@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Уличное искусство России — Street Art Russia</title>
+  <meta name="description" content="Анализ, карта граффити, истории художников, дискуссии, образовательные материалы и анонсы событий уличного искусства России." />
+  <style>
+    :root{
+      --bg:#0f1115; --card:#171923; --muted:#8b91a1; --text:#e6e8ef; --acc:#5bd2a6; --accent-2:#5bb1d2;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+    a{color:var(--acc);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{position:sticky;top:0;backdrop-filter:saturate(150%) blur(6px);background:linear-gradient(180deg,rgba(15,17,21,.9),rgba(15,17,21,.7));border-bottom:1px solid #1f2230;z-index:10}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand .logo{width:28px;height:28px;border-radius:6px;background:conic-gradient(from 210deg at 50% 50%, var(--acc), var(--accent-2), #e96ba8, var(--acc));box-shadow:0 0 24px rgba(91,210,166,.35)}
+    .menu{display:flex;gap:16px;font-size:14px;color:var(--muted)}
+    .hero{padding:56px 0 28px}
+    .hero h1{font-size:40px;line-height:1.15;margin:0 0 8px}
+    .hero p{margin:0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin:28px 0}
+    .card{grid-column:span 12;background:var(--card);border:1px solid #24283a;border-radius:14px;padding:18px}
+    .card h2{margin:0 0 8px;font-size:20px}
+    .card p{margin:0 0 12px;color:var(--muted)}
+    .row{display:flex;flex-wrap:wrap;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:#1e2233;border:1px solid #2a2f45;color:var(--text)}
+    .btn:hover{border-color:#3a4162}
+    .pill{font-size:12px;padding:6px 10px;border:1px solid #2a2f45;border-radius:999px;color:var(--muted)}
+    .two{grid-column:span 12}
+    @media (min-width: 860px){ .two{grid-column:span 6} }
+    footer{color:#7d8294;border-top:1px solid #1f2230;padding:22px 0;margin-top:32px}
+    /* Map placeholder */
+    .map{height:360px;border-radius:12px;border:1px dashed #334;display:grid;place-items:center;color:#9aa0b4;background:repeating-linear-gradient(45deg,#151826,#151826 10px,#161a2a 10px,#161a2a 20px)}
+    /* Simple collapsible */
+    details{background:#141827;border:1px solid #24283a;border-radius:12px;padding:12px}
+    details summary{cursor:pointer;list-style:none}
+    details summary::-webkit-details-marker{display:none}
+    .list{display:grid;gap:10px;margin:10px 0}
+    .list .item{display:flex;justify-content:space-between;gap:8px;padding:10px;border:1px solid #262a3e;border-radius:10px;background:#141826}
+    .tag{font-size:12px;color:#9aa0b4}
+    .anno{display:grid;gap:10px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand"><div class="logo" aria-hidden="true"></div><span>Street Art Russia</span></div>
+      <nav class="menu" aria-label="Основное меню">
+        <a href="#analysis">Анализ</a>
+        <a href="#map">Карта</a>
+        <a href="#artists">Художники</a>
+        <a href="#discuss">Дискуссии</a>
+        <a href="#edu">Образование</a>
+        <a href="#events">Анонсы</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Уличное искусство России</h1>
+      <p>Исследуем феномен граффити и мурализма: данные, карта, истории и сообщество.</p>
+      <div class="row" style="margin-top:14px">
+        <a class="btn" href="#map">Открыть карту</a>
+        <a class="btn" href="#discuss">Присоединиться к дискуссии</a>
+        <span class="pill">Открытый проект</span>
+      </div>
+    </section>
+
+    <section id="analysis" class="grid">
+      <article class="card two">
+        <h2>Аналитика и данные</h2>
+        <p>Сбор и анализ данных об объектах стрит-арта: география, техника, темы, авторы и динамика появления работ.</p>
+        <div class="list">
+          <div class="item"><span>Каталог работ и метаданные</span><span class="tag">JSON/CSV · API скоро</span></div>
+          <div class="item"><span>Дашборды (демо)</span><span class="tag">Тренды, стили, города</span></div>
+          <div class="item"><span>Исследования и методология</span><span class="tag">Стандарты описания, лицензии</span></div>
+        </div>
+      </article>
+
+      <article id="map" class="card two">
+        <h2>Карта граффити</h2>
+        <p>Интерактивная карта с фильтрами по городам, авторам и темам. Ниже заглушка — подключение реального тайл-сервиса и данных в будущем PR.</p>
+        <div class="map" role="img" aria-label="Заглушка карты">Тут будет карта (Leaflet/Mapbox/Яндекс)</div>
+      </article>
+
+      <article id="artists" class="card two">
+        <h2>Истории художников</h2>
+        <p>Интервью, биографии и подборки работ российских уличных художников.</p>
+        <details>
+          <summary>Пример: Artist X — «Слой города»</summary>
+          <div class="list">
+            <div class="item"><span>Биография</span><span class="tag">Краткая справка</span></div>
+            <div class="item"><span>Избранные работы</span><span class="tag">Галерея</span></div>
+            <div class="item"><span>Интервью</span><span class="tag">Видео/текст</span></div>
+          </div>
+        </details>
+      </article>
+
+      <article id="discuss" class="card two">
+        <h2>Дискуссии сообщества</h2>
+        <p>Темы для обсуждения практик, этики и сохранения уличного искусства. Оставьте идею — прототип добавляет сообщение в локальный список.</p>
+        <form id="forum-form" class="row" onsubmit="return addPost(event)">
+          <input id="topic" placeholder="Тема или вопрос" required style="flex:1;min-width:180px;padding:10px;border-radius:8px;border:1px solid #2a2f45;background:#0f1322;color:#e6e8ef" />
+          <button class="btn" type="submit">Опубликовать</button>
+        </form>
+        <div id="posts" class="list" aria-live="polite" style="margin-top:10px"></div>
+      </article>
+
+      <article id="edu" class="card two">
+        <h2>Образовательные материалы</h2>
+        <p>Гайды, воркшопы и учебные программы по исследованию и документированию стрит-арта.</p>
+        <ul class="anno">
+          <li>Как описывать работу: поля, теги, авторство, лицензии</li>
+          <li>Методы съёмки и геопривязки</li>
+          <li>Юридические аспекты и этика публикации</li>
+        </ul>
+      </article>
+
+      <article id="events" class="card two">
+        <h2>Анонсы событий</h2>
+        <p>Выставки, фестивали и открытые сборы данных.</p>
+        <div class="list" id="events-list">
+          <div class="item"><span>Фестиваль «Город и Цвет» — Казань</span><span class="tag">ноябрь</span></div>
+          <div class="item"><span>Открытый картирование — Москва</span><span class="tag">декабрь</span></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Проект «Street Art Russia». Код и данные — открыты. Добро пожаловать в вкладки Issues и Pull Requests.</div>
+  </footer>
+
+  <script>
+    // Простая демо-логика без бэкенда
+    const posts = [];
+    function addPost(e){
+      e.preventDefault();
+      const input = document.getElementById('topic');
+      const text = input.value.trim();
+      if(!text) return false;
+      const ts = new Date().toLocaleString('ru-RU');
+      posts.unshift({text, ts});
+      input.value='';
+      renderPosts();
+      return false;
+    }
+    function renderPosts(){
+      const box = document.getElementById('posts');
+      box.innerHTML = posts.map(p => `
+        <div class="item"><span>${p.text}</span><span class="tag">${p.ts}</span></div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
