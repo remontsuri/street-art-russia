@@ -1,161 +1,2002 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Уличное искусство России — Street Art Russia</title>
-  <meta name="description" content="Анализ, карта граффити, истории художников, дискуссии, образовательные материалы и анонсы событий уличного искусства России." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Р“СЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРё - РњРµРґРёР° Рѕ РєР°С‡РµСЃС‚РІРµРЅРЅРѕРј СѓР»РёС‡РЅРѕРј РёСЃРєСѓСЃСЃС‚РІРµ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0f1115; --card:#171923; --muted:#8b91a1; --text:#e6e8ef; --acc:#5bd2a6; --accent-2:#5bb1d2;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
-    a{color:var(--acc);text-decoration:none}
-    a:hover{text-decoration:underline}
-    header{position:sticky;top:0;backdrop-filter:saturate(150%) blur(6px);background:linear-gradient(180deg,rgba(15,17,21,.9),rgba(15,17,21,.7));border-bottom:1px solid #1f2230;z-index:10}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-    .brand .logo{width:28px;height:28px;border-radius:6px;background:conic-gradient(from 210deg at 50% 50%, var(--acc), var(--accent-2), #e96ba8, var(--acc));box-shadow:0 0 24px rgba(91,210,166,.35)}
-    .menu{display:flex;gap:16px;font-size:14px;color:var(--muted)}
-    .hero{padding:56px 0 28px}
-    .hero h1{font-size:40px;line-height:1.15;margin:0 0 8px}
-    .hero p{margin:0;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin:28px 0}
-    .card{grid-column:span 12;background:var(--card);border:1px solid #24283a;border-radius:14px;padding:18px}
-    .card h2{margin:0 0 8px;font-size:20px}
-    .card p{margin:0 0 12px;color:var(--muted)}
-    .row{display:flex;flex-wrap:wrap;gap:10px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:#1e2233;border:1px solid #2a2f45;color:var(--text)}
-    .btn:hover{border-color:#3a4162}
-    .pill{font-size:12px;padding:6px 10px;border:1px solid #2a2f45;border-radius:999px;color:var(--muted)}
-    .two{grid-column:span 12}
-    @media (min-width: 860px){ .two{grid-column:span 6} }
-    footer{color:#7d8294;border-top:1px solid #1f2230;padding:22px 0;margin-top:32px}
-    /* Map placeholder */
-    .map{height:360px;border-radius:12px;border:1px dashed #334;display:grid;place-items:center;color:#9aa0b4;background:repeating-linear-gradient(45deg,#151826,#151826 10px,#161a2a 10px,#161a2a 20px)}
-    /* Simple collapsible */
-    details{background:#141827;border:1px solid #24283a;border-radius:12px;padding:12px}
-    details summary{cursor:pointer;list-style:none}
-    details summary::-webkit-details-marker{display:none}
-    .list{display:grid;gap:10px;margin:10px 0}
-    .list .item{display:flex;justify-content:space-between;gap:8px;padding:10px;border:1px solid #262a3e;border-radius:10px;background:#141826}
-    .tag{font-size:12px;color:#9aa0b4}
-    .anno{display:grid;gap:10px}
+    :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Bebas Neue', sans-serif;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  --space-0: 0;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Custom colors for street art theme */
+  --color-urban-gray-1: #8B8B8B;
+  --color-urban-gray-2: #A9A9A9;
+  --color-urban-gray-3: #C0C0C0;
+  --color-graffiti-yellow: #FFD700;
+  --color-graffiti-orange: #FFA500;
+  --color-graffiti-blue: #4169E1;
+  --color-graffiti-blue-bright: #1E90FF;
+  --color-graffiti-red: #DC143C;
+  --color-graffiti-red-bright: #FF6347;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header & Navigation */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-card-border);
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  font-family: var(--font-family-display);
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--color-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.logo-accent {
+  color: var(--color-primary);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: var(--space-32);
+  align-items: center;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
+  transition: color var(--duration-fast) var(--ease-standard);
+  cursor: pointer;
+  padding: var(--space-8) 0;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.nav-link.active {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-md);
+  min-width: 250px;
+  padding: var(--space-8);
+  display: none;
+  margin-top: var(--space-8);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: var(--space-12) var(--space-16);
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: var(--color-secondary);
+}
+
+.dropdown-item-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-4);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: 24px;
+  cursor: pointer;
+  padding: var(--space-8);
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 500px;
+  background: linear-gradient(135deg, var(--color-urban-gray-1) 0%, var(--color-urban-gray-3) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.03) 10px,
+    rgba(255, 255, 255, 0.03) 20px
+  );
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  max-width: 800px;
+  padding: var(--space-32);
+  z-index: 1;
+}
+
+.hero-title {
+  font-family: var(--font-family-display);
+  font-size: 64px;
+  color: var(--color-white);
+  margin-bottom: var(--space-24);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-tagline {
+  font-size: var(--font-size-2xl);
+  color: var(--color-white);
+  margin-bottom: var(--space-32);
+  line-height: 1.6;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: var(--space-16);
+}
+
+.btn {
+  padding: var(--space-12) var(--space-32);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all var(--duration-normal) var(--ease-standard);
+  display: inline-block;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+.btn-secondary:hover {
+  background: var(--color-gray-200);
+  transform: translateY(-2px);
+}
+
+/* Container */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-64) var(--space-24);
+}
+
+/* Section Intro */
+.section-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--space-64);
+}
+
+.section-title {
+  font-family: var(--font-family-display);
+  font-size: 48px;
+  color: var(--color-text);
+  margin-bottom: var(--space-24);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-description {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* Article Grid */
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--space-32);
+  margin-bottom: var(--space-64);
+}
+
+.article-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-standard);
+  cursor: pointer;
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.article-image {
+  width: 100%;
+  height: 240px;
+  background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));
+  position: relative;
+  overflow: hidden;
+}
+
+.article-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(255, 255, 255, 0.05) 20px,
+    rgba(255, 255, 255, 0.05) 40px
+  );
+}
+
+.article-tag {
+  position: absolute;
+  top: var(--space-16);
+  left: var(--space-16);
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 1;
+}
+
+.article-content {
+  padding: var(--space-24);
+}
+
+.article-meta {
+  display: flex;
+  gap: var(--space-16);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-12);
+}
+
+.article-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-12);
+  line-height: 1.4;
+}
+
+.article-excerpt {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Featured Article */
+.featured-article {
+  margin-bottom: var(--space-64);
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.featured-image {
+  height: 100%;
+  min-height: 400px;
+  background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-7));
+  position: relative;
+}
+
+.featured-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 30px,
+    rgba(255, 255, 255, 0.05) 30px,
+    rgba(255, 255, 255, 0.05) 60px
+  );
+}
+
+.featured-content {
+  padding: var(--space-48);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.featured-tag {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-16);
+  width: fit-content;
+}
+
+.featured-title {
+  font-family: var(--font-family-display);
+  font-size: 36px;
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+  line-height: 1.2;
+}
+
+.featured-excerpt {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-24);
+}
+
+.featured-meta {
+  display: flex;
+  gap: var(--space-24);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-24);
+}
+
+/* Section Cards */
+.section-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: var(--space-64);
+}
+
+.section-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-32);
+  transition: all var(--duration-normal) var(--ease-standard);
+  cursor: pointer;
+}
+
+.section-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.section-card.strong {
+  border-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-bg-1), var(--color-surface));
+}
+
+.section-card-title {
+  font-family: var(--font-family-display);
+  font-size: 28px;
+  color: var(--color-text);
+  margin-bottom: var(--space-12);
+  text-transform: uppercase;
+}
+
+.section-card-desc {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-16);
+  line-height: 1.6;
+}
+
+.section-card-schedule {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* About Page */
+.about-section {
+  margin-bottom: var(--space-64);
+}
+
+.about-section h2 {
+  font-family: var(--font-family-display);
+  font-size: 36px;
+  color: var(--color-text);
+  margin-bottom: var(--space-24);
+  text-transform: uppercase;
+}
+
+.about-section p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-16);
+}
+
+.mission-box {
+  background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-40);
+  margin: var(--space-40) 0;
+}
+
+.mission-box h3 {
+  font-family: var(--font-family-display);
+  font-size: 32px;
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+}
+
+.mission-box p {
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.info-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-base);
+  padding: var(--space-24);
+}
+
+.info-card h4 {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  margin-bottom: var(--space-12);
+  font-weight: var(--font-weight-bold);
+}
+
+.info-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.info-card li {
+  padding: var(--space-8) 0;
+  color: var(--color-text-secondary);
+  position: relative;
+  padding-left: var(--space-20);
+}
+
+.info-card li::before {
+  content: 'вЂў';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* Competitors Table */
+.competitors-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.competitors-table thead {
+  background: var(--color-secondary);
+}
+
+.competitors-table th {
+  padding: var(--space-20);
+  text-align: left;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.competitors-table td {
+  padding: var(--space-20);
+  border-top: 1px solid var(--color-card-border);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+.competitors-table tr:hover {
+  background: var(--color-bg-1);
+}
+
+.competitors-table ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.competitors-table li {
+  padding: var(--space-4) 0;
+  position: relative;
+  padding-left: var(--space-16);
+}
+
+.competitors-table li::before {
+  content: 'вњ“';
+  position: absolute;
+  left: 0;
+  color: var(--color-success);
+}
+
+.competitors-table .cons li::before {
+  content: 'вњ—';
+  color: var(--color-error);
+}
+
+/* Map Section */
+.map-container {
+  width: 100%;
+  height: 600px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-placeholder {
+  text-align: center;
+  padding: var(--space-40);
+}
+
+.map-placeholder h3 {
+  font-family: var(--font-family-display);
+  font-size: 32px;
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+}
+
+.map-placeholder p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+/* Contact Form */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-64);
+}
+
+.contact-info h3 {
+  font-family: var(--font-family-display);
+  font-size: 28px;
+  color: var(--color-text);
+  margin-bottom: var(--space-24);
+}
+
+.contact-item {
+  margin-bottom: var(--space-24);
+}
+
+.contact-item h4 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+
+.contact-item p,
+.contact-item a {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  color: var(--color-primary);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-16);
+  margin-top: var(--space-16);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-12) var(--space-20);
+  background: var(--color-secondary);
+  border-radius: var(--radius-base);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.social-link:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.contact-form {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-40);
+}
+
+.form-group {
+  margin-bottom: var(--space-24);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: var(--space-12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* Footer */
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-card-border);
+  padding: var(--space-64) 0 var(--space-32);
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-24);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-48);
+  margin-bottom: var(--space-48);
+}
+
+.footer-section h3 {
+  font-family: var(--font-family-display);
+  font-size: 20px;
+  color: var(--color-text);
+  margin-bottom: var(--space-20);
+  text-transform: uppercase;
+}
+
+.footer-section p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: var(--space-12);
+}
+
+.footer-links a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--space-32);
+  border-top: 1px solid var(--color-card-border);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .featured-article {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 42px;
+  }
+  
+  .hero-tagline {
+    font-size: var(--font-size-lg);
+  }
+  
+  .section-title {
+    font-size: 36px;
+  }
+  
+  .article-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featured-content {
+    padding: var(--space-32);
+  }
+  
+  .competitors-table {
+    font-size: var(--font-size-sm);
+  }
+  
+  .competitors-table th,
+  .competitors-table td {
+    padding: var(--space-12);
+  }
+}
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <div class="brand"><div class="logo" aria-hidden="true"></div><span>Street Art Russia</span></div>
-      <nav class="menu" aria-label="Основное меню">
-        <a href="#analysis">Анализ</a>
-        <a href="#map">Карта</a>
-        <a href="#artists">Художники</a>
-        <a href="#discuss">Дискуссии</a>
-        <a href="#edu">Образование</a>
-        <a href="#events">Анонсы</a>
-      </nav>
-    </div>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="#" class="logo" onclick="navigateTo('home')">
+        <span>Р“Р РђР¤Р¤РРўР</span>
+        <span class="logo-accent">Р РћРЎРЎРР</span>
+      </a>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a class="nav-link" onclick="navigateTo('home')">Р“Р»Р°РІРЅР°СЏ</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link">Р СѓР±СЂРёРєРё в–ѕ</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" onclick="navigateTo('obyektiv')">
+              <strong>РћР±СЉРµРєС‚РёРІ</strong>
+              <div class="dropdown-item-desc">РђРЅР°Р»РёР· РіР»Р°Р·Р°РјРё С…СѓРґРѕР¶РЅРёРєРѕРІ Рё Р¶РёС‚РµР»РµР№</div>
+            </a>
+            <a class="dropdown-item" onclick="navigateTo('map')">
+              <strong>РљР°СЂС‚Р° РёСЃРєСѓСЃСЃС‚РІР°</strong>
+              <div class="dropdown-item-desc">РљР°С‚Р°Р»РѕРі Р»СѓС‡С€РёС… РіСЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРё</div>
+            </a>
+            <a class="dropdown-item" onclick="navigateTo('inspiration')">
+              <strong>Р’РґРѕС…РЅРѕРІРµРЅРёРµ СѓР»РёС†</strong>
+              <div class="dropdown-item-desc">РСЃС‚РѕСЂРёСЏ СЃС‚Р°РЅРѕРІР»РµРЅРёСЏ С…СѓРґРѕР¶РЅРёРєРѕРІ</div>
+            </a>
+            <a class="dropdown-item" onclick="navigateTo('discuss')">
+              <strong>Рђ РѕР±СЃСѓРґРёС‚СЊ?</strong>
+              <div class="dropdown-item-desc">РњРµСЃС‚Рѕ РґР»СЏ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РјРЅРµРЅРёР№</div>
+            </a>
+            <a class="dropdown-item" onclick="navigateTo('viewpoint')">
+              <strong>РўРѕС‡РєР° Р·СЂРµРЅРёСЏ</strong>
+              <div class="dropdown-item-desc">РљРѕР»РѕРЅРєРё РїСЂРёРіР»Р°С€С‘РЅРЅС‹С… Р°РІС‚РѕСЂРѕРІ</div>
+            </a>
+            <a class="dropdown-item" onclick="navigateTo('citypalm')">
+              <strong>Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</strong>
+              <div class="dropdown-item-desc">РљР°Рє РїРѕРЅРёРјР°С‚СЊ СЃС‚СЂРёС‚-Р°СЂС‚</div>
+            </a>
+            <a class="dropdown-item" onclick="navigateTo('echo')">
+              <strong>Р­С…Рѕ СЃРѕР±С‹С‚РёР№</strong>
+              <div class="dropdown-item-desc">РђРЅРѕРЅСЃС‹ РІС‹СЃС‚Р°РІРѕРє Рё С„РµСЃС‚РёРІР°Р»РµР№</div>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" onclick="navigateTo('about')">Рћ РїСЂРѕРµРєС‚Рµ</a></li>
+        <li class="nav-item"><a class="nav-link" onclick="navigateTo('competitors')">РљРѕРЅРєСѓСЂРµРЅС‚С‹</a></li>
+        <li class="nav-item"><a class="nav-link" onclick="navigateTo('contact')">РљРѕРЅС‚Р°РєС‚С‹</a></li>
+      </ul>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn">в°</button>
+    </nav>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Уличное искусство России</h1>
-      <p>Исследуем феномен граффити и мурализма: данные, карта, истории и сообщество.</p>
-      <div class="row" style="margin-top:14px">
-        <a class="btn" href="#map">Открыть карту</a>
-        <a class="btn" href="#discuss">Присоединиться к дискуссии</a>
-        <span class="pill">Открытый проект</span>
-      </div>
-    </section>
-
-    <section id="analysis" class="grid">
-      <article class="card two">
-        <h2>Аналитика и данные</h2>
-        <p>Сбор и анализ данных об объектах стрит-арта: география, техника, темы, авторы и динамика появления работ.</p>
-        <div class="list">
-          <div class="item"><span>Каталог работ и метаданные</span><span class="tag">JSON/CSV · API скоро</span></div>
-          <div class="item"><span>Дашборды (демо)</span><span class="tag">Тренды, стили, города</span></div>
-          <div class="item"><span>Исследования и методология</span><span class="tag">Стандарты описания, лицензии</span></div>
-        </div>
-      </article>
-
-      <article id="map" class="card two">
-        <h2>Карта граффити</h2>
-        <p>Интерактивная карта с фильтрами по городам, авторам и темам. Ниже заглушка — подключение реального тайл-сервиса и данных в будущем PR.</p>
-        <div class="map" role="img" aria-label="Заглушка карты">Тут будет карта (Leaflet/Mapbox/Яндекс)</div>
-      </article>
-
-      <article id="artists" class="card two">
-        <h2>Истории художников</h2>
-        <p>Интервью, биографии и подборки работ российских уличных художников.</p>
-        <details>
-          <summary>Пример: Artist X — «Слой города»</summary>
-          <div class="list">
-            <div class="item"><span>Биография</span><span class="tag">Краткая справка</span></div>
-            <div class="item"><span>Избранные работы</span><span class="tag">Галерея</span></div>
-            <div class="item"><span>Интервью</span><span class="tag">Видео/текст</span></div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Р“СЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРё</h1>
+          <p class="hero-tagline">РСЃСЃР»РµРґСѓРµРј РєР°С‡РµСЃС‚РІРµРЅРЅС‹Р№ СЃС‚СЂРёС‚-Р°СЂС‚ Рё СѓС‡РёРј РѕР±С‰РµСЃС‚РІРѕ С‡РёС‚Р°С‚СЊ СѓР»РёС‡РЅРѕРµ РёСЃРєСѓСЃСЃС‚РІРѕ</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" onclick="navigateTo('about')">Рћ РїСЂРѕРµРєС‚Рµ</a>
+            <a class="btn btn-secondary" onclick="navigateTo('map')">РљР°СЂС‚Р° РёСЃРєСѓСЃСЃС‚РІР°</a>
           </div>
-        </details>
-      </article>
-
-      <article id="discuss" class="card two">
-        <h2>Дискуссии сообщества</h2>
-        <p>Темы для обсуждения практик, этики и сохранения уличного искусства. Оставьте идею — прототип добавляет сообщение в локальный список.</p>
-        <form id="forum-form" class="row" onsubmit="return addPost(event)">
-          <input id="topic" placeholder="Тема или вопрос" required style="flex:1;min-width:180px;padding:10px;border-radius:8px;border:1px solid #2a2f45;background:#0f1322;color:#e6e8ef" />
-          <button class="btn" type="submit">Опубликовать</button>
-        </form>
-        <div id="posts" class="list" aria-live="polite" style="margin-top:10px"></div>
-      </article>
-
-      <article id="edu" class="card two">
-        <h2>Образовательные материалы</h2>
-        <p>Гайды, воркшопы и учебные программы по исследованию и документированию стрит-арта.</p>
-        <ul class="anno">
-          <li>Как описывать работу: поля, теги, авторство, лицензии</li>
-          <li>Методы съёмки и геопривязки</li>
-          <li>Юридические аспекты и этика публикации</li>
-        </ul>
-      </article>
-
-      <article id="events" class="card two">
-        <h2>Анонсы событий</h2>
-        <p>Выставки, фестивали и открытые сборы данных.</p>
-        <div class="list" id="events-list">
-          <div class="item"><span>Фестиваль «Город и Цвет» — Казань</span><span class="tag">ноябрь</span></div>
-          <div class="item"><span>Открытый картирование — Москва</span><span class="tag">декабрь</span></div>
         </div>
-      </article>
-    </section>
+      </section>
+
+      <div class="container">
+        <!-- Featured Article -->
+        <div class="featured-article">
+          <div class="featured-image"></div>
+          <div class="featured-content">
+            <span class="featured-tag">РћР±СЉРµРєС‚РёРІ</span>
+            <h2 class="featured-title">РџСЂРѕС‚РµСЃС‚ РёР»Рё РёСЃРєСѓСЃСЃС‚РІРѕ? Р Р°Р·Р±РёСЂР°РµРј СЃРїРѕСЂРЅРѕРµ РіСЂР°С„С„РёС‚Рё РЅР° СѓР»РёС†Рµ Р СѓР±РёРЅС€С‚РµР№РЅР°</h2>
+            <p class="featured-excerpt">РЇСЂРєРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РЅР° СЃС‚РµРЅРµ РґРѕРјР° в„– 23 РІС‹Р·РІР°Р»Рѕ Р±СѓСЂРЅС‹Рµ РґРёСЃРєСѓСЃСЃРёРё СЃСЂРµРґРё Р¶РёС‚РµР»РµР№. РҐСѓРґРѕР¶РЅРёРє РіРѕРІРѕСЂРёС‚ Рѕ СЃРІРѕР±РѕРґРµ СЃР°РјРѕРІС‹СЂР°Р¶РµРЅРёСЏ, Р¶РёР»СЊС†С‹ вЂ” Рѕ РІР°РЅРґР°Р»РёР·РјРµ. Р Р°Р·Р±РёСЂР°РµРјСЃСЏ, РіРґРµ РїСЂРѕС…РѕРґРёС‚ РіСЂР°РЅРёС†Р° РјРµР¶РґСѓ РїСЂРѕС‚РµСЃС‚РѕРј Рё РёСЃРєСѓСЃСЃС‚РІРѕРј.</p>
+            <div class="featured-meta">
+              <span>рџ‘¤ РђРЅРЅР° Р’РёРЅРѕРіСЂР°РґРѕРІР°</span>
+              <span>рџ“… 28 РѕРєС‚СЏР±СЂСЏ 2025</span>
+            </div>
+            <a class="btn btn-primary" onclick="navigateTo('obyektiv')">Р§РёС‚Р°С‚СЊ СЃС‚Р°С‚СЊСЋ</a>
+          </div>
+        </div>
+
+        <!-- Section Intro -->
+        <div class="section-intro">
+          <h2 class="section-title">РЎРІРµР¶РёРµ РјР°С‚РµСЂРёР°Р»С‹</h2>
+          <p class="section-description">РќРѕРІС‹Рµ СЃС‚Р°С‚СЊРё, РёРЅС‚РµСЂРІСЊСЋ Рё РёСЃСЃР»РµРґРѕРІР°РЅРёСЏ Рѕ РєСѓР»СЊС‚СѓСЂРµ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° РІ Р РѕСЃСЃРёРё</p>
+        </div>
+
+        <!-- Article Grid -->
+        <div class="article-grid">
+          <div class="article-card" onclick="navigateTo('inspiration')">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-6));">
+              <span class="article-tag">Р’РґРѕС…РЅРѕРІРµРЅРёРµ СѓР»РёС†</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р”РјРёС‚СЂРёР№ РљРѕР»РµСЃРЅРёРєРѕРІ</span>
+                <span>рџ“… 15 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РћС‚ С‚РµРіРѕРІ Рє РјСѓСЂР°Р»Р°Рј: РёСЃС‚РѕСЂРёСЏ РџР°С€Рё 183</h3>
+              <p class="article-excerpt">Р›РµРіРµРЅРґР°СЂРЅС‹Р№ РїРёС‚РµСЂСЃРєРёР№ СЂР°Р№С‚РµСЂ, С‡СЊРµ РёРјСЏ СЃС‚Р°Р»Рѕ СЃРёРјРІРѕР»РѕРј С†РµР»РѕР№ СЌРїРѕС…Рё СЂРѕСЃСЃРёР№СЃРєРѕРіРѕ РіСЂР°С„С„РёС‚Рё. Р­РєСЃРєР»СЋР·РёРІРЅРѕРµ РёРЅС‚РµСЂРІСЊСЋ СЃ С‚РµРјРё, РєС‚Рѕ РµРіРѕ Р·РЅР°Р»...</p>
+            </div>
+          </div>
+
+          <div class="article-card" onclick="navigateTo('discuss')">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-4), var(--color-bg-7));">
+              <span class="article-tag">Рђ РѕР±СЃСѓРґРёС‚СЊ?</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р РµРґР°РєС†РёСЏ</span>
+                <span>рџ“… 20 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РњРѕР»РѕРґРµР¶СЊ vs СЃС‚Р°СЂС€РµРµ РїРѕРєРѕР»РµРЅРёРµ: РЅСѓР¶РЅС‹ Р»Рё РіРѕСЂРѕРґСѓ РіСЂР°С„С„РёС‚Рё?</h3>
+              <p class="article-excerpt">Р—Р°РїРёСЃСЊ РѕРЅР»Р°Р№РЅ-РґРёСЃРєСѓСЃСЃРёРё, РіРґРµ РїСЂРµРґСЃС‚Р°РІРёС‚РµР»Рё СЂР°Р·РЅС‹С… РїРѕРєРѕР»РµРЅРёР№ РѕР±СЃСѓР¶РґР°СЋС‚ РіСЂР°РЅРёС†С‹ РґРѕРїСѓСЃС‚РёРјРѕРіРѕ РІ СѓР»РёС‡РЅРѕРј РёСЃРєСѓСЃСЃС‚РІРµ...</p>
+            </div>
+          </div>
+
+          <div class="article-card" onclick="navigateTo('citypalm')">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-5));">
+              <span class="article-tag">Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р•Р»РµРЅР° РљСЂР°СЃРЅРѕРІР°</span>
+                <span>рџ“… 27 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">5 РїСЂРёР·РЅР°РєРѕРІ РєР°С‡РµСЃС‚РІРµРЅРЅРѕРіРѕ СЃС‚СЂРёС‚-Р°СЂС‚Р°</h3>
+              <p class="article-excerpt">РљР°Рє РѕС‚Р»РёС‡РёС‚СЊ С‚Р°Р»Р°РЅС‚Р»РёРІСѓСЋ СЂР°Р±РѕС‚Сѓ РѕС‚ РѕР±С‹С‡РЅРѕРіРѕ РІР°РЅРґР°Р»РёР·РјР°? РџСЂРѕСЃС‚РѕР№ РіРёРґ РґР»СЏ РІСЃРµС…, РєС‚Рѕ С…РѕС‡РµС‚ РїРѕРЅРёРјР°С‚СЊ СѓР»РёС‡РЅРѕРµ РёСЃРєСѓСЃСЃС‚РІРѕ...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strong Sections -->
+        <div class="section-intro">
+          <h2 class="section-title">РљР»СЋС‡РµРІС‹Рµ СЂСѓР±СЂРёРєРё</h2>
+          <p class="section-description">РўСЂРё РіР»Р°РІРЅС‹С… РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР°С€РµРіРѕ РїСЂРѕРµРєС‚Р°</p>
+        </div>
+
+        <div class="section-cards">
+          <div class="section-card strong" onclick="navigateTo('obyektiv')">
+            <h3 class="section-card-title">РћР±СЉРµРєС‚РёРІ</h3>
+            <p class="section-card-desc">РђРЅР°Р»РёР· СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° РіР»Р°Р·Р°РјРё С…СѓРґРѕР¶РЅРёРєРѕРІ Рё Р¶РёС‚РµР»РµР№. РРЅС‚РµСЂРІСЊСЋ, СЌРєСЃРїРµСЂС‚РЅС‹Рµ РјРЅРµРЅРёСЏ, СЂР°Р·Р±РѕСЂ В«СЃРїРѕСЂРЅС‹С…В» РѕР±СЉРµРєС‚РѕРІ.</p>
+            <div class="section-card-schedule">рџ“… Р•Р¶РµРЅРµРґРµР»СЊРЅРѕ (РІС‚, С‡С‚, СЃР±)</div>
+          </div>
+
+          <div class="section-card strong" onclick="navigateTo('discuss')">
+            <h3 class="section-card-title">Рђ РѕР±СЃСѓРґРёС‚СЊ?</h3>
+            <p class="section-card-desc">РњРµСЃС‚Рѕ РґР»СЏ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РјРЅРµРЅРёР№ СЂР°Р·РЅС‹С… РїРѕРєРѕР»РµРЅРёР№. РљСЂСѓРіР»С‹Рµ СЃС‚РѕР»С‹, РѕРЅР»Р°Р№РЅ-РґРёСЃРєСѓСЃСЃРёРё, Р°РєС‚СѓР°Р»СЊРЅС‹Рµ РґРµР±Р°С‚С‹.</p>
+            <div class="section-card-schedule">рџ“… Р•Р¶РµРјРµСЃСЏС‡РЅРѕ (20 С‡РёСЃР»Р°)</div>
+          </div>
+
+          <div class="section-card strong" onclick="navigateTo('citypalm')">
+            <h3 class="section-card-title">Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</h3>
+            <p class="section-card-desc">РћР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅС‹Рµ РјР°С‚РµСЂРёР°Р»С‹: РєР°Рє РѕС‚Р»РёС‡РёС‚СЊ РєР°С‡РµСЃС‚РІРµРЅРЅС‹Р№ СЃС‚СЂРёС‚-Р°СЂС‚ РѕС‚ РІР°РЅРґР°Р»РёР·РјР°. Р—Р°РјРµС‚РєРё, РІРёРґРµРѕ, С‚РµСЃС‚С‹.</p>
+            <div class="section-card-schedule">рџ“… Р•Р¶РµРЅРµРґРµР»СЊРЅРѕ (РІРѕСЃРєСЂРµСЃРµРЅСЊРµ)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">Рћ РїСЂРѕРµРєС‚Рµ</h1>
+          <p class="section-description">Р¤РѕСЂРјРёСЂСѓРµРј РѕСЃРѕР·РЅР°РЅРЅРѕРµ РІРѕСЃРїСЂРёСЏС‚РёРµ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР°</p>
+        </div>
+
+        <div class="about-section">
+          <h2>РРґРµСЏ РїСЂРѕРµРєС‚Р°</h2>
+          <p>В«Р“СЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРёВ» вЂ” РјРµРґРёР°-РїСЂРѕРµРєС‚, РїРѕСЃРІСЏС‰С‘РЅРЅС‹Р№ РёСЃСЃР»РµРґРѕРІР°РЅРёСЋ РєР°С‡РµСЃС‚РІРµРЅРЅРѕРіРѕ СЃС‚СЂРёС‚-Р°СЂС‚Р° РІ РїСЂРѕС‚РёРІРѕРІРµСЃ РїРѕРІРµСЂС…РЅРѕСЃС‚РЅРѕРјСѓ Рё РґРµСЃС‚СЂСѓРєС‚РёРІРЅРѕРјСѓ РіСЂР°С„С„РёС‚Рё. РњС‹ СЃС‚СЂРµРјРёРјСЃСЏ РїРѕРєР°Р·Р°С‚СЊ РєСЂРёС‚РµСЂРёРё РѕС†РµРЅРєРё СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° С‡РµСЂРµР· РїСЂРёР·РјСѓ РјРЅРµРЅРёР№ С…СѓРґРѕР¶РЅРёРєРѕРІ, Р¶РёС‚РµР»РµР№ РіРѕСЂРѕРґРѕРІ Рё РіСЂР°РґРѕР·Р°С‰РёС‚РЅРёРєРѕРІ.</p>
+          <p>РќР°С€Р° С†РµР»СЊ вЂ” РЅР°СѓС‡РёС‚СЊ РѕР±С‰РµСЃС‚РІРѕ В«С‡РёС‚Р°С‚СЊВ» СѓР»РёС‡РЅРѕРµ РёСЃРєСѓСЃСЃС‚РІРѕ, РїРѕРЅРёРјР°С‚СЊ РµРіРѕ СЃРјС‹СЃР»С‹ Рё РѕС‚Р»РёС‡Р°С‚СЊ РЅР°СЃС‚РѕСЏС‰РµРµ С‚РІРѕСЂС‡РµСЃС‚РІРѕ РѕС‚ РІР°РЅРґР°Р»РёР·РјР°. РњС‹ СЃРѕР·РґР°С‘Рј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РґР»СЏ РґРёР°Р»РѕРіР° РјРµР¶РґСѓ РїРѕРєРѕР»РµРЅРёСЏРјРё, РїСЂРѕС„РµСЃСЃРёРѕРЅР°Р»Р°РјРё Рё РїСЂРѕСЃС‚Рѕ РЅРµСЂР°РІРЅРѕРґСѓС€РЅС‹РјРё РіРѕСЂРѕР¶Р°РЅР°РјРё.</p>
+        </div>
+
+        <div class="mission-box">
+          <h3>РќР°С€Р° РјРёСЃСЃРёСЏ</h3>
+          <p>РЎРѕР·РґР°С‚СЊ Р±Р»Р°РіРѕРїСЂРёСЏС‚РЅРѕРµ РІР»РёСЏРЅРёРµ РЅР° Р°СѓРґРёС‚РѕСЂРёСЋ, С„РѕСЂРјРёСЂСѓСЏ РѕСЃРѕР·РЅР°РЅРЅРѕРµ РІРѕСЃРїСЂРёСЏС‚РёРµ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР°. РџСЂРµРґР»РѕР¶РёС‚СЊ РЅРѕРІС‹Р№ РІР·РіР»СЏРґ РЅР° РіСЂР°С„С„РёС‚Рё, РѕР±СЉСЏСЃРЅСЏСЏ РєСЂРёС‚РµСЂРёРё РѕС†РµРЅРєРё СЃ СЂР°Р·РЅС‹С… С‚РѕС‡РµРє Р·СЂРµРЅРёСЏ, СЃРїРѕСЃРѕР±СЃС‚РІРѕРІР°С‚СЊ СѓРІР°Р¶РµРЅРёСЋ Рє РїРѕРґР»РёРЅРЅС‹Рј С…СѓРґРѕР¶РµСЃС‚РІРµРЅРЅС‹Рј СЂР°Р±РѕС‚Р°Рј Рё РЅР°СѓС‡РёС‚СЊ РѕР±С‰РµСЃС‚РІРѕ В«С‡РёС‚Р°С‚СЊВ» СѓР»РёС‡РЅРѕРµ РёСЃРєСѓСЃСЃС‚РІРѕ.</p>
+        </div>
+
+        <div class="about-section">
+          <h2>Р¦РµР»РµРІР°СЏ Р°СѓРґРёС‚РѕСЂРёСЏ</h2>
+          <p>РњС‹ РѕР±СЂР°С‰Р°РµРјСЃСЏ Рє Р°РєС‚РёРІРЅС‹Рј РіРѕСЂРѕРґСЃРєРёРј Р¶РёС‚РµР»СЏРј РІ РІРѕР·СЂР°СЃС‚Рµ 18-45 Р»РµС‚ СЃРѕ СЃСЂРµРґРЅРёРј СЃРїРµС†РёР°Р»СЊРЅС‹Рј РёР»Рё РІС‹СЃС€РёРј РѕР±СЂР°Р·РѕРІР°РЅРёРµРј. РќР°С€Р° Р°СѓРґРёС‚РѕСЂРёСЏ вЂ” СЌС‚Рѕ С‚РІРѕСЂС‡РµСЃРєРёРµ РїСЂРѕС„РµСЃСЃРёРѕРЅР°Р»С‹, СЃС‚СѓРґРµРЅС‚С‹, Р¶СѓСЂРЅР°Р»РёСЃС‚С‹, РґРёР·Р°Р№РЅРµСЂС‹, Р°СЂС…РёС‚РµРєС‚РѕСЂС‹ Рё РІСЃРµ, РєС‚Рѕ РёРЅС‚РµСЂРµСЃСѓРµС‚СЃСЏ СЃРѕРІСЂРµРјРµРЅРЅРѕР№ РіРѕСЂРѕРґСЃРєРѕР№ РєСѓР»СЊС‚СѓСЂРѕР№.</p>
+          
+          <div class="info-grid">
+            <div class="info-card">
+              <h4>РџСЂРѕС„РµСЃСЃРёРё</h4>
+              <ul>
+                <li>РҐСѓРґРѕР¶РЅРёРєРё Рё РіСЂР°С„С„РёС‚Рё-С…СѓРґРѕР¶РЅРёРєРё</li>
+                <li>РљСѓР»СЊС‚СѓСЂРЅС‹Рµ Рё РєСЂРµР°С‚РёРІРЅС‹Рµ СЃРїРµС†РёР°Р»РёСЃС‚С‹</li>
+                <li>РђСЂС…РёС‚РµРєС‚РѕСЂС‹ Рё РіСЂР°РґРѕР·Р°С‰РёС‚РЅРёРєРё</li>
+                <li>Р”РёР·Р°Р№РЅРµСЂС‹</li>
+                <li>Р–СѓСЂРЅР°Р»РёСЃС‚С‹</li>
+                <li>РЎС‚СѓРґРµРЅС‚С‹ РїСЂРѕС„РёР»СЊРЅС‹С… РЅР°РїСЂР°РІР»РµРЅРёР№</li>
+              </ul>
+            </div>
+            
+            <div class="info-card">
+              <h4>РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё</h4>
+              <ul>
+                <li>РЎСЂРµРґРЅРёР№ РєР»Р°СЃСЃ</li>
+                <li>РўРІРѕСЂС‡РµСЃРєР°СЏ РјРѕР»РѕРґС‘Р¶СЊ</li>
+                <li>Р–РёС‚РµР»Рё РјРµРіР°РїРѕР»РёСЃРѕРІ</li>
+                <li>РРЅС‚РµСЂРµСЃ Рє СЃРѕРІСЂРµРјРµРЅРЅРѕРјСѓ РёСЃРєСѓСЃСЃС‚РІСѓ</li>
+                <li>РђРєС‚РёРІРЅР°СЏ РіСЂР°Р¶РґР°РЅСЃРєР°СЏ РїРѕР·РёС†РёСЏ</li>
+                <li>РћС‚РєСЂС‹С‚РѕСЃС‚СЊ Рє РґРёР°Р»РѕРіСѓ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h2>РќР°С€Рё РїР»Р°С‚С„РѕСЂРјС‹</h2>
+          <div class="info-grid">
+            <div class="info-card">
+              <h4>рџЊђ Р’РµР±-СЃР°Р№С‚</h4>
+              <p>РћСЃРЅРѕРІРЅР°СЏ РїР»Р°С‚С„РѕСЂРјР° РґР»СЏ РїСѓР±Р»РёРєР°С†РёРё СЃС‚Р°С‚РµР№, Р°РЅР°Р»РёС‚РёРєРё Рё РѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅС‹С… РјР°С‚РµСЂРёР°Р»РѕРІ</p>
+            </div>
+            <div class="info-card">
+              <h4>рџ“± Telegram</h4>
+              <p>РћРїРµСЂР°С‚РёРІРЅС‹Р№ РѕР±РјРµРЅ РЅРѕРІРѕСЃС‚СЏРјРё, РїСѓР±Р»РёРєР°С†РёСЏ СЃС‚Р°С‚РµР№ Рё Р°РЅРѕРЅСЃС‹ СЃРѕР±С‹С‚РёР№</p>
+            </div>
+            <div class="info-card">
+              <h4>рџЋҐ YouTube</h4>
+              <p>РРЅС‚РµСЂРІСЊСЋ СЃ С…СѓРґРѕР¶РЅРёРєР°РјРё Рё РґРѕРєСѓРјРµРЅС‚Р°Р»СЊРЅС‹Рµ С„РёР»СЊРјС‹ Рѕ РіСЂР°С„С„РёС‚Рё</p>
+            </div>
+            <div class="info-card">
+              <h4>рџ“ VK &amp; Instagram</h4>
+              <p>РЎРѕРѕР±С‰РµСЃС‚РІРѕ, РѕР±СЃСѓР¶РґРµРЅРёСЏ Рё РІРёР·СѓР°Р»СЊРЅС‹Р№ РєРѕРЅС‚РµРЅС‚</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OBYEKTIV PAGE -->
+    <div id="obyektiv" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">РћР±СЉРµРєС‚РёРІ</h1>
+          <p class="section-description">РђРЅР°Р»РёР· СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° РіР»Р°Р·Р°РјРё С…СѓРґРѕР¶РЅРёРєРѕРІ Рё Р¶РёС‚РµР»РµР№</p>
+          <p style="color: var(--color-primary); font-weight: var(--font-weight-medium);">рџ“… РџСѓР±Р»РёРєР°С†РёРё: РІС‚РѕСЂРЅРёРє, С‡РµС‚РІРµСЂРі, СЃСѓР±Р±РѕС‚Р°</p>
+        </div>
+
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));">
+              <span class="article-tag">РћР±СЉРµРєС‚РёРІ</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РђРЅРЅР° Р’РёРЅРѕРіСЂР°РґРѕРІР°</span>
+                <span>рџ“… 28 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РџСЂРѕС‚РµСЃС‚ РёР»Рё РёСЃРєСѓСЃСЃС‚РІРѕ? Р Р°Р·Р±РёСЂР°РµРј СЃРїРѕСЂРЅРѕРµ РіСЂР°С„С„РёС‚Рё РЅР° СѓР»РёС†Рµ Р СѓР±РёРЅС€С‚РµР№РЅР°</h3>
+              <p class="article-excerpt">РЇСЂРєРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РЅР° СЃС‚РµРЅРµ РґРѕРјР° в„– 23 РІС‹Р·РІР°Р»Рѕ Р±СѓСЂРЅС‹Рµ РґРёСЃРєСѓСЃСЃРёРё СЃСЂРµРґРё Р¶РёС‚РµР»РµР№. РҐСѓРґРѕР¶РЅРёРє РіРѕРІРѕСЂРёС‚ Рѕ СЃРІРѕР±РѕРґРµ СЃР°РјРѕРІС‹СЂР°Р¶РµРЅРёСЏ, Р¶РёР»СЊС†С‹ вЂ” Рѕ РІР°РЅРґР°Р»РёР·РјРµ. РњС‹ РїРѕРіРѕРІРѕСЂРёР»Рё СЃ РѕР±РµРёРјРё СЃС‚РѕСЂРѕРЅР°РјРё РєРѕРЅС„Р»РёРєС‚Р° Рё РїРѕРїС‹С‚Р°Р»РёСЃСЊ СЂР°Р·РѕР±СЂР°С‚СЊСЃСЏ, РіРґРµ РїСЂРѕС…РѕРґРёС‚ РіСЂР°РЅРёС†Р° РјРµР¶РґСѓ РїСЂРѕС‚РµСЃС‚РѕРј Рё РёСЃРєСѓСЃСЃС‚РІРѕРј.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-7));">
+              <span class="article-tag">РћР±СЉРµРєС‚РёРІ</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РњР°РєСЃРёРј РЎРѕРєРѕР»РѕРІ</span>
+                <span>рџ“… 26 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РњСѓСЂР°Р» РЅР° РљСЂР°СЃРЅРѕРј РїСЂРѕСЃРїРµРєС‚Рµ: РєР°Рє Р¶РёС‚РµР»Рё РќРѕРІРѕСЃРёР±РёСЂСЃРєР° РїСЂРёРЅСЏР»Рё РЅРѕРІС‹Р№ Р°СЂС‚-РѕР±СЉРµРєС‚</h3>
+              <p class="article-excerpt">РњР°СЃС€С‚Р°Р±РЅР°СЏ СЂР°Р±РѕС‚Р° РёР·РІРµСЃС‚РЅРѕРіРѕ СѓР»РёС‡РЅРѕРіРѕ С…СѓРґРѕР¶РЅРёРєР° РїРѕСЏРІРёР»Р°СЃСЊ РІ С†РµРЅС‚СЂРµ РіРѕСЂРѕРґР° РјРµСЃСЏС† РЅР°Р·Р°Рґ. РР·СѓС‡Р°РµРј СЂРµР°РєС†РёСЋ РіРѕСЂРѕР¶Р°РЅ, РјРЅРµРЅРёРµ РёСЃРєСѓСЃСЃС‚РІРѕРІРµРґРѕРІ Рё РїР»Р°РЅС‹ РіРѕСЂРѕРґСЃРєРёС… РІР»Р°СЃС‚РµР№ РїРѕ СЂР°Р·РІРёС‚РёСЋ СЃС‚СЂРёС‚-Р°СЂС‚Р° РІ СЂРµРіРёРѕРЅРµ.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-4));">
+              <span class="article-tag">РћР±СЉРµРєС‚РёРІ</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РћР»СЊРіР° РџРµС‚СЂРѕРІР°</span>
+                <span>рџ“… 24 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">Р­РєСЃРїРµСЂРёРјРµРЅС‚: РјРѕР¶РЅРѕ Р»Рё Р·Р° 10 РјРёРЅСѓС‚ РѕС‚Р»РёС‡РёС‚СЊ РєР°С‡РµСЃС‚РІРµРЅРЅС‹Р№ СЃС‚СЂРёС‚-Р°СЂС‚ РѕС‚ С‚РµРіР°?</h3>
+              <p class="article-excerpt">РњС‹ РїСЂРѕРІРµР»Рё РѕРїСЂРѕСЃ СЃСЂРµРґРё СЃР»СѓС‡Р°Р№РЅС‹С… РїСЂРѕС…РѕР¶РёС…, РїРѕРєР°Р·С‹РІР°СЏ РёРј С„РѕС‚РѕРіСЂР°С„РёРё СЂР°Р·Р»РёС‡РЅС‹С… РіСЂР°С„С„РёС‚Рё. Р РµР·СѓР»СЊС‚Р°С‚С‹ РѕРєР°Р·Р°Р»РёСЃСЊ РЅРµРѕР¶РёРґР°РЅРЅС‹РјРё: Р±РѕР»СЊС€РёРЅСЃС‚РІРѕ Р·Р°С‚СЂСѓРґРЅРёР»РёСЃСЊ СЃ РѕС‚РІРµС‚РѕРј. Р§С‚Рѕ СЌС‚Рѕ РіРѕРІРѕСЂРёС‚ Рѕ РєСѓР»СЊС‚СѓСЂРµ РІРѕСЃРїСЂРёСЏС‚РёСЏ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР°?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP PAGE -->
+    <div id="map" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">РљР°СЂС‚Р° РёСЃРєСѓСЃСЃС‚РІР°</h1>
+          <p class="section-description">РРЅС‚РµСЂР°РєС‚РёРІРЅС‹Р№ РєР°С‚Р°Р»РѕРі Р»СѓС‡С€РёС… СЂР°Р±РѕС‚ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° РїРѕ РІСЃРµР№ Р РѕСЃСЃРёРё</p>
+        </div>
+
+        <div class="map-container">
+          <div class="map-placeholder">
+            <h3>рџ—єпёЏ РРЅС‚РµСЂР°РєС‚РёРІРЅР°СЏ РєР°СЂС‚Р°</h3>
+            <p>Р—РґРµСЃСЊ Р±СѓРґРµС‚ СЂР°Р·РјРµС‰РµРЅР° РёРЅС‚РµСЂР°РєС‚РёРІРЅР°СЏ РєР°СЂС‚Р° СЃ РѕС‚РјРµС‚РєР°РјРё Р»СѓС‡С€РёС… РіСЂР°С„С„РёС‚Рё Рё РјСѓСЂР°Р»РѕРІ Р РѕСЃСЃРёРё. РљР°Р¶РґР°СЏ Р»РѕРєР°С†РёСЏ РІРєР»СЋС‡Р°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± Р°РІС‚РѕСЂРµ, РґР°С‚Сѓ СЃРѕР·РґР°РЅРёСЏ Рё РєРѕРјРјРµРЅС‚Р°СЂРёРё СЌРєСЃРїРµСЂС‚РѕРІ.</p>
+          </div>
+        </div>
+
+        <div class="article-grid" style="margin-top: var(--space-64);">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-5), var(--color-bg-8));">
+              <span class="article-tag">РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі</span>
+            </div>
+            <div class="article-content">
+              <h3 class="article-title">Р›РµРіРµРЅРґР°СЂРЅС‹Р№ РјСѓСЂР°Р» РЅР° СѓР»РёС†Рµ Р–СѓРєРѕРІСЃРєРѕРіРѕ</h3>
+              <p class="article-excerpt">РђРІС‚РѕСЂ: Zoom. РћРґРЅР° РёР· СЃР°РјС‹С… Р·РЅР°РєРѕРІС‹С… СЂР°Р±РѕС‚ РїРёС‚РµСЂСЃРєРѕРіРѕ СЃС‚СЂРёС‚-Р°СЂС‚Р°, СЃРѕР·РґР°РЅРЅР°СЏ РІ 2019 РіРѕРґСѓ.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-6));">
+              <span class="article-tag">РњРѕСЃРєРІР°</span>
+            </div>
+            <div class="article-content">
+              <h3 class="article-title">РџРѕСЂС‚СЂРµС‚ РЅР° С„Р°СЃР°РґРµ РґРѕРјР° РєСѓР»СЊС‚СѓСЂС‹</h3>
+              <p class="article-excerpt">РђРІС‚РѕСЂ: Artez. РњР°СЃС€С‚Р°Р±РЅР°СЏ СЂР°Р±РѕС‚Р° РІ СЂР°Р№РѕРЅРµ РЎРѕРєРѕР», СЃС‚Р°РІС€Р°СЏ РІРёР·РёС‚РЅРѕР№ РєР°СЂС‚РѕС‡РєРѕР№ СЂР°Р№РѕРЅР°.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-2));">
+              <span class="article-tag">Р•РєР°С‚РµСЂРёРЅР±СѓСЂРі</span>
+            </div>
+            <div class="article-content">
+              <h3 class="article-title">РђР±СЃС‚СЂР°РєС‚РЅР°СЏ РєРѕРјРїРѕР·РёС†РёСЏ РЅР° Р’Р°Р№РЅРµСЂР°</h3>
+              <p class="article-excerpt">РђРІС‚РѕСЂ: РљРѕР»Р»РµРєС‚РёРІ E-CREW. РЇСЂРєР°СЏ СЂР°Р±РѕС‚Р° РІ С†РµРЅС‚СЂРµ РіРѕСЂРѕРґР°, СЃРѕР·РґР°СЋС‰Р°СЏ РѕСЃРѕР±СѓСЋ Р°С‚РјРѕСЃС„РµСЂСѓ СѓР»РёС†С‹.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSPIRATION PAGE -->
+    <div id="inspiration" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">Р’РґРѕС…РЅРѕРІРµРЅРёРµ СѓР»РёС†</h1>
+          <p class="section-description">РСЃС‚РѕСЂРёСЏ СЃС‚Р°РЅРѕРІР»РµРЅРёСЏ СѓР»РёС‡РЅС‹С… С…СѓРґРѕР¶РЅРёРєРѕРІ. РРЅС‚РµСЂРІСЊСЋ, С„РѕС‚РѕРїСЂРѕРµРєС‚С‹, Р»РѕРЅРіСЂРёРґС‹</p>
+          <p style="color: var(--color-primary); font-weight: var(--font-weight-medium);">рџ“… РџСѓР±Р»РёРєР°С†РёРё: 15 Рё 30 С‡РёСЃР»Р° РєР°Р¶РґРѕРіРѕ РјРµСЃСЏС†Р°</p>
+        </div>
+
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-6));">
+              <span class="article-tag">Р’РґРѕС…РЅРѕРІРµРЅРёРµ СѓР»РёС†</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р”РјРёС‚СЂРёР№ РљРѕР»РµСЃРЅРёРєРѕРІ</span>
+                <span>рџ“… 15 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РћС‚ С‚РµРіРѕРІ Рє РјСѓСЂР°Р»Р°Рј: РёСЃС‚РѕСЂРёСЏ РџР°С€Рё 183</h3>
+              <p class="article-excerpt">Р›РµРіРµРЅРґР°СЂРЅС‹Р№ РїРёС‚РµСЂСЃРєРёР№ СЂР°Р№С‚РµСЂ, С‡СЊРµ РёРјСЏ СЃС‚Р°Р»Рѕ СЃРёРјРІРѕР»РѕРј С†РµР»РѕР№ СЌРїРѕС…Рё СЂРѕСЃСЃРёР№СЃРєРѕРіРѕ РіСЂР°С„С„РёС‚Рё. Р­РєСЃРєР»СЋР·РёРІРЅРѕРµ РёРЅС‚РµСЂРІСЊСЋ СЃ С‚РµРјРё, РєС‚Рѕ РµРіРѕ Р·РЅР°Р», Р°СЂС…РёРІРЅС‹Рµ С„РѕС‚РѕРіСЂР°С„РёРё Рё Р°РЅР°Р»РёР· РІР»РёСЏРЅРёСЏ РЅР° СЃРѕРІСЂРµРјРµРЅРЅРѕРµ РїРѕРєРѕР»РµРЅРёРµ С…СѓРґРѕР¶РЅРёРєРѕРІ.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-7), var(--color-bg-4));">
+              <span class="article-tag">Р’РґРѕС…РЅРѕРІРµРЅРёРµ СѓР»РёС†</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РњР°СЂРёСЏ Р’РѕР»РєРѕРІР°</span>
+                <span>рџ“… 30 СЃРµРЅС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">Р–РµРЅС‰РёРЅС‹ РІ СЂРѕСЃСЃРёР№СЃРєРѕРј РіСЂР°С„С„РёС‚Рё: СЂР°Р·СЂСѓС€Р°СЏ СЃС‚РµСЂРµРѕС‚РёРїС‹</h3>
+              <p class="article-excerpt">РСЃС‚РѕСЂРёРё РїСЏС‚Рё С…СѓРґРѕР¶РЅРёС†, РєРѕС‚РѕСЂС‹Рµ РґРѕРєР°Р·Р°Р»Рё, С‡С‚Рѕ СЃС‚СЂРёС‚-Р°СЂС‚ вЂ” РЅРµ С‚РѕР»СЊРєРѕ РјСѓР¶СЃРєР°СЏ С‚РµСЂСЂРёС‚РѕСЂРёСЏ. РС… РїСѓС‚СЊ РѕС‚ РїРµСЂРІС‹С… СЂР°Р±РѕС‚ РґРѕ РїСЂРёР·РЅР°РЅРёСЏ РІ РїСЂРѕС„РµСЃСЃРёРѕРЅР°Р»СЊРЅРѕРј СЃРѕРѕР±С‰РµСЃС‚РІРµ.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-8));">
+              <span class="article-tag">Р’РґРѕС…РЅРѕРІРµРЅРёРµ СѓР»РёС†</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РђР»РµРєСЃР°РЅРґСЂ РќРѕРІРёРєРѕРІ</span>
+                <span>рџ“… 15 СЃРµРЅС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">Р­РІРѕР»СЋС†РёСЏ СЃС‚РёР»СЏ: 20 Р»РµС‚ С‚РІРѕСЂС‡РµСЃС‚РІР° РјРѕСЃРєРѕРІСЃРєРѕРіРѕ РєРѕР»Р»РµРєС‚РёРІР° Zuk Club</h3>
+              <p class="article-excerpt">Р¤РѕС‚РѕРїСЂРѕРµРєС‚, РґРµРјРѕРЅСЃС‚СЂРёСЂСѓСЋС‰РёР№, РєР°Рє РјРµРЅСЏР»СЃСЏ СЃС‚РёР»СЊ Рё РїРѕРґС…РѕРґ РѕРґРЅРѕР№ РёР· СЃР°РјС‹С… РІР»РёСЏС‚РµР»СЊРЅС‹С… РіСЂР°С„С„РёС‚Рё-РєРѕРјР°РЅРґ Р РѕСЃСЃРёРё Р·Р° РґРІР° РґРµСЃСЏС‚РёР»РµС‚РёСЏ.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCUSS PAGE -->
+    <div id="discuss" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">Рђ РѕР±СЃСѓРґРёС‚СЊ?</h1>
+          <p class="section-description">РњРµСЃС‚Рѕ РґР»СЏ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РјРЅРµРЅРёР№ СЂР°Р·РЅС‹С… РїРѕРєРѕР»РµРЅРёР№ Рѕ СЃС‚СЂРёС‚-Р°СЂС‚Рµ</p>
+          <p style="color: var(--color-primary); font-weight: var(--font-weight-medium);">рџ“… РџСѓР±Р»РёРєР°С†РёРё: 20 С‡РёСЃР»Р° РєР°Р¶РґРѕРіРѕ РјРµСЃСЏС†Р°</p>
+        </div>
+
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-4), var(--color-bg-7));">
+              <span class="article-tag">Рђ РѕР±СЃСѓРґРёС‚СЊ?</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р РµРґР°РєС†РёСЏ</span>
+                <span>рџ“… 20 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РњРѕР»РѕРґРµР¶СЊ vs СЃС‚Р°СЂС€РµРµ РїРѕРєРѕР»РµРЅРёРµ: РЅСѓР¶РЅС‹ Р»Рё РіРѕСЂРѕРґСѓ РіСЂР°С„С„РёС‚Рё?</h3>
+              <p class="article-excerpt">Р—Р°РїРёСЃСЊ РѕРЅР»Р°Р№РЅ-РґРёСЃРєСѓСЃСЃРёРё, РіРґРµ РїСЂРµРґСЃС‚Р°РІРёС‚РµР»Рё СЂР°Р·РЅС‹С… РїРѕРєРѕР»РµРЅРёР№ РѕР±СЃСѓР¶РґР°СЋС‚ РіСЂР°РЅРёС†С‹ РґРѕРїСѓСЃС‚РёРјРѕРіРѕ РІ СѓР»РёС‡РЅРѕРј РёСЃРєСѓСЃСЃС‚РІРµ. РњРѕР¶РµС‚ Р»Рё РіСЂР°С„С„РёС‚Рё СѓРєСЂР°С€Р°С‚СЊ РіРѕСЂРѕРґ РёР»Рё СЌС‚Рѕ РІСЃРµРіРґР° РїРѕСЂС‡Р° РёРјСѓС‰РµСЃС‚РІР°?</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-5), var(--color-bg-1));">
+              <span class="article-tag">Рђ РѕР±СЃСѓРґРёС‚СЊ?</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р РµРґР°РєС†РёСЏ</span>
+                <span>рџ“… 20 СЃРµРЅС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РљРѕРјРјРµСЂС†РёР°Р»РёР·Р°С†РёСЏ СЃС‚СЂРёС‚-Р°СЂС‚Р°: РїСЂРѕРґР°Р¶Р° РґСѓС€Рё РёР»Рё СЂР°Р·РІРёС‚РёРµ РёСЃРєСѓСЃСЃС‚РІР°?</h3>
+              <p class="article-excerpt">РҐСѓРґРѕР¶РЅРёРєРё, РіР°Р»РµСЂРёСЃС‚С‹ Рё РєСЂРёС‚РёРєРё СЃРїРѕСЂСЏС‚ Рѕ С‚РѕРј, СЃРѕС…СЂР°РЅСЏРµС‚ Р»Рё РіСЂР°С„С„РёС‚Рё СЃРІРѕСЋ Р°СѓС‚РµРЅС‚РёС‡РЅРѕСЃС‚СЊ, РєРѕРіРґР° РІС‹С…РѕРґРёС‚ РЅР° РєРѕРјРјРµСЂС‡РµСЃРєРёР№ СЂС‹РЅРѕРє.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-6), var(--color-bg-3));">
+              <span class="article-tag">Рђ РѕР±СЃСѓРґРёС‚СЊ?</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р РµРґР°РєС†РёСЏ</span>
+                <span>рџ“… 20 Р°РІРіСѓСЃС‚Р° 2025</span>
+              </div>
+              <h3 class="article-title">Р”РѕР»Р¶РЅС‹ Р»Рё РІР»Р°СЃС‚Рё РїРѕРґРґРµСЂР¶РёРІР°С‚СЊ СѓР»РёС‡РЅРѕРµ РёСЃРєСѓСЃСЃС‚РІРѕ?</h3>
+              <p class="article-excerpt">РљСЂСѓРіР»С‹Р№ СЃС‚РѕР» СЃ СѓС‡Р°СЃС‚РёРµРј РїСЂРµРґСЃС‚Р°РІРёС‚РµР»РµР№ РіРѕСЂРѕРґСЃРєРѕР№ Р°РґРјРёРЅРёСЃС‚СЂР°С†РёРё, С…СѓРґРѕР¶РЅРёРєРѕРІ Рё Р¶РёС‚РµР»РµР№ Рѕ СЂРѕР»Рё РіРѕСЃСѓРґР°СЂСЃС‚РІР° РІ СЂР°Р·РІРёС‚РёРё СЃС‚СЂРёС‚-Р°СЂС‚ РєСѓР»СЊС‚СѓСЂС‹.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEWPOINT PAGE -->
+    <div id="viewpoint" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">РўРѕС‡РєР° Р·СЂРµРЅРёСЏ</h1>
+          <p class="section-description">РљРѕР»РѕРЅРєРё РїСЂРёРіР»Р°С€С‘РЅРЅС‹С… Р°РІС‚РѕСЂРѕРІ: С…СѓРґРѕР¶РЅРёРєРѕРІ, РєСЂРёС‚РёРєРѕРІ, Р°СЂС…РёС‚РµРєС‚РѕСЂРѕРІ</p>
+          <p style="color: var(--color-primary); font-weight: var(--font-weight-medium);">рџ“… РџСѓР±Р»РёРєР°С†РёРё: РїРѕРЅРµРґРµР»СЊРЅРёРє, СЃСЂРµРґР°, РїСЏС‚РЅРёС†Р°</p>
+        </div>
+
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-5));">
+              <span class="article-tag">РўРѕС‡РєР° Р·СЂРµРЅРёСЏ</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РРіРѕСЂСЊ РџРѕРЅРѕСЃРѕРІ, С…СѓРґРѕР¶РЅРёРє</span>
+                <span>рџ“… 28 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РџРѕС‡РµРјСѓ СЏ РїРµСЂРµСЃС‚Р°Р» СЂРёСЃРѕРІР°С‚СЊ РЅРµР»РµРіР°Р»СЊРЅРѕ</h3>
+              <p class="article-excerpt">Р›РёС‡РЅС‹Р№ РѕРїС‹С‚ С…СѓРґРѕР¶РЅРёРєР°, РєРѕС‚РѕСЂС‹Р№ РїСЂРѕС€С‘Р» РїСѓС‚СЊ РѕС‚ РїРѕРґРїРѕР»СЊРЅРѕРіРѕ СЂР°Р№С‚РµСЂР° РґРѕ СЃРѕР·РґР°С‚РµР»СЏ Р»РµРіР°Р»СЊРЅС‹С… РјСѓСЂР°Р»РѕРІ. Рћ РїРµСЂРµРѕСЃРјС‹СЃР»РµРЅРёРё С‚РІРѕСЂС‡РµСЃС‚РІР° Рё РїРѕРёСЃРєРµ Р±Р°Р»Р°РЅСЃР°.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-8), var(--color-bg-1));">
+              <span class="article-tag">РўРѕС‡РєР° Р·СЂРµРЅРёСЏ</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РђРЅРЅР° РњРёС…Р°Р№Р»РѕРІР°, Р°СЂС…РёС‚РµРєС‚РѕСЂ</span>
+                <span>рџ“… 25 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РљР°Рє СЃС‚СЂРёС‚-Р°СЂС‚ РјРµРЅСЏРµС‚ РіРѕСЂРѕРґСЃРєСѓСЋ СЃСЂРµРґСѓ: РІР·РіР»СЏРґ Р°СЂС…РёС‚РµРєС‚РѕСЂР°</h3>
+              <p class="article-excerpt">РђРЅР°Р»РёР· РІР»РёСЏРЅРёСЏ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° РЅР° РІРѕСЃРїСЂРёСЏС‚РёРµ РіРѕСЂРѕРґСЃРєРѕРіРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° Рё РєР°С‡РµСЃС‚РІРѕ Р¶РёР·РЅРё РіРѕСЂРѕР¶Р°РЅ СЃ С‚РѕС‡РєРё Р·СЂРµРЅРёСЏ РїСЂРѕС„РµСЃСЃРёРѕРЅР°Р»СЊРЅРѕРіРѕ Р°СЂС…РёС‚РµРєС‚РѕСЂР°.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-4), var(--color-bg-6));">
+              <span class="article-tag">РўРѕС‡РєР° Р·СЂРµРЅРёСЏ</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РЎРµСЂРіРµР№ Р”Р°РІС‹РґРѕРІ, РєСЂРёС‚РёРє</span>
+                <span>рџ“… 23 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">Р“СЂР°С„С„РёС‚Рё РІ РјСѓР·РµРµ: РґРµР»Рѕ РїСЂРёРЅС†РёРїР° РёР»Рё РєРѕРјРїСЂРѕРјРёСЃСЃ?</h3>
+              <p class="article-excerpt">Р Р°Р·РјС‹С€Р»РµРЅРёСЏ РёСЃРєСѓСЃСЃС‚РІРѕРІРµРґР° Рѕ РјРµСЃС‚Рµ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° РІ РёРЅСЃС‚РёС‚СѓС†РёРѕРЅР°Р»СЊРЅРѕРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ. РўРµСЂСЏРµС‚ Р»Рё РіСЂР°С„С„РёС‚Рё СЃРІРѕСЋ СЃСѓС‚СЊ, РїРѕРїР°РґР°СЏ РІ РіР°Р»РµСЂРµРё?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CITY IN PALM PAGE -->
+    <div id="citypalm" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</h1>
+          <p class="section-description">РћР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅС‹Рµ РјР°С‚РµСЂРёР°Р»С‹: РєР°Рє РїРѕРЅРёРјР°С‚СЊ Рё РѕС‚Р»РёС‡Р°С‚СЊ РєР°С‡РµСЃС‚РІРµРЅРЅС‹Р№ СЃС‚СЂРёС‚-Р°СЂС‚</p>
+          <p style="color: var(--color-primary); font-weight: var(--font-weight-medium);">рџ“… РџСѓР±Р»РёРєР°С†РёРё: РєР°Р¶РґРѕРµ РІРѕСЃРєСЂРµСЃРµРЅСЊРµ</p>
+        </div>
+
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-5));">
+              <span class="article-tag">Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р•Р»РµРЅР° РљСЂР°СЃРЅРѕРІР°</span>
+                <span>рџ“… 27 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">5 РїСЂРёР·РЅР°РєРѕРІ РєР°С‡РµСЃС‚РІРµРЅРЅРѕРіРѕ СЃС‚СЂРёС‚-Р°СЂС‚Р°</h3>
+              <p class="article-excerpt">РљР°Рє РѕС‚Р»РёС‡РёС‚СЊ С‚Р°Р»Р°РЅС‚Р»РёРІСѓСЋ СЂР°Р±РѕС‚Сѓ РѕС‚ РѕР±С‹С‡РЅРѕРіРѕ РІР°РЅРґР°Р»РёР·РјР°? РџСЂРѕСЃС‚РѕР№ РіРёРґ РґР»СЏ РІСЃРµС…, РєС‚Рѕ С…РѕС‡РµС‚ РїРѕРЅРёРјР°С‚СЊ СѓР»РёС‡РЅРѕРµ РёСЃРєСѓСЃСЃС‚РІРѕ. Р Р°Р·Р±РёСЂР°РµРј РєР»СЋС‡РµРІС‹Рµ РєСЂРёС‚РµСЂРёРё РѕС†РµРЅРєРё.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-7));">
+              <span class="article-tag">Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ РџР°РІРµР» РћСЂР»РѕРІ</span>
+                <span>рџ“… 20 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РЎР»РѕРІР°СЂСЊ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР°: РѕС‚ С‚РµРіР° РґРѕ РјСѓСЂР°Р»Р°</h3>
+              <p class="article-excerpt">РџРѕРґСЂРѕР±РЅС‹Р№ РіР»РѕСЃСЃР°СЂРёР№ С‚РµСЂРјРёРЅРѕРІ РіСЂР°С„С„РёС‚Рё-РєСѓР»СЊС‚СѓСЂС‹. РЈР·РЅР°Р№С‚Рµ, С‡С‚Рѕ РѕР·РЅР°С‡Р°СЋС‚ throw-up, piece, bombing Рё РґСЂСѓРіРёРµ РїРѕРЅСЏС‚РёСЏ РјРёСЂР° СЃС‚СЂРёС‚-Р°СЂС‚Р°.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-4));">
+              <span class="article-tag">Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ‘¤ Р’РёРєС‚РѕСЂРёСЏ РЎРјРёСЂРЅРѕРІР°</span>
+                <span>рџ“… 13 РѕРєС‚СЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">РСЃС‚РѕСЂРёСЏ РіСЂР°С„С„РёС‚Рё: РѕС‚ РґСЂРµРІРЅРёС… РїРµС‰РµСЂ РґРѕ СЃРѕРІСЂРµРјРµРЅРЅС‹С… РјРµРіР°РїРѕР»РёСЃРѕРІ</h3>
+              <p class="article-excerpt">РћР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅС‹Р№ Р»РѕРЅРіСЂРёРґ Рѕ С‚РѕРј, РєР°Рє СЂР°Р·РІРёРІР°Р»РѕСЃСЊ РёСЃРєСѓСЃСЃС‚РІРѕ РіСЂР°С„С„РёС‚Рё РЅР° РїСЂРѕС‚СЏР¶РµРЅРёРё РІРµРєРѕРІ Рё РєР°РєРёРµ С„РѕСЂРјС‹ РѕРЅРѕ РїСЂРёРЅРёРјР°РµС‚ СЃРµРіРѕРґРЅСЏ.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ECHO PAGE -->
+    <div id="echo" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">Р­С…Рѕ СЃРѕР±С‹С‚РёР№</h1>
+          <p class="section-description">РђРЅРѕРЅСЃС‹ РІС‹СЃС‚Р°РІРѕРє, С„РµСЃС‚РёРІР°Р»РµР№, СЌРєСЃРєСѓСЂСЃРёР№ Рё РґСЂСѓРіРёС… СЃРѕР±С‹С‚РёР№</p>
+          <p style="color: var(--color-primary); font-weight: var(--font-weight-medium);">рџ“… РћР±РЅРѕРІР»РµРЅРёСЏ РїРѕ РјРµСЂРµ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ РёРЅС„РѕРїРѕРІРѕРґРѕРІ</p>
+        </div>
+
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-6), var(--color-bg-8));">
+              <span class="article-tag">Р­С…Рѕ СЃРѕР±С‹С‚РёР№</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ“Ќ РњРѕСЃРєРІР°</span>
+                <span>рџ“… 5-10 РЅРѕСЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">Р¤РµСЃС‚РёРІР°Р»СЊ СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР° В«РђСЂС‚РјРѕСЃСЃС„РµСЂР°-2025В»</h3>
+              <p class="article-excerpt">РљСЂСѓРїРЅРµР№С€РµРµ СЃРѕР±С‹С‚РёРµ РіРѕРґР° РґР»СЏ РїРѕРєР»РѕРЅРЅРёРєРѕРІ СЃС‚СЂРёС‚-Р°СЂС‚Р°. РњР°СЃС‚РµСЂ-РєР»Р°СЃСЃС‹ РѕС‚ РІРµРґСѓС‰РёС… С…СѓРґРѕР¶РЅРёРєРѕРІ, РІС‹СЃС‚Р°РІРєРё, РїРµСЂС„РѕСЂРјР°РЅСЃС‹ Рё СЃРѕР·РґР°РЅРёРµ РЅРѕРІС‹С… РјСѓСЂР°Р»РѕРІ РІ С†РµРЅС‚СЂРµ СЃС‚РѕР»РёС†С‹.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-5), var(--color-bg-2));">
+              <span class="article-tag">Р­С…Рѕ СЃРѕР±С‹С‚РёР№</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ“Ќ РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі</span>
+                <span>рџ“… 15 РЅРѕСЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">Р­РєСЃРєСѓСЂСЃРёСЏ В«Р“СЂР°С„С„РёС‚Рё РџРµС‚СЂРѕРіСЂР°РґСЃРєРѕР№ СЃС‚РѕСЂРѕРЅС‹В»</h3>
+              <p class="article-excerpt">РЎРїРµС†РёР°Р»СЊРЅС‹Р№ РјР°СЂС€СЂСѓС‚ РїРѕ Р»РµРіРµРЅРґР°СЂРЅС‹Рј РјРµСЃС‚Р°Рј РїРёС‚РµСЂСЃРєРѕРіРѕ СЃС‚СЂРёС‚-Р°СЂС‚Р° СЃ СЌРєСЃРєСѓСЂСЃРѕРІРѕРґРѕРј-СЂР°Р№С‚РµСЂРѕРј. РЈР·РЅР°Р№С‚Рµ РёСЃС‚РѕСЂРёСЋ Р·РЅР°РєРѕРІС‹С… СЂР°Р±РѕС‚ Рё РёС… Р°РІС‚РѕСЂРѕРІ.</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-7), var(--color-bg-3));">
+              <span class="article-tag">Р­С…Рѕ СЃРѕР±С‹С‚РёР№</span>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>рџ“Ќ Р•РєР°С‚РµСЂРёРЅР±СѓСЂРі</span>
+                <span>рџ“… 20-22 РЅРѕСЏР±СЂСЏ 2025</span>
+              </div>
+              <h3 class="article-title">Р’С‹СЃС‚Р°РІРєР° В«РЈСЂР±Р°РЅ: РѕС‚ СЃС‚РµРЅ Рє С…РѕР»СЃС‚СѓВ»</h3>
+              <p class="article-excerpt">РџРµСЂРІР°СЏ РІ СЂРµРіРёРѕРЅРµ РІС‹СЃС‚Р°РІРєР°, РґРµРјРѕРЅСЃС‚СЂРёСЂСѓСЋС‰Р°СЏ СЌРІРѕР»СЋС†РёСЋ СѓСЂР°Р»СЊСЃРєРёС… РіСЂР°С„С„РёС‚Рё-С…СѓРґРѕР¶РЅРёРєРѕРІ РѕС‚ СѓР»РёС‡РЅС‹С… СЂР°Р±РѕС‚ Рє РіР°Р»РµСЂРµР№РЅРѕРјСѓ РёСЃРєСѓСЃСЃС‚РІСѓ.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPETITORS PAGE -->
+    <div id="competitors" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">РђРЅР°Р»РёР· РєРѕРЅРєСѓСЂРµРЅС‚РѕРІ</h1>
+          <p class="section-description">РћР±Р·РѕСЂ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… РјРµРґРёР° Рё РїСЂРѕРµРєС‚РѕРІ Рѕ СЃС‚СЂРёС‚-Р°СЂС‚Рµ РІ Р РѕСЃСЃРёРё</p>
+        </div>
+
+        <table class="competitors-table">
+          <thead>
+            <tr>
+              <th>РќР°Р·РІР°РЅРёРµ РїСЂРѕРµРєС‚Р°</th>
+              <th>РџСЂРµРёРјСѓС‰РµСЃС‚РІР°</th>
+              <th>РќРµРґРѕСЃС‚Р°С‚РєРё</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Р“РёРґ РїРѕ СѓР»РёС‡РЅРѕРјСѓ РёСЃРєСѓСЃСЃС‚РІСѓ РІ Р РѕСЃСЃРёРё</strong></td>
+              <td>
+                <ul>
+                  <li>РћР±С€РёСЂРЅС‹Р№ РѕС…РІР°С‚ С‚РµСЂСЂРёС‚РѕСЂРёРё</li>
+                  <li>Р Р°Р·РЅРѕРѕР±СЂР°Р·РёРµ С„РѕСЂРј СѓР»РёС‡РЅРѕРіРѕ РёСЃРєСѓСЃСЃС‚РІР°</li>
+                  <li>РљР°С‡РµСЃС‚РІРµРЅРЅРѕРµ РѕС„РѕСЂРјР»РµРЅРёРµ СЃР°Р№С‚Р°</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅР°СЏ РѕС†РµРЅРєР° РєР°С‡РµСЃС‚РІР° РіСЂР°С„С„РёС‚Рё</li>
+                  <li>РћС‚СЃСѓС‚СЃС‚РІРёРµ СЌРєСЃРїРµСЂС‚РЅРѕРіРѕ РјРЅРµРЅРёСЏ</li>
+                  <li>Р¤РѕРєСѓСЃ С‚РѕР»СЊРєРѕ РЅР° РїРµСЂРµС‡РёСЃР»РµРЅРёРё Р»РѕРєР°С†РёР№</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>РќР° РІРёСЂС‚СѓР°Р»СЊРЅС‹С… СѓР»РёС†Р°С… РЅРµ РЅР°СЃС‚СѓРїР°РµС‚ СѓС‚СЂРѕ</strong><br><small>РџРµС‚РµСЂР±СѓСЂРі</small></td>
+              <td>
+                <ul>
+                  <li>РРЅС‚РµСЂР°РєС‚РёРІРЅРѕСЃС‚СЊ (РєР°СЂС‚Р° РіСЂР°С„С„РёС‚Рё)</li>
+                  <li>РЎРµСЂСЊС‘Р·РЅС‹Р№ РёСЃСЃР»РµРґРѕРІР°С‚РµР»СЊСЃРєРёР№ РїРѕРґС…РѕРґ</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>РЈР·РєР°СЏ РіРµРѕРіСЂР°С„РёСЏ (С‚РѕР»СЊРєРѕ РџРµС‚РµСЂР±СѓСЂРі)</li>
+                  <li>РўРµС…РЅРёС‡РµСЃРєРёРµ РїСЂРѕР±Р»РµРјС‹ СЃ РёРЅС‚РµСЂР°РєС‚РёРІРЅРѕСЃС‚СЊСЋ</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>GraffitiRussia.com</strong></td>
+              <td>
+                <ul>
+                  <li>РџРѕРґСЂРѕР±РЅС‹Рµ С‚РµРјР°С‚РёС‡РµСЃРєРёРµ РјР°С‚РµСЂРёР°Р»С‹</li>
+                  <li>РћСЃРІРµС‰РµРЅРёРµ СЂР°Р·РІРёС‚РёСЏ СЃРѕРІСЂРµРјРµРЅРЅРѕРіРѕ РіСЂР°С„С„РёС‚Рё</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>Р РµРґРєР°СЏ РїСѓР±Р»РёРєР°С†РёСЏ РЅРѕРІС‹С… РјР°С‚РµСЂРёР°Р»РѕРІ</li>
+                  <li>РЎРёР»СЊРЅС‹Р№ СѓРєР»РѕРЅ РЅР° РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Рµ Р·Р°РєР°Р·С‹</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Р‘РёРµРЅРЅР°Р»Рµ РђСЂС‚РјРѕСЃСЃС„РµСЂР°</strong></td>
+              <td>
+                <ul>
+                  <li>РћСЂРіР°РЅРёР·РѕРІР°РЅРЅРѕРµ СЃРѕР±С‹С‚РёРµ СЃ 2014 РіРѕРґР°</li>
+                  <li>РЈС‡Р°СЃС‚РёРµ РёР·РІРµСЃС‚РЅС‹С… СЌРєСЃРїРµСЂС‚РѕРІ</li>
+                  <li>Р’С‹СЃРѕРєРѕРµ РєР°С‡РµСЃС‚РІРѕ РѕС„РѕСЂРјР»РµРЅРёСЏ</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>РџСЂРµРёРјСѓС‰РµСЃС‚РІРµРЅРЅРѕ РѕС„Р»Р°Р№РЅ-С„РѕСЂРјР°С‚</li>
+                  <li>РњРµРЅСЊС€Рµ РїРѕСЃС‚РѕСЏРЅРЅРѕРіРѕ РјРµРґРёР°-РєРѕРЅС‚РµРЅС‚Р°</li>
+                  <li>РћРіСЂР°РЅРёС‡РµРЅРЅС‹Р№ РѕС…РІР°С‚ Р°СѓРґРёС‚РѕСЂРёРё</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Skillbox - СЃС‚Р°С‚СЊРё Рѕ СЃС‚СЂРёС‚-Р°СЂС‚Рµ</strong></td>
+              <td>
+                <ul>
+                  <li>РЁРёСЂРѕРєРѕРµ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёРµ РїР»Р°С‚С„РѕСЂРјС‹</li>
+                  <li>РћСЃРІРµС‰РµРЅРёРµ РЅРѕРІС‹С… С‚СЂРµРЅРґРѕРІ РІ РёСЃРєСѓСЃСЃС‚РІРµ</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>РџРѕРІРµСЂС…РЅРѕСЃС‚РЅС‹Р№ РѕР±Р·РѕСЂ С‚РµРјР°С‚РёРєРё</li>
+                  <li>РљРѕРјРјРµСЂС‡РµСЃРєР°СЏ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚СЊ</li>
+                  <li>РќРµРїРѕСЃС‚РѕСЏРЅРЅС‹Р№ РјРµРґРёР°-РєРѕРЅС‚РµРЅС‚ Рѕ РіСЂР°С„С„РёС‚Рё</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Petrograff</strong><br><small>РџРµС‚РµСЂР±СѓСЂРіСЃРєРёР№ Р¶СѓСЂРЅР°Р» Рѕ РіСЂР°С„С„РёС‚Рё-РєСѓР»СЊС‚СѓСЂРµ</small></td>
+              <td>
+                <ul>
+                  <li>РџРµС‡Р°С‚РЅР°СЏ РІРµСЂСЃРёСЏ Р¶СѓСЂРЅР°Р»Р°</li>
+                  <li>Р Р°Р·РЅРѕРѕР±СЂР°Р·РЅС‹Рµ СЂСѓР±СЂРёРєРё (РёРЅС‚РµСЂРІСЊСЋ, СѓР»РёС†С‹, СЂР°Р±РѕС‚С‹)</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>РћРіСЂР°РЅРёС‡РµРЅРЅРѕСЃС‚СЊ РїРµС‡Р°С‚РЅРѕРіРѕ С„РѕСЂРјР°С‚Р°</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>MOVEBACK N5</strong><br><small>2023</small></td>
+              <td>
+                <ul>
+                  <li>РљР°С‡РµСЃС‚РІРµРЅРЅС‹Рµ РїРѕРґР±РѕСЂРєРё РёРЅС‚РµСЂРІСЊСЋ</li>
+                  <li>РРЅС‚РµСЂРµСЃРЅС‹Рµ РІРёР·СѓР°Р»СЊРЅС‹Рµ СЂР°Р·РІРѕСЂРѕС‚С‹</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>РўРѕР»СЊРєРѕ РїРµС‡Р°С‚РЅР°СЏ РІРµСЂСЃРёСЏ</li>
+                  <li>РњР°Р»РѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЂСѓР±СЂРёРє</li>
+                  <li>РћРіСЂР°РЅРёС‡РµРЅРЅС‹Р№ РѕС…РІР°С‚ Р°СѓРґРёС‚РѕСЂРёРё</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="about-section" style="margin-top: var(--space-64);">
+          <h2>РќР°С€Рµ РєРѕРЅРєСѓСЂРµРЅС‚РЅРѕРµ РїСЂРµРёРјСѓС‰РµСЃС‚РІРѕ</h2>
+          <p>Р’ РѕС‚Р»РёС‡РёРµ РѕС‚ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… РїСЂРѕРµРєС‚РѕРІ, В«Р“СЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРёВ» СЃРѕС‡РµС‚Р°РµС‚ РіР»СѓР±РѕРєСѓСЋ Р°РЅР°Р»РёС‚РёРєСѓ СЃ РѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅРѕР№ РјРёСЃСЃРёРµР№. РњС‹ РЅРµ РїСЂРѕСЃС‚Рѕ РїРѕРєР°Р·С‹РІР°РµРј РіСЂР°С„С„РёС‚Рё вЂ” РјС‹ СѓС‡РёРј РїРѕРЅРёРјР°С‚СЊ РµРіРѕ, С„РѕСЂРјРёСЂСѓРµРј РєСЂРёС‚РµСЂРёРё РѕС†РµРЅРєРё Рё СЃРѕР·РґР°С‘Рј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РґР»СЏ РґРёР°Р»РѕРіР° РјРµР¶РґСѓ С…СѓРґРѕР¶РЅРёРєР°РјРё, Р¶РёС‚РµР»СЏРјРё Рё РіСЂР°РґРѕР·Р°С‰РёС‚РЅРёРєР°РјРё.</p>
+          <p>РќР°С€ РїРѕРґС…РѕРґ РІРєР»СЋС‡Р°РµС‚ СЂРµРіСѓР»СЏСЂРЅС‹Р№ РєРѕРЅС‚РµРЅС‚ РїРѕ РІСЃРµРј РєР»СЋС‡РµРІС‹Рј РЅР°РїСЂР°РІР»РµРЅРёСЏРј, РїСЂРёСЃСѓС‚СЃС‚РІРёРµ РЅР° РјРЅРѕР¶РµСЃС‚РІРµРЅРЅС‹С… РїР»Р°С‚С„РѕСЂРјР°С… Рё С„РѕРєСѓСЃ РЅР° РєР°С‡РµСЃС‚РІРµ РІРјРµСЃС‚Рѕ РєРѕР»РёС‡РµСЃС‚РІР°.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">РљРѕРЅС‚Р°РєС‚С‹</h1>
+          <p class="section-description">РЎРІСЏР¶РёС‚РµСЃСЊ СЃ СЂРµРґР°РєС†РёРµР№ РёР»Рё СЃР»РµРґРёС‚Рµ Р·Р° РЅР°РјРё РІ СЃРѕС†РёР°Р»СЊРЅС‹С… СЃРµС‚СЏС…</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Р РµРґР°РєС†РёСЏ</h3>
+            
+            <div class="contact-item">
+              <h4>Р­Р»РµРєС‚СЂРѕРЅРЅР°СЏ РїРѕС‡С‚Р°</h4>
+              <a href="mailto:info@graffiti-russia.ru">info@graffiti-russia.ru</a>
+            </div>
+
+            <div class="contact-item">
+              <h4>Р”Р»СЏ Р°РІС‚РѕСЂРѕРІ</h4>
+              <a href="mailto:authors@graffiti-russia.ru">authors@graffiti-russia.ru</a>
+            </div>
+
+            <div class="contact-item">
+              <h4>Р РµРєР»Р°РјРЅРѕРµ СЃРѕС‚СЂСѓРґРЅРёС‡РµСЃС‚РІРѕ</h4>
+              <a href="mailto:ads@graffiti-russia.ru">ads@graffiti-russia.ru</a>
+            </div>
+
+            <div class="contact-item">
+              <h4>РЎРѕС†РёР°Р»СЊРЅС‹Рµ СЃРµС‚Рё</h4>
+              <div class="social-links">
+                <a href="https://t.me/graffiti_russia" class="social-link" target="_blank">рџ“± Telegram</a>
+                <a href="https://youtube.com/@graffiti_russia" class="social-link" target="_blank">рџЋҐ YouTube</a>
+              </div>
+              <div class="social-links">
+                <a href="https://vk.com/graffiti_russia" class="social-link" target="_blank">рџ“ Р’РљРѕРЅС‚Р°РєС‚Рµ</a>
+                <a href="https://instagram.com/graffiti_russia" class="social-link" target="_blank">рџ“ё Instagram</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <h4>Р“Р»Р°РІРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ</h4>
+              <p>РђРЅРЅР° Р’РёРЅРѕРіСЂР°РґРѕРІР°</p>
+            </div>
+
+            <div class="contact-item">
+              <h4>РђСЂС‚-РґРёСЂРµРєС‚РѕСЂ</h4>
+              <p>РњР°РєСЃРёРј РЎРѕРєРѕР»РѕРІ</p>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3 style="margin-bottom: var(--space-24);">РќР°РїРёСЃР°С‚СЊ РЅР°Рј</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label class="form-label" for="name">Р’Р°С€Рµ РёРјСЏ</label>
+                <input type="text" id="name" class="form-input" placeholder="РРІР°РЅ РРІР°РЅРѕРІ" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="ivan@example.com" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="subject">РўРµРјР°</label>
+                <input type="text" id="subject" class="form-input" placeholder="Рћ С‡С‘Рј РІС‹ С…РѕС‚РёС‚Рµ РЅР°РїРёСЃР°С‚СЊ?" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="message">РЎРѕРѕР±С‰РµРЅРёРµ</label>
+                <textarea id="message" class="form-textarea" placeholder="Р’Р°С€Рµ СЃРѕРѕР±С‰РµРЅРёРµ..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary" style="width: 100%;">РћС‚РїСЂР°РІРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <footer>
-    <div class="wrap">Проект «Street Art Russia». Код и данные — открыты. Добро пожаловать в вкладки Issues и Pull Requests.</div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Р“СЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРё</h3>
+          <p>РњРµРґРёР°-РїСЂРѕРµРєС‚ Рѕ РєР°С‡РµСЃС‚РІРµРЅРЅРѕРј СѓР»РёС‡РЅРѕРј РёСЃРєСѓСЃСЃС‚РІРµ. Р¤РѕСЂРјРёСЂСѓРµРј РѕСЃРѕР·РЅР°РЅРЅРѕРµ РІРѕСЃРїСЂРёСЏС‚РёРµ СЃС‚СЂРёС‚-Р°СЂС‚Р° Рё СѓС‡РёРј РѕР±С‰РµСЃС‚РІРѕ С‡РёС‚Р°С‚СЊ РіСЂР°С„С„РёС‚Рё.</p>
+          <div class="social-links" style="margin-top: var(--space-24);">
+            <a href="https://t.me/graffiti_russia" class="social-link" target="_blank">Telegram</a>
+            <a href="https://youtube.com/@graffiti_russia" class="social-link" target="_blank">YouTube</a>
+            <a href="https://vk.com/graffiti_russia" class="social-link" target="_blank">VK</a>
+            <a href="https://instagram.com/graffiti_russia" class="social-link" target="_blank">Instagram</a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Р СѓР±СЂРёРєРё</h3>
+          <ul class="footer-links">
+            <li><a onclick="navigateTo('obyektiv')">РћР±СЉРµРєС‚РёРІ</a></li>
+            <li><a onclick="navigateTo('map')">РљР°СЂС‚Р° РёСЃРєСѓСЃСЃС‚РІР°</a></li>
+            <li><a onclick="navigateTo('inspiration')">Р’РґРѕС…РЅРѕРІРµРЅРёРµ СѓР»РёС†</a></li>
+            <li><a onclick="navigateTo('discuss')">Рђ РѕР±СЃСѓРґРёС‚СЊ?</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Р•С‰С‘ СЂСѓР±СЂРёРєРё</h3>
+          <ul class="footer-links">
+            <li><a onclick="navigateTo('viewpoint')">РўРѕС‡РєР° Р·СЂРµРЅРёСЏ</a></li>
+            <li><a onclick="navigateTo('citypalm')">Р“РѕСЂРѕРґ РЅР° Р»Р°РґРѕРЅРё</a></li>
+            <li><a onclick="navigateTo('echo')">Р­С…Рѕ СЃРѕР±С‹С‚РёР№</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>РРЅС„РѕСЂРјР°С†РёСЏ</h3>
+          <ul class="footer-links">
+            <li><a onclick="navigateTo('about')">Рћ РїСЂРѕРµРєС‚Рµ</a></li>
+            <li><a onclick="navigateTo('competitors')">РљРѕРЅРєСѓСЂРµРЅС‚С‹</a></li>
+            <li><a onclick="navigateTo('contact')">РљРѕРЅС‚Р°РєС‚С‹</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Р“СЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРё. Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹. РњРµРґРёР°-РїСЂРѕРµРєС‚ Рѕ РєР°С‡РµСЃС‚РІРµРЅРЅРѕРј СѓР»РёС‡РЅРѕРј РёСЃРєСѓСЃСЃС‚РІРµ.</p>
+      </div>
+    </div>
   </footer>
 
   <script>
-    // Простая демо-логика без бэкенда
-    const posts = [];
-    function addPost(e){
+    // Navigation functionality
+    function navigateTo(pageId) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+      
+      // Show selected page
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Update active nav link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => link.classList.remove('active'));
+    }
+
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const input = document.getElementById('topic');
-      const text = input.value.trim();
-      if(!text) return false;
-      const ts = new Date().toLocaleString('ru-RU');
-      posts.unshift({text, ts});
-      input.value='';
-      renderPosts();
-      return false;
-    }
-    function renderPosts(){
-      const box = document.getElementById('posts');
-      box.innerHTML = posts.map(p => `
-        <div class="item"><span>${p.text}</span><span class="tag">${p.ts}</span></div>
-      `).join('');
-    }
+      alert('РЎРїР°СЃРёР±Рѕ Р·Р° РІР°С€Рµ СЃРѕРѕР±С‰РµРЅРёРµ! РњС‹ СЃРІСЏР¶РµРјСЃСЏ СЃ РІР°РјРё РІ Р±Р»РёР¶Р°Р№С€РµРµ РІСЂРµРјСЏ.');
+      this.reset();
+    });
+
+    // Mobile menu (placeholder for future implementation)
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      alert('РњРѕР±РёР»СЊРЅРѕРµ РјРµРЅСЋ Р±СѓРґРµС‚ СЂРµР°Р»РёР·РѕРІР°РЅРѕ РІ СЃР»РµРґСѓСЋС‰РµР№ РІРµСЂСЃРёРё');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Add hover effect to article cards
+    document.querySelectorAll('.article-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Р“СЂР°С„С„РёС‚Рё Р РѕСЃСЃРёРё - СЃР°Р№С‚ Р·Р°РіСЂСѓР¶РµРЅ СѓСЃРїРµС€РЅРѕ');
+    });
   </script>
 </body>
 </html>
