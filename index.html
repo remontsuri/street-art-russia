@@ -1,364 +1,1166 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Уличное искусство России</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            color: #fff;
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 4px solid #ff1744;
-        }
-        
-        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        header p { font-size: 1.1rem; color: #ccc; }
-        
-        nav {
-            background: #222;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        nav li { margin: 0 1.5rem; }
-        
-        nav a {
-            color: #ffd700;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-        
-        nav a:hover { color: #ff1744; }
-        
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        section {
-            background: #fff;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h2 {
-            color: #b72e92;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 3px solid #ff1744;
-            padding-bottom: 0.5rem;
-        }
-        
-        h3 {
-            color: #333;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        p { margin-bottom: 1rem; text-align: justify; }
-        
-        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
-        li { margin-bottom: 0.5rem; }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-        }
-        
-        th {
-            background: #b72e92;
-            color: #fff;
-            padding: 1rem;
-            text-align: left;
-            font-weight: bold;
-        }
-        
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        tr:hover { background: #f9f9f9; }
-        
-        tr:nth-child(even) { background: #f5f5f5; }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .card {
-            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
-            padding: 1.5rem;
-            border-left: 4px solid #ff1744;
-            border-radius: 5px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .card h4 { color: #b72e92; margin-bottom: 0.5rem; }
-        
-        footer {
-            background: #222;
-            color: #fff;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            border-top: 4px solid #ff1744;
-        }
-        
-        footer a { color: #ffd700; text-decoration: none; }
-        footer a:hover { color: #ff1744; }
-        
-        .schedule {
-            background: #f9f9f9;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-        }
-        
-        .schedule p { margin: 0.5rem 0; }
-        
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.8rem; }
-            nav ul { flex-direction: column; }
-            nav li { margin: 0.5rem 0; }
-            section { padding: 1.5rem; }
-            h2 { font-size: 1.5rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Уличное искусство России | Медиапроект о граффити и стритарте</title>
+  <meta name="description" content="Медиа-проект об осознанном восприятии граффити и уличного искусства в России. Интервью с художниками, анализ городской культуры, путеводители по городам.">
+  <style>
+    :root {
+      --color-white: rgba(255, 255, 255, 1);
+      --color-black: rgba(0, 0, 0, 1);
+      --color-cream-50: rgba(252, 252, 249, 1);
+      --color-cream-100: rgba(255, 255, 253, 1);
+      --color-gray-200: rgba(245, 245, 245, 1);
+      --color-gray-300: rgba(167, 169, 169, 1);
+      --color-slate-500: rgba(98, 108, 113, 1);
+      --color-slate-900: rgba(19, 52, 59, 1);
+      --color-teal-300: rgba(50, 184, 198, 1);
+      --color-teal-500: rgba(33, 128, 141, 1);
+      --color-teal-600: rgba(29, 116, 128, 1);
+      --color-bg-1: rgba(59, 130, 246, 0.08);
+      --color-bg-5: rgba(147, 51, 234, 0.08);
+      --color-bg-3: rgba(34, 197, 94, 0.08);
+      --color-bg-7: rgba(236, 72, 153, 0.08);
+      --color-bg-2: rgba(245, 158, 11, 0.08);
+      --color-bg-6: rgba(249, 115, 22, 0.08);
+      --color-bg-4: rgba(239, 68, 68, 0.08);
+      --color-bg-8: rgba(6, 182, 212, 0.08);
+      
+      --color-background: var(--color-cream-50);
+      --color-surface: var(--color-cream-100);
+      --color-text: var(--color-slate-900);
+      --color-text-secondary: var(--color-slate-500);
+      --color-primary: var(--color-teal-500);
+      --color-primary-hover: var(--color-teal-600);
+      --color-secondary: rgba(94, 82, 64, 0.12);
+      --color-border: rgba(94, 82, 64, 0.2);
+      --color-card-border: rgba(94, 82, 64, 0.12);
+      
+      --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-family-display: 'Impact', 'Arial Black', sans-serif;
+      --space-8: 8px;
+      --space-12: 12px;
+      --space-16: 16px;
+      --space-20: 20px;
+      --space-24: 24px;
+      --space-32: 32px;
+      --space-40: 40px;
+      --space-48: 48px;
+      --space-64: 64px;
+      
+      --radius-base: 8px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-family-base); background: var(--color-background); color: var(--color-text); }
+    
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-card-border);
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--space-24);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+    
+    .logo {
+      font-family: var(--font-family-display);
+      font-size: 24px;
+      color: var(--color-text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+    
+    .logo-accent { color: var(--color-primary); }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: var(--space-32);
+    }
+    
+    .nav-link {
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .nav-link:hover { color: var(--color-primary); }
+    .nav-link.active { color: var(--color-primary); font-weight: 600; }
+    
+    .main-content { margin-top: 70px; min-height: calc(100vh - 70px); }
+    .page { display: none; }
+    .page.active { display: block; }
+    
+    .hero {
+      position: relative;
+      height: 500px;
+      background: linear-gradient(135deg, #8B8B8B 0%, #C0C0C0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
+    }
+    
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 800px;
+      padding: var(--space-32);
+      z-index: 1;
+    }
+    
+    .hero-title {
+      font-family: var(--font-family-display);
+      font-size: 64px;
+      color: var(--color-white);
+      margin-bottom: var(--space-24);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-tagline {
+      font-size: 20px;
+      color: var(--color-white);
+      margin-bottom: var(--space-32);
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-cta { display: inline-flex; gap: var(--space-16); }
+    
+    .btn {
+      padding: var(--space-12) var(--space-32);
+      border-radius: var(--radius-base);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+    
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .btn-secondary {
+      background: var(--color-white);
+      color: var(--color-text);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--color-gray-200);
+      transform: translateY(-2px);
+    }
+    
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--space-64) var(--space-24);
+    }
+    
+    .section-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-64);
+    }
+    
+    .section-title {
+      font-family: var(--font-family-display);
+      font-size: 48px;
+      color: var(--color-text);
+      margin-bottom: var(--space-24);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .section-description {
+      font-size: 18px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+    
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: var(--space-32);
+      margin-bottom: var(--space-64);
+    }
+    
+    .article-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-base);
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .article-image {
+      width: 100%;
+      height: 240px;
+      background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .article-tag {
+      position: absolute;
+      top: var(--space-16);
+      left: var(--space-16);
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: var(--space-4) var(--space-12);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+    
+    .article-content { padding: var(--space-24); }
+    .article-meta { font-size: 12px; color: var(--color-text-secondary); margin-bottom: var(--space-12); }
+    
+    .article-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-12);
+      line-height: 1.4;
+    }
+    
+    .article-excerpt {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+    
+    .featured-article {
+      margin-bottom: var(--space-64);
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-base);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .featured-image {
+      height: 100%;
+      min-height: 400px;
+      background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-7));
+    }
+    
+    .featured-content {
+      padding: var(--space-48);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .featured-tag {
+      display: inline-block;
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: var(--space-8) var(--space-16);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: var(--space-16);
+      width: fit-content;
+    }
+    
+    .featured-title {
+      font-family: var(--font-family-display);
+      font-size: 36px;
+      color: var(--color-text);
+      margin-bottom: var(--space-16);
+      line-height: 1.2;
+    }
+    
+    .featured-excerpt {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-24);
+    }
+    
+    .featured-meta {
+      display: flex;
+      gap: var(--space-24);
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-24);
+    }
+    
+    .section-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-24);
+      margin-bottom: var(--space-64);
+    }
+    
+    .section-card {
+      background: var(--color-surface);
+      border: 2px solid var(--color-card-border);
+      border-radius: var(--radius-base);
+      padding: var(--space-32);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .section-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .section-card.strong {
+      border-color: var(--color-primary);
+      background: linear-gradient(135deg, var(--color-bg-1), var(--color-surface));
+    }
+    
+    .section-card-title {
+      font-family: var(--font-family-display);
+      font-size: 28px;
+      color: var(--color-text);
+      margin-bottom: var(--space-12);
+      text-transform: uppercase;
+    }
+    
+    .section-card-desc {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-16);
+      line-height: 1.6;
+    }
+    
+    .section-card-schedule {
+      font-size: 12px;
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    
+    .about-section { margin-bottom: var(--space-64); }
+    .about-section h2 {
+      font-family: var(--font-family-display);
+      font-size: 36px;
+      color: var(--color-text);
+      margin-bottom: var(--space-24);
+      text-transform: uppercase;
+    }
+    
+    .about-section p {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--space-16);
+    }
+    
+    .mission-box {
+      background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-base);
+      padding: var(--space-40);
+      margin: var(--space-40) 0;
+    }
+    
+    .mission-box h3 {
+      font-family: var(--font-family-display);
+      font-size: 32px;
+      color: var(--color-text);
+      margin-bottom: var(--space-16);
+    }
+    
+    .mission-box p {
+      font-size: 18px;
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-24);
+      margin-top: var(--space-32);
+    }
+    
+    .info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-base);
+      padding: var(--space-24);
+    }
+    
+    .info-card h4 {
+      font-size: 16px;
+      color: var(--color-text);
+      margin-bottom: var(--space-12);
+      font-weight: 600;
+    }
+    
+    .info-card ul { list-style: none; padding-left: 0; }
+    .info-card li {
+      padding: var(--space-8) 0;
+      color: var(--color-text-secondary);
+      position: relative;
+      padding-left: var(--space-20);
+    }
+    
+    .info-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary);
+      font-weight: bold;
+    }
+    
+    .competitors-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-base);
+      overflow: hidden;
+    }
+    
+    .competitors-table thead { background: var(--color-secondary); }
+    .competitors-table th {
+      padding: var(--space-20);
+      text-align: left;
+      font-weight: 600;
+      color: var(--color-text);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .competitors-table td {
+      padding: var(--space-20);
+      border-top: 1px solid var(--color-card-border);
+      color: var(--color-text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    .competitors-table tr:hover { background: var(--color-bg-1); }
+    .competitors-table ul { list-style: none; padding: 0; margin: 0; }
+    .competitors-table li {
+      padding: var(--space-4) 0;
+      position: relative;
+      padding-left: var(--space-16);
+    }
+    
+    .competitors-table li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #22c55e;
+    }
+    
+    .competitors-table .cons li::before {
+      content: '✗';
+      color: #dc2626;
+    }
+    
+    .map-container {
+      width: 100%;
+      height: 600px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-card-border);
+      border-radius: var(--radius-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .map-placeholder {
+      text-align: center;
+      padding: var(--space-40);
+    }
+    
+    .map-placeholder h3 {
+      font-family: var(--font-family-display);
+      font-size: 32px;
+      color: var(--color-text);
+      margin-bottom: var(--space-16);
+    }
+    
+    .map-placeholder p {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-64);
+    }
+    
+    .contact-info h3 {
+      font-family: var(--font-family-display);
+      font-size: 28px;
+      color: var(--color-text);
+      margin-bottom: var(--space-24);
+    }
+    
+    .contact-item { margin-bottom: var(--space-24); }
+    .contact-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-8);
+    }
+    
+    .contact-item p, .contact-item a {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+    
+    .contact-item a:hover { color: var(--color-primary); }
+    
+    .social-links { display: flex; gap: var(--space-16); margin-top: var(--space-16); }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-12) var(--space-20);
+      background: var(--color-secondary);
+      border-radius: var(--radius-base);
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .social-link:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+      transform: translateY(-2px);
+    }
+    
+    .contact-form {
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-base);
+      padding: var(--space-40);
+    }
+    
+    .form-group { margin-bottom: var(--space-24); }
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-8);
+    }
+    
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: var(--space-12);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-base);
+      font-size: 14px;
+      font-family: var(--font-family-base);
+      color: var(--color-text);
+      background: var(--color-background);
+      transition: border-color 0.2s;
+    }
+    
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    
+    .form-textarea { resize: vertical; min-height: 150px; }
+    
+    .footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-card-border);
+      padding: var(--space-64) 0 var(--space-32);
+    }
+    
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--space-24);
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-48);
+      margin-bottom: var(--space-48);
+    }
+    
+    .footer-section h3 {
+      font-family: var(--font-family-display);
+      font-size: 20px;
+      color: var(--color-text);
+      margin-bottom: var(--space-20);
+      text-transform: uppercase;
+    }
+    
+    .footer-section p {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+    
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: var(--space-12); }
+    .footer-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover { color: var(--color-primary); }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: var(--space-32);
+      border-top: 1px solid var(--color-card-border);
+      color: var(--color-text-secondary);
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-title { font-size: 42px; }
+      .section-title { font-size: 36px; }
+      .article-grid, .section-cards { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .featured-article { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="#" class="logo" onclick="navigateTo('home')">
+        <span>🎨 Уличное</span>
+        <span class="logo-accent">искусство</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a class="nav-link" onclick="navigateTo('home')">Главная</a></li>
+        <li><a class="nav-link" onclick="navigateTo('about')">О проекте</a></li>
+        <li><a class="nav-link" onclick="navigateTo('rubrics')">Рубрики</a></li>
+        <li><a class="nav-link" onclick="navigateTo('competitors')">Конкуренты</a></li>
+        <li><a class="nav-link" onclick="navigateTo('contact')">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<header>
-    <h1>🎨 Уличное искусство России</h1>
-    <p>Медиа-проект об осознанном восприятии граффити и уличного искусства</p>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="#about">О проекте</a></li>
-        <li><a href="#rubrics">Рубрики</a></li>
-        <li><a href="#schedule">График</a></li>
-        <li><a href="#competitors">Конкуренты</a></li>
-        <li><a href="#contacts">Контакты</a></li>
-    </ul>
-</nav>
-
-<main>
-    <!-- О ПРОЕКТЕ -->
-    <section id="about">
-        <h2>О проекте</h2>
-        <p>
-            <strong>Уличное искусство России</strong> — это медиа-проект, который посвящён исследованию граффити, стритарта и городских инсталляций в крупных российских городах. Мы изучаем творчество художников, собираем мнения жителей и анализируем отношение градозащитников к преобразованию городской среды.
-        </p>
-        <p>
-            Наша цель — способствовать осознанному восприятию уличного искусства, поднять культурный уровень обсуждения и показать, как граффити и стритарт влияют на облик города и жизнь горожан.
-        </p>
-        <h3>Целевая аудитория:</h3>
-        <ul>
-            <li>Молодые люди 18-35 лет, интересующиеся современным искусством</li>
-            <li>Городские активисты и градозащитники</li>
-            <li>Художники и творческие профессионалы</li>
-            <li>Люди, заинтересованные в развитии городской культуры</li>
-        </ul>
-    </section>
-
-    <!-- РУБРИКИ -->
-    <section id="rubrics">
-        <h2>Рубрики проекта</h2>
-        <div class="grid">
-            <div class="card">
-                <h4>📸 Объектив</h4>
-                <p>Фотографические проекты, где мы документируем самые яркие примеры уличного искусства в городах России. Каждая работа рассказывает свою историю.</p>
-            </div>
-
-            <div class="card">
-                <h4>🗺️ Карта искусства</h4>
-                <p>Интерактивная карта с отмеченными локациями граффити и стритарта в разных городах. Гайд по местам, которые стоит посетить.</p>
-            </div>
-
-            <div class="card">
-                <h4>💡 Вдохновение улиц</h4>
-                <p>Интервью с художниками о их творческом процессе, вдохновении и взглядах на развитие уличного искусства в России.</p>
-            </div>
-
-            <div class="card">
-                <h4>🗣️ А обсудить?</h4>
-                <p>Дискуссионный раздел, где мы поднимаем острые вопросы: конфликты между художниками и городскими властями, отношение к граффити.</p>
-            </div>
-
-            <div class="card">
-                <h4>✍️ Точка зрения</h4>
-                <p>Колонки экспертов: искусствоведов, социологов, городских планировщиков и активистов о роли уличного искусства в обществе.</p>
-            </div>
-
-            <div class="card">
-                <h4>🌆 Город на ладони</h4>
-                <p>Путеводители по городам России с описанием граффити-сцены, рекомендациями лучших локаций и истории уличного искусства каждого региона.</p>
-            </div>
-
-            <div class="card">
-                <h4>📰 Эхо событий</h4>
-                <p>Новости мира уличного искусства: выставки, фестивали, громкие события и перемены в граффити-сообществе.</p>
-            </div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Уличное искусство России</h1>
+          <p class="hero-tagline">Медиа-проект об осознанном восприятии граффити и стритарта в городах России</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" onclick="navigateTo('about')">О проекте</a>
+            <a class="btn btn-secondary" onclick="navigateTo('rubrics')">Рубрики</a>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- ГРАФИК ПУБЛИКАЦИЙ -->
-    <section id="schedule">
-        <h2>График публикаций</h2>
-        <div class="schedule">
-            <h3>Еженедельный выпуск:</h3>
-            <p><strong>Понедельник:</strong> Новая публикация в рубрике "Объектив" (фото-проект)</p>
-            <p><strong>Среда:</strong> Интервью в рубрике "Вдохновение улиц" или статья "Точка зрения"</p>
-            <p><strong>Пятница:</strong> Дискуссия в рубрике "А обсудить?" и новости в "Эхо событий"</p>
+      <div class="container">
+        <!-- Featured Article -->
+        <div class="featured-article">
+          <div class="featured-image"></div>
+          <div class="featured-content">
+            <span class="featured-tag">Объектив</span>
+            <h2 class="featured-title">История самого красивого граффити Москвы</h2>
+            <p class="featured-excerpt">Эта работа, созданная 23 октября 2024 года, стала новым символом городского искусства. Художник использовал нетрадиционные техники и ярких краски, отражая дух современности. Мы поговорили с автором о его вдохновении и планах на будущее.</p>
+            <div class="featured-meta">
+              <span>Автор: Иван Петровский</span>
+              <span>Дата: 28 октября 2025</span>
+            </div>
+            <a class="btn btn-primary" onclick="navigateTo('rubrics')">Читать полностью</a>
+          </div>
         </div>
-        <div class="schedule">
-            <h3>Ежемесячные материалы:</h3>
-            <p><strong>1-я неделя:</strong> Путеводитель "Город на ладони" по одному из российских городов</p>
-            <p><strong>3-я неделя:</strong> Обновление "Карты искусства" с новыми локациями</p>
-        </div>
-    </section>
 
-    <!-- АНАЛИЗ КОНКУРЕНТОВ -->
-    <section id="competitors">
-        <h2>Анализ конкурентов</h2>
-        <p>Мы изучили существующие проекты и медиа, работающие в сфере уличного искусства:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Проект</th>
-                    <th>Фокус</th>
-                    <th>Сильные стороны</th>
-                    <th>Слабые стороны</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Граффити.рф</strong></td>
-                    <td>Документация и архив граффити</td>
-                    <td>Огромная база работ, сообщество художников</td>
-                    <td>Устаревший дизайн, низкая активность контента</td>
-                </tr>
-                <tr>
-                    <td><strong>Street Art Foundation</strong></td>
-                    <td>Глобальная платформа стритарта</td>
-                    <td>Международный охват, высокий уровень контента</td>
-                    <td>Мало материалов о России, высокий уровень специализации</td>
-                </tr>
-                <tr>
-                    <td><strong>STRABAG</strong></td>
-                    <td>Галерея и выставки</td>
-                    <td>Кураторский подход, выставки в офлайне</td>
-                    <td>Узкая аудитория, мало онлайн-контента</td>
-                </tr>
-                <tr>
-                    <td><strong>Инстаграм-аккаунты художников</strong></td>
-                    <td>Личные страницы авторов</td>
-                    <td>Прямая связь с автором, аутентичность</td>
-                    <td>Фрагментированно, сложно найти качественный контент</td>
-                </tr>
-                <tr>
-                    <td><strong>Medium-статьи о граффити</strong></td>
-                    <td>Аналитика и социология</td>
-                    <td>Глубокие исследования, экспертность</td>
-                    <td>Редкие публикации, узкая аудитория</td>
-                </tr>
-                <tr>
-                    <td><strong>TikTok-контент о стритарте</strong></td>
-                    <td>Вирусный, развлекательный контент</td>
-                    <td>Популярен среди молодёжи, легко потребляется</td>
-                    <td>Поверхностный анализ, низкое качество информации</td>
-                </tr>
-                <tr>
-                    <td><strong>Телепередачи о городском искусстве</strong></td>
-                    <td>Документальное кино</td>
-                    <td>Высокое качество производства, авторитетность</td>
-                    <td>Редкие выпуски, неактуально в интернет-формате</td>
-                </tr>
-            </tbody>
+        <!-- Section Intro -->
+        <div class="section-intro">
+          <h2 class="section-title">7 основных рубрик</h2>
+          <p class="section-description">Разнообразный контент от фотопроектов до экспертных мнений о развитии городской культуры</p>
+        </div>
+
+        <!-- Article Grid -->
+        <div class="article-grid">
+          <div class="article-card" onclick="navigateTo('rubrics')">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-6));"></div>
+            <div class="article-content">
+              <span class="article-tag">Вдохновение улиц</span>
+              <h3 class="article-title">Интервью с художником Zoom: как родилась серия работ на Кузнецком мосту</h3>
+              <p class="article-excerpt">Молодой таланты граффити-сцены поделились своей историей создания масштабного проекта, который изменил облик одной из главных улиц города...</p>
+            </div>
+          </div>
+
+          <div class="article-card" onclick="navigateTo('rubrics')">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-4), var(--color-bg-7));"></div>
+            <div class="article-content">
+              <span class="article-tag">А обсудить?</span>
+              <h3 class="article-title">Граффити vs Искусство: может ли городская роспись быть наследием?</h3>
+              <p class="article-excerpt">Острая дискуссия между художниками, градозащитниками и муниципальными властями. Могут ли работы со стен города попасть в музеи...</p>
+            </div>
+          </div>
+
+          <div class="article-card" onclick="navigateTo('rubrics')">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-5));"></div>
+            <div class="article-content">
+              <span class="article-tag">Город на ладони</span>
+              <h3 class="article-title">5 лучших локаций для фотографирования граффити в Санкт-Петербурге</h3>
+              <p class="article-excerpt">Гид по самым красивым местам, где сосредоточены лучшие работы стрит-артистов города...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Intro -->
+        <div class="section-intro">
+          <h2 class="section-title">Популярные рубрики</h2>
+          <p class="section-description">Самые читаемые разделы нашего медиа-проекта с еженедельными обновлениями</p>
+        </div>
+
+        <!-- Section Cards -->
+        <div class="section-cards">
+          <div class="section-card strong" onclick="navigateTo('rubrics')">
+            <h3 class="section-card-title">Объектив</h3>
+            <p class="section-card-desc">Фотографические проекты, где мы документируем самые яркие примеры уличного искусства в городах России с высоким качеством.</p>
+            <div class="section-card-schedule">График: Еженедельно (пн, ср, пт)</div>
+          </div>
+
+          <div class="section-card strong" onclick="navigateTo('rubrics')">
+            <h3 class="section-card-title">А обсудить?</h3>
+            <p class="section-card-desc">Дискуссионный раздел, где мы поднимаем острые вопросы о конфликтах между художниками и городскими властями, отношение общества к граффити.</p>
+            <div class="section-card-schedule">График: Еженедельно (20 марта)</div>
+          </div>
+
+          <div class="section-card strong" onclick="navigateTo('rubrics')">
+            <h3 class="section-card-title">Город на ладони</h3>
+            <p class="section-card-desc">Путеводители по городам России с описанием граффити-сцены, рекомендациями лучших локаций и истории уличного искусства каждого региона.</p>
+            <div class="section-card-schedule">График: Еженедельно (вторник)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">О проекте</h1>
+          <p class="section-description">Медиа-проект об осознанном восприятии граффити и стритарта в России</p>
+        </div>
+
+        <div class="about-section">
+          <h2>Наша миссия</h2>
+          <p>«Уличное искусство России» — это медиа-проект, который посвящён исследованию граффити, стритарта и городских инсталляций в крупных российских городах. Мы изучаем творчество художников, собираем мнения жителей и анализируем отношение градозащитников к преобразованию городской среды.</p>
+          
+          <div class="mission-box">
+            <h3>Цель проекта</h3>
+            <p>Способствовать осознанному восприятию уличного искусства, поднять культурный уровень обсуждения и показать, как граффити и стритарт влияют на облик города и жизнь горожан.</p>
+          </div>
+
+          <div class="about-section">
+            <h2>Целевая аудитория</h2>
+            <div class="info-grid">
+              <div class="info-card">
+                <h4>Молодежь и творцы</h4>
+                <ul>
+                  <li>Молодые люди 18-45 лет с интересом к современному искусству</li>
+                  <li>Интерес к уличной культуре и творческим профессиям</li>
+                  <li>Активные пользователи социальных сетей</li>
+                  <li>Студенты и выпускники</li>
+                  <li>Дизайнеры и архитекторы</li>
+                  <li>Профессионалы в области городской культуры</li>
+                </ul>
+              </div>
+
+              <div class="info-card">
+                <h4>Городские активисты</h4>
+                <ul>
+                  <li>Градозащитники и волонтеры</li>
+                  <li>Муниципальные деятели</li>
+                  <li>Журналисты и блогеры</li>
+                  <li>Представители государственных и общественных организаций</li>
+                  <li>Преподаватели и исследователи</li>
+                  <li>Руководители культурных учреждений</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h2>Наши каналы коммуникации</h2>
+            <div class="info-grid">
+              <div class="info-card">
+                <h4>📱 ВКонтакте</h4>
+                <p>Основная площадка для сообщества и обсуждений</p>
+              </div>
+              <div class="info-card">
+                <h4>💬 Telegram</h4>
+                <p>Оперативные новости и анонсы публикаций</p>
+              </div>
+              <div class="info-card">
+                <h4>📷 Instagram</h4>
+                <p>Лучшие фото-проекты и визуальный контент</p>
+              </div>
+              <div class="info-card">
+                <h4>🎬 YouTube</h4>
+                <p>Видео-интервью и документальные фильмы о стритарте</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUBRICS PAGE -->
+    <div id="rubrics" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">7 рубрик проекта</h1>
+          <p class="section-description">Разнообразный контент от фотопроектов до экспертных мнений</p>
+        </div>
+
+        <div class="article-grid">
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));"></div>
+            <div class="article-content">
+              <span class="article-tag">Объектив</span>
+              <h3 class="article-title">Фотографические проекты уличного искусства</h3>
+              <p class="article-excerpt">Документирование самых ярких примеров граффити и стритарта в городах России с высоким качеством фотографии...</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-7));"></div>
+            <div class="article-content">
+              <span class="article-tag">Карта искусства</span>
+              <h3 class="article-title">Интерактивная карта граффити-сцены</h3>
+              <p class="article-excerpt">Гайд по лучшим локациям стрит-арта в разных российских городах...</p>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-4));"></div>
+            <div class="article-content">
+              <span class="article-tag">Вдохновение</span>
+              <h3 class="article-title">Интервью с художниками и творцами</h3>
+              <p class="article-excerpt">История создания ярких работ, вдохновение авторов и взгляды на развитие уличного искусства в России...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPETITORS PAGE -->
+    <div id="competitors" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">Анализ конкурентов</h1>
+          <p class="section-description">Исследование существующих проектов в сфере уличного искусства</p>
+        </div>
+
+        <table class="competitors-table">
+          <thead>
+            <tr>
+              <th>Проект</th>
+              <th>Сильные стороны</th>
+              <th>Слабые стороны</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Граффити.рф</strong></td>
+              <td>
+                <ul>
+                  <li>Огромная база работ</li>
+                  <li>Активное сообщество художников</li>
+                  <li>История развития сцены</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>Устаревший дизайн</li>
+                  <li>Низкая активность контента</li>
+                  <li>Сложная навигация</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Street Art Foundation</strong></td>
+              <td>
+                <ul>
+                  <li>Международный охват</li>
+                  <li>Высокий уровень контента</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>Мало материалов о России</li>
+                  <li>Узкая аудитория</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Instagram-аккаунты художников</strong></td>
+              <td>
+                <ul>
+                  <li>Прямая связь с авторами</li>
+                  <li>Аутентичность</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>Фрагментированно</li>
+                  <li>Сложно найти качество</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Medium-статьи</strong></td>
+              <td>
+                <ul>
+                  <li>Глубокие исследования</li>
+                  <li>Экспертность</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>Редкие публикации</li>
+                  <li>Узкая аудитория</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>TikTok-контент</strong></td>
+              <td>
+                <ul>
+                  <li>Популярность среди молодежи</li>
+                  <li>Легко потребляется</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>Поверхностный анализ</li>
+                  <li>Низкое качество информации</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Документальное кино</strong></td>
+              <td>
+                <ul>
+                  <li>Высокое качество</li>
+                  <li>Авторитетность</li>
+                </ul>
+              </td>
+              <td class="cons">
+                <ul>
+                  <li>Редкие выпуски</li>
+                  <li>Неактуально в интернете</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
         </table>
-        <h3 style="margin-top: 2rem;">Наше преимущество:</h3>
-        <ul>
-            <li>✓ Фокус на России и русскоязычную аудиторию</li>
-            <li>✓ Еженедельные обновления с актуальным контентом</li>
-            <li>✓ Сочетание фотографии, интервью, аналитики и дискуссий</li>
-            <li>✓ Интерактивные элементы (карта, гайды)</li>
-            <li>✓ Сообщество и вовлечение аудитории</li>
-        </ul>
-    </section>
 
-    <!-- КОНТАКТЫ -->
-    <section id="contacts">
-        <h2>Контакты и социальные сети</h2>
-        <h3>Общая информация:</h3>
-        <p>
-            <strong>Email редакции:</strong> info@street-art-russia.ru <br>
-            <strong>Телефон:</strong> +7 (XXX) XXX-XX-XX <br>
-            <strong>Адрес офиса:</strong> Москва, Россия
-        </p>
-        <h3>Следите за нами в соцсетях:</h3>
-        <p>
-            📱 <a href="https://vk.com" target="_blank"><strong>ВКонтакте</strong></a> — основная площадка для сообщества <br>
-            💬 <a href="https://t.me" target="_blank"><strong>Telegram</strong></a> — оперативные новости <br>
-            📷 <a href="https://instagram.com" target="_blank"><strong>Instagram</strong></a> — лучшие фото-проекты <br>
-            🎬 <a href="https://youtube.com" target="_blank"><strong>YouTube</strong></a> — видео-интервью и документалистика
-        </p>
-        <h3>Сотрудничество:</h3>
-        <p>Если вы художник, фотограф, эксперт или просто хотите поделиться своей историей — свяжитесь с нами! Мы всегда ищем новых авторов и партнёров.</p>
-        <p><strong>Email для предложений:</strong> partnerships@street-art-russia.ru</p>
-    </section>
-</main>
+        <div class="about-section" style="margin-top: var(--space-64);">
+          <h2>Наше преимущество</h2>
+          <div class="info-grid">
+            <div class="info-card">
+              <h4>✓ Фокус на России</h4>
+              <p>Исследования сосредоточены на русскоязычной аудитории и местной сцене</p>
+            </div>
+            <div class="info-card">
+              <h4>✓ Еженедельные обновления</h4>
+              <p>Регулярный контент с актуальными материалами и новостями</p>
+            </div>
+            <div class="info-card">
+              <h4>✓ Разнообразность</h4>
+              <p>Сочетание фотографии, интервью, аналитики и дискуссий</p>
+            </div>
+            <div class="info-card">
+              <h4>✓ Интерактивность</h4>
+              <p>Карты, гайды и прямое взаимодействие с аудиторией</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<footer>
-    <p>&copy; 2025 <strong>Уличное искусство России</strong>. Все права защищены.</p>
-    <p>Проект создан с целью продвижения культуры и осознанного восприятия современного искусства.</p>
-    <p>Политика конфиденциальности | Условия использования</p>
-</footer>
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+      <div class="container">
+        <div class="section-intro">
+          <h1 class="section-title">Контакты</h1>
+          <p class="section-description">Свяжитесь с нами для сотрудничества, предложений или вопросов</p>
+        </div>
 
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Информация о редакции</h3>
+            
+            <div class="contact-item">
+              <h4>Email редакции</h4>
+              <p>info@street-art-russia.ru</p>
+            </div>
+            
+            <div class="contact-item">
+              <h4>Телефон</h4>
+              <p>+7 (495) XXX-XX-XX</p>
+            </div>
+            
+            <div class="contact-item">
+              <h4>Адрес офиса</h4>
+              <p>Москва, Россия</p>
+            </div>
+
+            <div class="contact-item">
+              <h4>Следите за нами</h4>
+              <div class="social-links">
+                <a class="social-link" href="https://vk.com" target="_blank">ВКонтакте</a>
+                <a class="social-link" href="https://t.me" target="_blank">Telegram</a>
+                <a class="social-link" href="https://instagram.com" target="_blank">Instagram</a>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-form">
+            <div class="form-group">
+              <label class="form-label">Ваше имя</label>
+              <input type="text" class="form-input" placeholder="Иван Иванов" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" placeholder="your@email.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Тема</label>
+              <input type="text" class="form-input" placeholder="Ваша тема" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Сообщение</label>
+              <textarea class="form-textarea" placeholder="Ваше сообщение..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Уличное искусство России</h3>
+          <p>Медиа-проект об осознанном восприятии граффити и стритарта в России. Исследуем творчество художников, мнения жителей и взгляды градозащитников.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Навигация</h3>
+          <ul class="footer-links">
+            <li><a onclick="navigateTo('home')">Главная</a></li>
+            <li><a onclick="navigateTo('about')">О проекте</a></li>
+            <li><a onclick="navigateTo('rubrics')">Рубрики</a></li>
+            <li><a onclick="navigateTo('competitors')">Конкуренты</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Соцсети</h3>
+          <ul class="footer-links">
+            <li><a href="https://vk.com" target="_blank">ВКонтакте</a></li>
+            <li><a href="https://t.me" target="_blank">Telegram</a></li>
+            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+            <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Контакты</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:info@street-art-russia.ru">Email</a></li>
+            <li><a href="mailto:partnerships@street-art-russia.ru">Сотрудничество</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Уличное искусство России. Все права защищены.</p>
+        <p>Проект создан с целью продвижения культуры и осознанного восприятия современного искусства.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function navigateTo(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(page).classList.add('active');
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      event.target?.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
 </body>
 </html>
