@@ -1,1166 +1,404 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Уличное искусство России | Медиапроект о граффити и стритарте</title>
-  <meta name="description" content="Медиа-проект об осознанном восприятии граффити и уличного искусства в России. Интервью с художниками, анализ городской культуры, путеводители по городам.">
-  <style>
-    :root {
-      --color-white: rgba(255, 255, 255, 1);
-      --color-black: rgba(0, 0, 0, 1);
-      --color-cream-50: rgba(252, 252, 249, 1);
-      --color-cream-100: rgba(255, 255, 253, 1);
-      --color-gray-200: rgba(245, 245, 245, 1);
-      --color-gray-300: rgba(167, 169, 169, 1);
-      --color-slate-500: rgba(98, 108, 113, 1);
-      --color-slate-900: rgba(19, 52, 59, 1);
-      --color-teal-300: rgba(50, 184, 198, 1);
-      --color-teal-500: rgba(33, 128, 141, 1);
-      --color-teal-600: rgba(29, 116, 128, 1);
-      --color-bg-1: rgba(59, 130, 246, 0.08);
-      --color-bg-5: rgba(147, 51, 234, 0.08);
-      --color-bg-3: rgba(34, 197, 94, 0.08);
-      --color-bg-7: rgba(236, 72, 153, 0.08);
-      --color-bg-2: rgba(245, 158, 11, 0.08);
-      --color-bg-6: rgba(249, 115, 22, 0.08);
-      --color-bg-4: rgba(239, 68, 68, 0.08);
-      --color-bg-8: rgba(6, 182, 212, 0.08);
-      
-      --color-background: var(--color-cream-50);
-      --color-surface: var(--color-cream-100);
-      --color-text: var(--color-slate-900);
-      --color-text-secondary: var(--color-slate-500);
-      --color-primary: var(--color-teal-500);
-      --color-primary-hover: var(--color-teal-600);
-      --color-secondary: rgba(94, 82, 64, 0.12);
-      --color-border: rgba(94, 82, 64, 0.2);
-      --color-card-border: rgba(94, 82, 64, 0.12);
-      
-      --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      --font-family-display: 'Impact', 'Arial Black', sans-serif;
-      --space-8: 8px;
-      --space-12: 12px;
-      --space-16: 16px;
-      --space-20: 20px;
-      --space-24: 24px;
-      --space-32: 32px;
-      --space-40: 40px;
-      --space-48: 48px;
-      --space-64: 64px;
-      
-      --radius-base: 8px;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-family-base); background: var(--color-background); color: var(--color-text); }
-    
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: var(--color-surface);
-      border-bottom: 1px solid var(--color-card-border);
-      z-index: 1000;
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .nav-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 var(--space-24);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 70px;
-    }
-    
-    .logo {
-      font-family: var(--font-family-display);
-      font-size: 24px;
-      color: var(--color-text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: var(--space-8);
-    }
-    
-    .logo-accent { color: var(--color-primary); }
-    
-    .nav-menu {
-      display: flex;
-      list-style: none;
-      gap: var(--space-32);
-    }
-    
-    .nav-link {
-      color: var(--color-text);
-      text-decoration: none;
-      font-weight: 500;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-    
-    .nav-link:hover { color: var(--color-primary); }
-    .nav-link.active { color: var(--color-primary); font-weight: 600; }
-    
-    .main-content { margin-top: 70px; min-height: calc(100vh - 70px); }
-    .page { display: none; }
-    .page.active { display: block; }
-    
-    .hero {
-      position: relative;
-      height: 500px;
-      background: linear-gradient(135deg, #8B8B8B 0%, #C0C0C0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
-    }
-    
-    .hero-content {
-      position: relative;
-      text-align: center;
-      max-width: 800px;
-      padding: var(--space-32);
-      z-index: 1;
-    }
-    
-    .hero-title {
-      font-family: var(--font-family-display);
-      font-size: 64px;
-      color: var(--color-white);
-      margin-bottom: var(--space-24);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    
-    .hero-tagline {
-      font-size: 20px;
-      color: var(--color-white);
-      margin-bottom: var(--space-32);
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    .hero-cta { display: inline-flex; gap: var(--space-16); }
-    
-    .btn {
-      padding: var(--space-12) var(--space-32);
-      border-radius: var(--radius-base);
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.3s;
-      display: inline-block;
-    }
-    
-    .btn-primary {
-      background: var(--color-primary);
-      color: var(--color-white);
-    }
-    
-    .btn-primary:hover {
-      background: var(--color-primary-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-    
-    .btn-secondary {
-      background: var(--color-white);
-      color: var(--color-text);
-    }
-    
-    .btn-secondary:hover {
-      background: var(--color-gray-200);
-      transform: translateY(-2px);
-    }
-    
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: var(--space-64) var(--space-24);
-    }
-    
-    .section-intro {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto var(--space-64);
-    }
-    
-    .section-title {
-      font-family: var(--font-family-display);
-      font-size: 48px;
-      color: var(--color-text);
-      margin-bottom: var(--space-24);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .section-description {
-      font-size: 18px;
-      color: var(--color-text-secondary);
-      line-height: 1.7;
-    }
-    
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: var(--space-32);
-      margin-bottom: var(--space-64);
-    }
-    
-    .article-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-card-border);
-      border-radius: var(--radius-base);
-      overflow: hidden;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    
-    .article-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .article-image {
-      width: 100%;
-      height: 240px;
-      background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .article-tag {
-      position: absolute;
-      top: var(--space-16);
-      left: var(--space-16);
-      background: var(--color-primary);
-      color: var(--color-white);
-      padding: var(--space-4) var(--space-12);
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      z-index: 1;
-    }
-    
-    .article-content { padding: var(--space-24); }
-    .article-meta { font-size: 12px; color: var(--color-text-secondary); margin-bottom: var(--space-12); }
-    
-    .article-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: var(--space-12);
-      line-height: 1.4;
-    }
-    
-    .article-excerpt {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      line-height: 1.6;
-    }
-    
-    .featured-article {
-      margin-bottom: var(--space-64);
-      background: var(--color-surface);
-      border: 1px solid var(--color-card-border);
-      border-radius: var(--radius-base);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    
-    .featured-image {
-      height: 100%;
-      min-height: 400px;
-      background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-7));
-    }
-    
-    .featured-content {
-      padding: var(--space-48);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    .featured-tag {
-      display: inline-block;
-      background: var(--color-primary);
-      color: var(--color-white);
-      padding: var(--space-8) var(--space-16);
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: var(--space-16);
-      width: fit-content;
-    }
-    
-    .featured-title {
-      font-family: var(--font-family-display);
-      font-size: 36px;
-      color: var(--color-text);
-      margin-bottom: var(--space-16);
-      line-height: 1.2;
-    }
-    
-    .featured-excerpt {
-      font-size: 16px;
-      color: var(--color-text-secondary);
-      line-height: 1.7;
-      margin-bottom: var(--space-24);
-    }
-    
-    .featured-meta {
-      display: flex;
-      gap: var(--space-24);
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-24);
-    }
-    
-    .section-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: var(--space-24);
-      margin-bottom: var(--space-64);
-    }
-    
-    .section-card {
-      background: var(--color-surface);
-      border: 2px solid var(--color-card-border);
-      border-radius: var(--radius-base);
-      padding: var(--space-32);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    
-    .section-card:hover {
-      border-color: var(--color-primary);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .section-card.strong {
-      border-color: var(--color-primary);
-      background: linear-gradient(135deg, var(--color-bg-1), var(--color-surface));
-    }
-    
-    .section-card-title {
-      font-family: var(--font-family-display);
-      font-size: 28px;
-      color: var(--color-text);
-      margin-bottom: var(--space-12);
-      text-transform: uppercase;
-    }
-    
-    .section-card-desc {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-16);
-      line-height: 1.6;
-    }
-    
-    .section-card-schedule {
-      font-size: 12px;
-      color: var(--color-primary);
-      font-weight: 600;
-    }
-    
-    .about-section { margin-bottom: var(--space-64); }
-    .about-section h2 {
-      font-family: var(--font-family-display);
-      font-size: 36px;
-      color: var(--color-text);
-      margin-bottom: var(--space-24);
-      text-transform: uppercase;
-    }
-    
-    .about-section p {
-      font-size: 16px;
-      color: var(--color-text-secondary);
-      line-height: 1.8;
-      margin-bottom: var(--space-16);
-    }
-    
-    .mission-box {
-      background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));
-      border: 2px solid var(--color-primary);
-      border-radius: var(--radius-base);
-      padding: var(--space-40);
-      margin: var(--space-40) 0;
-    }
-    
-    .mission-box h3 {
-      font-family: var(--font-family-display);
-      font-size: 32px;
-      color: var(--color-text);
-      margin-bottom: var(--space-16);
-    }
-    
-    .mission-box p {
-      font-size: 18px;
-      color: var(--color-text);
-      line-height: 1.8;
-    }
-    
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--space-24);
-      margin-top: var(--space-32);
-    }
-    
-    .info-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-card-border);
-      border-radius: var(--radius-base);
-      padding: var(--space-24);
-    }
-    
-    .info-card h4 {
-      font-size: 16px;
-      color: var(--color-text);
-      margin-bottom: var(--space-12);
-      font-weight: 600;
-    }
-    
-    .info-card ul { list-style: none; padding-left: 0; }
-    .info-card li {
-      padding: var(--space-8) 0;
-      color: var(--color-text-secondary);
-      position: relative;
-      padding-left: var(--space-20);
-    }
-    
-    .info-card li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--color-primary);
-      font-weight: bold;
-    }
-    
-    .competitors-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: var(--color-surface);
-      border: 1px solid var(--color-card-border);
-      border-radius: var(--radius-base);
-      overflow: hidden;
-    }
-    
-    .competitors-table thead { background: var(--color-secondary); }
-    .competitors-table th {
-      padding: var(--space-20);
-      text-align: left;
-      font-weight: 600;
-      color: var(--color-text);
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .competitors-table td {
-      padding: var(--space-20);
-      border-top: 1px solid var(--color-card-border);
-      color: var(--color-text-secondary);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    
-    .competitors-table tr:hover { background: var(--color-bg-1); }
-    .competitors-table ul { list-style: none; padding: 0; margin: 0; }
-    .competitors-table li {
-      padding: var(--space-4) 0;
-      position: relative;
-      padding-left: var(--space-16);
-    }
-    
-    .competitors-table li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #22c55e;
-    }
-    
-    .competitors-table .cons li::before {
-      content: '✗';
-      color: #dc2626;
-    }
-    
-    .map-container {
-      width: 100%;
-      height: 600px;
-      background: var(--color-surface);
-      border: 2px solid var(--color-card-border);
-      border-radius: var(--radius-base);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .map-placeholder {
-      text-align: center;
-      padding: var(--space-40);
-    }
-    
-    .map-placeholder h3 {
-      font-family: var(--font-family-display);
-      font-size: 32px;
-      color: var(--color-text);
-      margin-bottom: var(--space-16);
-    }
-    
-    .map-placeholder p {
-      font-size: 16px;
-      color: var(--color-text-secondary);
-    }
-    
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-64);
-    }
-    
-    .contact-info h3 {
-      font-family: var(--font-family-display);
-      font-size: 28px;
-      color: var(--color-text);
-      margin-bottom: var(--space-24);
-    }
-    
-    .contact-item { margin-bottom: var(--space-24); }
-    .contact-item h4 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: var(--space-8);
-    }
-    
-    .contact-item p, .contact-item a {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      text-decoration: none;
-    }
-    
-    .contact-item a:hover { color: var(--color-primary); }
-    
-    .social-links { display: flex; gap: var(--space-16); margin-top: var(--space-16); }
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--space-12) var(--space-20);
-      background: var(--color-secondary);
-      border-radius: var(--radius-base);
-      color: var(--color-text);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    
-    .social-link:hover {
-      background: var(--color-primary);
-      color: var(--color-white);
-      transform: translateY(-2px);
-    }
-    
-    .contact-form {
-      background: var(--color-surface);
-      border: 1px solid var(--color-card-border);
-      border-radius: var(--radius-base);
-      padding: var(--space-40);
-    }
-    
-    .form-group { margin-bottom: var(--space-24); }
-    .form-label {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-text);
-      margin-bottom: var(--space-8);
-    }
-    
-    .form-input, .form-textarea {
-      width: 100%;
-      padding: var(--space-12);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-base);
-      font-size: 14px;
-      font-family: var(--font-family-base);
-      color: var(--color-text);
-      background: var(--color-background);
-      transition: border-color 0.2s;
-    }
-    
-    .form-input:focus, .form-textarea:focus {
-      outline: none;
-      border-color: var(--color-primary);
-    }
-    
-    .form-textarea { resize: vertical; min-height: 150px; }
-    
-    .footer {
-      background: var(--color-surface);
-      border-top: 1px solid var(--color-card-border);
-      padding: var(--space-64) 0 var(--space-32);
-    }
-    
-    .footer-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 var(--space-24);
-    }
-    
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: var(--space-48);
-      margin-bottom: var(--space-48);
-    }
-    
-    .footer-section h3 {
-      font-family: var(--font-family-display);
-      font-size: 20px;
-      color: var(--color-text);
-      margin-bottom: var(--space-20);
-      text-transform: uppercase;
-    }
-    
-    .footer-section p {
-      color: var(--color-text-secondary);
-      line-height: 1.7;
-    }
-    
-    .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: var(--space-12); }
-    .footer-links a {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    
-    .footer-links a:hover { color: var(--color-primary); }
-    
-    .footer-bottom {
-      text-align: center;
-      padding-top: var(--space-32);
-      border-top: 1px solid var(--color-card-border);
-      color: var(--color-text-secondary);
-      font-size: 12px;
-    }
-    
-    @media (max-width: 768px) {
-      .hero-title { font-size: 42px; }
-      .section-title { font-size: 36px; }
-      .article-grid, .section-cards { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .featured-article { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СТЕНА | Интерактивное медиа о стрит-арте</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'urban-black': '#0a0a0a',
+                        'urban-dark': '#121212',
+                        'urban-gray': '#1e1e1e',
+                        'accent-yellow': '#FACC15',
+                        'accent-red': '#EF4444',
+                        'accent-blue': '#3B82F6',
+                    },
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'oswald': ['Oswald', 'sans-serif'],
+                        'roboto': ['Roboto', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0a0a0a; color: #ffffff; font-family: 'Roboto', sans-serif; }
+        .text-stroke { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; }
+        .modal-open { overflow: hidden; }
+        
+        /* Анимация уведомлений */
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            border-bottom: 4px solid #FACC15;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+        /* Markdown Styles for Modal content */
+        .prose strong { color: #FACC15; font-weight: 700; }
+    </style>
 </head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <nav class="nav-container">
-      <a href="#" class="logo" onclick="navigateTo('home')">
-        <span>🎨 Уличное</span>
-        <span class="logo-accent">искусство</span>
-      </a>
-      <ul class="nav-menu" id="navMenu">
-        <li><a class="nav-link" onclick="navigateTo('home')">Главная</a></li>
-        <li><a class="nav-link" onclick="navigateTo('about')">О проекте</a></li>
-        <li><a class="nav-link" onclick="navigateTo('rubrics')">Рубрики</a></li>
-        <li><a class="nav-link" onclick="navigateTo('competitors')">Конкуренты</a></li>
-        <li><a class="nav-link" onclick="navigateTo('contact')">Контакты</a></li>
-      </ul>
+<body class="font-roboto bg-urban-black bg-noise selection:bg-accent-yellow selection:text-black">
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="fixed w-full z-50 top-0 start-0 border-b border-gray-800 bg-urban-black/95 backdrop-blur-sm">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 group" onclick="window.scrollTo(0,0)">
+                <span class="self-center text-4xl font-anton uppercase text-white group-hover:text-accent-yellow transition-colors cursor-pointer">СТЕНА</span>
+            </a>
+            
+            <button id="menu-toggle" class="md:hidden text-gray-400 hover:text-white">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+
+            <div class="hidden w-full md:flex md:w-auto md:order-1" id="navbar-menu">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-8 md:flex-row md:mt-0 font-oswald uppercase tracking-wider text-sm">
+                    <li><a href="#rubrics" class="block py-2 px-3 text-white hover:text-accent-yellow transition-colors">Рубрики</a></li>
+                    <li><a href="#latest" class="block py-2 px-3 text-white hover:text-accent-yellow transition-colors">Материалы</a></li>
+                    <li><a href="#map" class="block py-2 px-3 text-white hover:text-accent-yellow transition-colors">Карта</a></li>
+                </ul>
+            </div>
+            
+            <div class="hidden md:flex md:order-2">
+                <button onclick="showToast('Подписка оформлена! (Демо)')" class="text-black bg-white hover:bg-accent-yellow font-medium rounded-sm text-sm px-4 py-2 uppercase font-oswald transition-all">Подписаться</button>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- HOME PAGE -->
-    <div id="home" class="page active">
-      <section class="hero">
-        <div class="hero-content">
-          <h1 class="hero-title">Уличное искусство России</h1>
-          <p class="hero-tagline">Медиа-проект об осознанном восприятии граффити и стритарта в городах России</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" onclick="navigateTo('about')">О проекте</a>
-            <a class="btn btn-secondary" onclick="navigateTo('rubrics')">Рубрики</a>
-          </div>
+    <!-- ГЕРОЙ -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?q=80&w=2145&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/0a0a0a/ffffff?text=Background+Image';" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-gradient-to-t from-urban-black via-urban-black/50 to-transparent"></div>
         </div>
-      </section>
-
-      <div class="container">
-        <!-- Featured Article -->
-        <div class="featured-article">
-          <div class="featured-image"></div>
-          <div class="featured-content">
-            <span class="featured-tag">Объектив</span>
-            <h2 class="featured-title">История самого красивого граффити Москвы</h2>
-            <p class="featured-excerpt">Эта работа, созданная 23 октября 2024 года, стала новым символом городского искусства. Художник использовал нетрадиционные техники и ярких краски, отражая дух современности. Мы поговорили с автором о его вдохновении и планах на будущее.</p>
-            <div class="featured-meta">
-              <span>Автор: Иван Петровский</span>
-              <span>Дата: 28 октября 2025</span>
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
+            <h1 class="text-7xl md:text-[150px] font-anton leading-none uppercase mb-6 drop-shadow-2xl">
+                Искусство <span class="text-stroke">или</span><br><span class="text-accent-yellow">Вандализм?</span>
+            </h1>
+            <p class="text-xl text-gray-200 font-light max-w-2xl mx-auto mb-10">
+                Аналитический медиапроект. Мы учим читать городские стены.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center mt-10">
+                <a href="#latest" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-black bg-accent-yellow rounded-sm hover:bg-white transition-colors font-oswald uppercase tracking-wide cursor-pointer shadow-lg hover:shadow-yellow-500/50">
+                    Читать материалы
+                </a>
             </div>
-            <a class="btn btn-primary" onclick="navigateTo('rubrics')">Читать полностью</a>
-          </div>
         </div>
+    </section>
 
-        <!-- Section Intro -->
-        <div class="section-intro">
-          <h2 class="section-title">7 основных рубрик</h2>
-          <p class="section-description">Разнообразный контент от фотопроектов до экспертных мнений о развитии городской культуры</p>
-        </div>
-
-        <!-- Article Grid -->
-        <div class="article-grid">
-          <div class="article-card" onclick="navigateTo('rubrics')">
-            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-6));"></div>
-            <div class="article-content">
-              <span class="article-tag">Вдохновение улиц</span>
-              <h3 class="article-title">Интервью с художником Zoom: как родилась серия работ на Кузнецком мосту</h3>
-              <p class="article-excerpt">Молодой таланты граффити-сцены поделились своей историей создания масштабного проекта, который изменил облик одной из главных улиц города...</p>
+    <!-- РУБРИКИ (ФИЛЬТРЫ) -->
+    <section id="rubrics" class="py-20 px-4 max-w-screen-xl mx-auto">
+        <h2 class="text-5xl md:text-7xl font-anton uppercase mb-12">Рубрики</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div onclick="filterCategory('Объектив')" class="group relative h-64 bg-urban-gray border border-gray-800 hover:border-accent-red cursor-pointer transition-all overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/222/ccc?text=Photo');"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                    <h3 class="text-3xl font-anton uppercase group-hover:text-accent-red transition-colors">Объектив</h3>
+                    <p class="text-sm text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">Анализ уличного искусства</p>
+                </div>
             </div>
-          </div>
 
-          <div class="article-card" onclick="navigateTo('rubrics')">
-            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-4), var(--color-bg-7));"></div>
-            <div class="article-content">
-              <span class="article-tag">А обсудить?</span>
-              <h3 class="article-title">Граффити vs Искусство: может ли городская роспись быть наследием?</h3>
-              <p class="article-excerpt">Острая дискуссия между художниками, градозащитниками и муниципальными властями. Могут ли работы со стен города попасть в музеи...</p>
+            <div onclick="filterCategory('А обсудить?')" class="group relative h-64 bg-urban-gray border border-gray-800 hover:border-accent-yellow cursor-pointer transition-all overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/222/ccc?text=Discuss');"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                    <h3 class="text-3xl font-anton uppercase group-hover:text-accent-yellow transition-colors">А обсудить?</h3>
+                    <p class="text-sm text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">Дискуссии и мнения</p>
+                </div>
             </div>
-          </div>
 
-          <div class="article-card" onclick="navigateTo('rubrics')">
-            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-5));"></div>
-            <div class="article-content">
-              <span class="article-tag">Город на ладони</span>
-              <h3 class="article-title">5 лучших локаций для фотографирования граффити в Санкт-Петербурге</h3>
-              <p class="article-excerpt">Гид по самым красивым местам, где сосредоточены лучшие работы стрит-артистов города...</p>
+            <div onclick="filterCategory('Город на ладони')" class="group relative h-64 bg-urban-gray border border-gray-800 hover:border-accent-blue cursor-pointer transition-all overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/222/ccc?text=Education');"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                    <h3 class="text-3xl font-anton uppercase group-hover:text-accent-blue transition-colors">Город на ладони</h3>
+                    <p class="text-sm text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">Образовательные гайды</p>
+                </div>
             </div>
-          </div>
+
         </div>
+    </section>
 
-        <!-- Section Intro -->
-        <div class="section-intro">
-          <h2 class="section-title">Популярные рубрики</h2>
-          <p class="section-description">Самые читаемые разделы нашего медиа-проекта с еженедельными обновлениями</p>
+    <!-- СЕТКА МАТЕРИАЛОВ (ПОЛНОСТЬЮ КЛИКАБЕЛЬНАЯ) -->
+    <section id="latest" class="py-20 bg-urban-dark border-t border-gray-800">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <h2 class="text-5xl font-anton uppercase mb-12 flex items-center">
+                <span class="text-accent-red mr-4">///</span> Материалы
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Карточка 1 -->
+                <article onclick="openArticle('banksy')" class="cursor-pointer group">
+                    <div class="h-64 overflow-hidden border-b-4 border-accent-yellow relative mb-4">
+                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Объектив</span>
+                        <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+1';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-accent-yellow transition-colors">Банкси в России: Миф?</h3>
+                    <p class="text-gray-400 text-sm mt-2">Разбор новых трафаретов в Екатеринбурге.</p>
+                </article>
+
+                <!-- Карточка 2 -->
+                <article onclick="openArticle('urban')" class="cursor-pointer group">
+                    <div class="h-64 overflow-hidden border-b-4 border-accent-blue relative mb-4">
+                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Точка зрения</span>
+                        <img src="https://images.unsplash.com/photo-1483394663321-4d1a38bc8636?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+2';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-accent-blue transition-colors">ЖКХ vs Искусство</h3>
+                    <p class="text-gray-400 text-sm mt-2">Почему серый квадрат убивает город.</p>
+                </article>
+
+                <!-- Карточка 3 -->
+                <article onclick="openArticle('pokras')" class="cursor-pointer group">
+                    <div class="h-64 overflow-hidden border-b-4 border-accent-red relative mb-4">
+                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Вдохновение</span>
+                        <img src="https://images.unsplash.com/photo-1571172964276-91faaa704e1f?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+3';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-accent-red transition-colors">Покрас Лампас</h3>
+                    <p class="text-gray-400 text-sm mt-2">Эксклюзивное интервью о будущем каллиграфии.</p>
+                </article>
+
+                <!-- Карточка 4 -->
+                <article onclick="openArticle('guide')" class="cursor-pointer group">
+                    <div class="h-64 overflow-hidden border-b-4 border-white relative mb-4">
+                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Город на ладони</span>
+                        <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+4';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-gray-300 transition-colors">Гайд: Теги vs Бомбинг</h3>
+                    <p class="text-gray-400 text-sm mt-2">Учимся различать стили улиц.</p>
+                </article>
+
+            </div>
         </div>
+    </section>
 
-        <!-- Section Cards -->
-        <div class="section-cards">
-          <div class="section-card strong" onclick="navigateTo('rubrics')">
-            <h3 class="section-card-title">Объектив</h3>
-            <p class="section-card-desc">Фотографические проекты, где мы документируем самые яркие примеры уличного искусства в городах России с высоким качеством.</p>
-            <div class="section-card-schedule">График: Еженедельно (пн, ср, пт)</div>
-          </div>
-
-          <div class="section-card strong" onclick="navigateTo('rubrics')">
-            <h3 class="section-card-title">А обсудить?</h3>
-            <p class="section-card-desc">Дискуссионный раздел, где мы поднимаем острые вопросы о конфликтах между художниками и городскими властями, отношение общества к граффити.</p>
-            <div class="section-card-schedule">График: Еженедельно (20 марта)</div>
-          </div>
-
-          <div class="section-card strong" onclick="navigateTo('rubrics')">
-            <h3 class="section-card-title">Город на ладони</h3>
-            <p class="section-card-desc">Путеводители по городам России с описанием граффити-сцены, рекомендациями лучших локаций и истории уличного искусства каждого региона.</p>
-            <div class="section-card-schedule">График: Еженедельно (вторник)</div>
-          </div>
+    <!-- ИНТЕРАКТИВНАЯ КАРТА -->
+    <section id="map" class="py-20 bg-gray-900 border-t border-gray-800 text-center">
+        <h2 class="text-5xl font-anton uppercase mb-8">Карта Искусства</h2>
+        <div class="max-w-4xl mx-auto px-4">
+            <div onclick="openMapModal()" class="aspect-video bg-gray-800 relative flex items-center justify-center overflow-hidden border border-gray-600 group cursor-pointer shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000" onerror="this.onerror=null;this.src='https://placehold.co/1000x500/0a0a0a/ffffff?text=Map+Placeholder';" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity">
+                <div class="relative z-10 bg-black/80 px-8 py-4 border border-accent-yellow">
+                    <h3 class="text-2xl font-anton text-accent-yellow uppercase"><i class="fa-solid fa-expand mr-2"></i> Открыть карту</h3>
+                </div>
+            </div>
+            <p class="mt-4 text-gray-500 text-sm">Нажмите, чтобы развернуть интерактивный режим</p>
         </div>
-      </div>
+    </section>
+
+    <!-- ПОДПИСКА -->
+    <section class="py-20 bg-accent-yellow text-black text-center">
+        <h2 class="text-4xl md:text-6xl font-anton uppercase mb-4">Не пропусти важное</h2>
+        <form class="max-w-md mx-auto flex gap-4 px-4" onsubmit="event.preventDefault(); showToast('Вы успешно подписались!');">
+            <input type="email" placeholder="Email" class="flex-1 p-4 border-2 border-black font-oswald outline-none" required>
+            <button type="submit" class="bg-black text-white px-8 font-anton uppercase hover:bg-gray-800 transition-colors">ОК</button>
+        </form>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer class="bg-urban-black py-12 border-t border-gray-800 text-center">
+        <a href="#" class="text-4xl font-anton uppercase text-white block mb-6">СТЕНА</a>
+        <div class="flex justify-center gap-6 mb-8 text-2xl text-gray-400">
+            <a href="#" class="hover:text-accent-blue"><i class="fa-brands fa-vk"></i></a>
+            <a href="#" class="hover:text-blue-400"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#" class="hover:text-red-500"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p class="text-gray-600 text-xs font-mono">© 2025 СТЕНА. PROJECT BY ELIZAVETA V.</p>
+    </footer>
+
+    <!-- УВЕДОМЛЕНИЯ (TOAST) -->
+    <div id="toast" class="toast">Сообщение</div>
+
+    <!-- МОДАЛЬНОЕ ОКНО СТАТЬИ -->
+    <div id="article-modal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-sm" onclick="closeArticle()"></div>
+        <div class="absolute inset-y-0 right-0 w-full md:w-2/3 lg:w-1/2 bg-urban-dark border-l border-gray-700 overflow-y-auto transform transition-transform duration-300 translate-x-full" id="modal-panel">
+            <div class="p-8">
+                <button onclick="closeArticle()" class="text-gray-400 hover:text-white mb-6 text-xl"><i class="fa-solid fa-arrow-right"></i> Закрыть</button>
+                <div id="article-content">
+                    <!-- Сюда JS загрузит контент -->
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- ABOUT PAGE -->
-    <div id="about" class="page">
-      <div class="container">
-        <div class="section-intro">
-          <h1 class="section-title">О проекте</h1>
-          <p class="section-description">Медиа-проект об осознанном восприятии граффити и стритарта в России</p>
-        </div>
-
-        <div class="about-section">
-          <h2>Наша миссия</h2>
-          <p>«Уличное искусство России» — это медиа-проект, который посвящён исследованию граффити, стритарта и городских инсталляций в крупных российских городах. Мы изучаем творчество художников, собираем мнения жителей и анализируем отношение градозащитников к преобразованию городской среды.</p>
-          
-          <div class="mission-box">
-            <h3>Цель проекта</h3>
-            <p>Способствовать осознанному восприятию уличного искусства, поднять культурный уровень обсуждения и показать, как граффити и стритарт влияют на облик города и жизнь горожан.</p>
-          </div>
-
-          <div class="about-section">
-            <h2>Целевая аудитория</h2>
-            <div class="info-grid">
-              <div class="info-card">
-                <h4>Молодежь и творцы</h4>
-                <ul>
-                  <li>Молодые люди 18-45 лет с интересом к современному искусству</li>
-                  <li>Интерес к уличной культуре и творческим профессиям</li>
-                  <li>Активные пользователи социальных сетей</li>
-                  <li>Студенты и выпускники</li>
-                  <li>Дизайнеры и архитекторы</li>
-                  <li>Профессионалы в области городской культуры</li>
-                </ul>
-              </div>
-
-              <div class="info-card">
-                <h4>Городские активисты</h4>
-                <ul>
-                  <li>Градозащитники и волонтеры</li>
-                  <li>Муниципальные деятели</li>
-                  <li>Журналисты и блогеры</li>
-                  <li>Представители государственных и общественных организаций</li>
-                  <li>Преподаватели и исследователи</li>
-                  <li>Руководители культурных учреждений</li>
-                </ul>
-              </div>
+    <!-- МОДАЛЬНОЕ ОКНО КАРТЫ -->
+    <div id="map-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/95">
+        <button onclick="closeMapModal()" class="absolute top-5 right-5 text-white text-4xl hover:text-accent-yellow"><i class="fa-solid fa-xmark"></i></button>
+        <div class="w-full h-full p-10 flex flex-col items-center justify-center">
+            <h2 class="text-4xl font-anton uppercase text-accent-yellow mb-4">Карта Искусства</h2>
+            <div class="w-full h-3/4 bg-gray-800 border-2 border-accent-yellow relative rounded-sm flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1500" onerror="this.onerror=null;this.src='https://placehold.co/1000x800/0a0a0a/ffffff?text=Map+Placeholder';" class="absolute inset-0 w-full h-full object-cover opacity-30">
+                <p class="relative z-10 text-xl font-oswald uppercase">Здесь будет API Яндекс.Карт или Google Maps</p>
+                <!-- Имитация пинов -->
+                <i class="fa-solid fa-location-dot text-accent-red text-3xl absolute top-1/3 left-1/4 animate-bounce cursor-pointer" title="Объект 1" onclick="showToast('Объект: Мурал Маяковский, Автор: P183')"></i>
+                <i class="fa-solid fa-location-dot text-accent-blue text-3xl absolute bottom-1/3 right-1/3 animate-bounce cursor-pointer" style="animation-delay: 0.2s" title="Объект 2" onclick="showToast('Объект: Двор Нельсона')"></i>
+                <i class="fa-solid fa-location-dot text-accent-yellow text-3xl absolute top-1/2 left-1/2 animate-bounce cursor-pointer" style="animation-delay: 0.5s" title="Объект 3" onclick="showToast('Объект: Стрит-арт Музей')"></i>
             </div>
-          </div>
-
-          <div class="about-section">
-            <h2>Наши каналы коммуникации</h2>
-            <div class="info-grid">
-              <div class="info-card">
-                <h4>📱 ВКонтакте</h4>
-                <p>Основная площадка для сообщества и обсуждений</p>
-              </div>
-              <div class="info-card">
-                <h4>💬 Telegram</h4>
-                <p>Оперативные новости и анонсы публикаций</p>
-              </div>
-              <div class="info-card">
-                <h4>📷 Instagram</h4>
-                <p>Лучшие фото-проекты и визуальный контент</p>
-              </div>
-              <div class="info-card">
-                <h4>🎬 YouTube</h4>
-                <p>Видео-интервью и документальные фильмы о стритарте</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 
-    <!-- RUBRICS PAGE -->
-    <div id="rubrics" class="page">
-      <div class="container">
-        <div class="section-intro">
-          <h1 class="section-title">7 рубрик проекта</h1>
-          <p class="section-description">Разнообразный контент от фотопроектов до экспертных мнений</p>
-        </div>
+    <!-- SCRIPTS -->
+    <script>
+        // 1. Data Source (Контент статей)
+        const articlesDB = {
+            'banksy': {
+                title: 'Банкси в России: Миф или реальность?',
+                tag: 'Объектив',
+                color: 'text-accent-yellow',
+                img: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=800',
+                body: `<p class="text-xl font-light text-gray-300 mb-6">Недавние трафареты в Екатеринбурге вызвали споры. Это подражатель или легенда?</p>
+                       <h3 class="text-2xl font-oswald text-white mb-2">Мнение эксперта</h3>
+                       <p class="text-gray-400 mb-4">"Стиль очень похож, но техника нанесения говорит о том, что работал подражатель высокого класса." — А. Соколов.</p>
+                       <p class="text-gray-400">Мы продолжаем следить за ситуацией...</p>`
+            },
+            'urban': {
+                title: 'ЖКХ против Искусства',
+                tag: 'Точка зрения',
+                color: 'text-accent-blue',
+                img: 'https://images.unsplash.com/photo-1483394663321-4d1a38bc8636?q=80&w=800',
+                body: `<p class="text-xl font-light text-gray-300 mb-6">Почему коммунальщики закрашивают шедевры серым цветом, создавая "заплатки"?</p>
+                       <p class="text-gray-400">Теория разбитых окон в действии. Серые квадраты на фасадах выглядят хуже, чем качественный стрит-арт.</p>`
+            },
+            'pokras': {
+                title: 'Покрас Лампас: Интервью',
+                tag: 'Вдохновение',
+                color: 'text-accent-red',
+                img: 'https://images.unsplash.com/photo-1571172964276-91faaa704e1f?q=80&w=800',
+                body: `<p class="text-xl font-light text-gray-300 mb-6">Эксклюзивный разговор о каллиграфутуризме и будущем улиц.</p>
+                       <p class="text-gray-400">"Улица — это диалог. Если ты пишешь на стене, ты должен быть готов к ответу."</p>`
+            },
+            'guide': {
+                title: 'Гайд: Теги vs Бомбинг',
+                tag: 'Город на ладони',
+                color: 'text-white',
+                img: 'https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=800',
+                body: `<p class="text-xl font-light text-gray-300 mb-6">Разбираемся в терминологии.</p>
+                       <ul class="list-disc pl-5 text-gray-400 space-y-2">
+                           <li><strong>Тег:</strong> Подпись автора.</li>
+                           <li><strong>Бомбинг:</strong> Быстрое нанесение рисунка.</li>
+                           <li><strong>Мурал:</strong> Масштабная картина на весь фасад.</li>
+                       </ul>`
+            }
+        };
 
-        <div class="article-grid">
-          <div class="article-card">
-            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-5));"></div>
-            <div class="article-content">
-              <span class="article-tag">Объектив</span>
-              <h3 class="article-title">Фотографические проекты уличного искусства</h3>
-              <p class="article-excerpt">Документирование самых ярких примеров граффити и стритарта в городах России с высоким качеством фотографии...</p>
-            </div>
-          </div>
+        // 2. Logic: Open Article (Открытие модального окна статьи)
+        function openArticle(id) {
+            const data = articlesDB[id];
+            if(!data) return;
 
-          <div class="article-card">
-            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-3), var(--color-bg-7));"></div>
-            <div class="article-content">
-              <span class="article-tag">Карта искусства</span>
-              <h3 class="article-title">Интерактивная карта граффити-сцены</h3>
-              <p class="article-excerpt">Гайд по лучшим локациям стрит-арта в разных российских городах...</p>
-            </div>
-          </div>
+            const content = document.getElementById('article-content');
+            // Заменяем 'alert' на 'showToast' в контенте карты, чтобы избежать проблем в iframe
+            const safeBody = data.body.replace(/alert\(/g, 'showToast('); 
 
-          <div class="article-card">
-            <div class="article-image" style="background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-4));"></div>
-            <div class="article-content">
-              <span class="article-tag">Вдохновение</span>
-              <h3 class="article-title">Интервью с художниками и творцами</h3>
-              <p class="article-excerpt">История создания ярких работ, вдохновение авторов и взгляды на развитие уличного искусства в России...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            content.innerHTML = `
+                <span class="text-xs font-bold uppercase border border-gray-600 px-2 py-1 mb-4 inline-block text-gray-400">${data.tag}</span>
+                <h1 class="text-4xl md:text-5xl font-anton uppercase mb-6 leading-tight ${data.color}">${data.title}</h1>
+                <img src="${data.img}" onerror="this.onerror=null;this.src='https://placehold.co/800x600/0a0a0a/ffffff?text=${data.title}';" class="w-full mb-8 rounded-sm border-2 border-gray-800">
+                <div class="prose prose-invert max-w-none">
+                    ${safeBody}
+                </div>
+                <div class="mt-10 pt-6 border-t border-gray-800">
+                    <h4 class="font-oswald uppercase mb-4">Комментарии</h4>
+                    <div class="bg-black p-4 rounded-sm mb-4 border-l-2 border-gray-600">
+                        <p class="text-xs text-gray-500 mb-1">User123</p>
+                        <p class="text-sm text-gray-300">Отличная статья! Спасибо за разбор.</p>
+                    </div>
+                    <textarea class="w-full bg-black border border-gray-700 p-3 text-white text-sm" placeholder="Написать комментарий..."></textarea>
+                    <button onclick="showToast('Комментарий отправлен в модерацию!')" class="mt-2 bg-accent-yellow text-black font-oswald uppercase text-sm px-4 py-2 rounded-sm hover:bg-white transition-colors">Отправить</button>
+                </div>
+            `;
 
-    <!-- COMPETITORS PAGE -->
-    <div id="competitors" class="page">
-      <div class="container">
-        <div class="section-intro">
-          <h1 class="section-title">Анализ конкурентов</h1>
-          <p class="section-description">Исследование существующих проектов в сфере уличного искусства</p>
-        </div>
-
-        <table class="competitors-table">
-          <thead>
-            <tr>
-              <th>Проект</th>
-              <th>Сильные стороны</th>
-              <th>Слабые стороны</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Граффити.рф</strong></td>
-              <td>
-                <ul>
-                  <li>Огромная база работ</li>
-                  <li>Активное сообщество художников</li>
-                  <li>История развития сцены</li>
-                </ul>
-              </td>
-              <td class="cons">
-                <ul>
-                  <li>Устаревший дизайн</li>
-                  <li>Низкая активность контента</li>
-                  <li>Сложная навигация</li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Street Art Foundation</strong></td>
-              <td>
-                <ul>
-                  <li>Международный охват</li>
-                  <li>Высокий уровень контента</li>
-                </ul>
-              </td>
-              <td class="cons">
-                <ul>
-                  <li>Мало материалов о России</li>
-                  <li>Узкая аудитория</li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Instagram-аккаунты художников</strong></td>
-              <td>
-                <ul>
-                  <li>Прямая связь с авторами</li>
-                  <li>Аутентичность</li>
-                </ul>
-              </td>
-              <td class="cons">
-                <ul>
-                  <li>Фрагментированно</li>
-                  <li>Сложно найти качество</li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Medium-статьи</strong></td>
-              <td>
-                <ul>
-                  <li>Глубокие исследования</li>
-                  <li>Экспертность</li>
-                </ul>
-              </td>
-              <td class="cons">
-                <ul>
-                  <li>Редкие публикации</li>
-                  <li>Узкая аудитория</li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>TikTok-контент</strong></td>
-              <td>
-                <ul>
-                  <li>Популярность среди молодежи</li>
-                  <li>Легко потребляется</li>
-                </ul>
-              </td>
-              <td class="cons">
-                <ul>
-                  <li>Поверхностный анализ</li>
-                  <li>Низкое качество информации</li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Документальное кино</strong></td>
-              <td>
-                <ul>
-                  <li>Высокое качество</li>
-                  <li>Авторитетность</li>
-                </ul>
-              </td>
-              <td class="cons">
-                <ul>
-                  <li>Редкие выпуски</li>
-                  <li>Неактуально в интернете</li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="about-section" style="margin-top: var(--space-64);">
-          <h2>Наше преимущество</h2>
-          <div class="info-grid">
-            <div class="info-card">
-              <h4>✓ Фокус на России</h4>
-              <p>Исследования сосредоточены на русскоязычной аудитории и местной сцене</p>
-            </div>
-            <div class="info-card">
-              <h4>✓ Еженедельные обновления</h4>
-              <p>Регулярный контент с актуальными материалами и новостями</p>
-            </div>
-            <div class="info-card">
-              <h4>✓ Разнообразность</h4>
-              <p>Сочетание фотографии, интервью, аналитики и дискуссий</p>
-            </div>
-            <div class="info-card">
-              <h4>✓ Интерактивность</h4>
-              <p>Карты, гайды и прямое взаимодействие с аудиторией</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONTACT PAGE -->
-    <div id="contact" class="page">
-      <div class="container">
-        <div class="section-intro">
-          <h1 class="section-title">Контакты</h1>
-          <p class="section-description">Свяжитесь с нами для сотрудничества, предложений или вопросов</p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="contact-info">
-            <h3>Информация о редакции</h3>
+            const modal = document.getElementById('article-modal');
+            const panel = document.getElementById('modal-panel');
             
-            <div class="contact-item">
-              <h4>Email редакции</h4>
-              <p>info@street-art-russia.ru</p>
-            </div>
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
             
-            <div class="contact-item">
-              <h4>Телефон</h4>
-              <p>+7 (495) XXX-XX-XX</p>
-            </div>
-            
-            <div class="contact-item">
-              <h4>Адрес офиса</h4>
-              <p>Москва, Россия</p>
-            </div>
+            // Animation for panel slide-in
+            setTimeout(() => {
+                panel.classList.remove('translate-x-full');
+            }, 10);
+        }
 
-            <div class="contact-item">
-              <h4>Следите за нами</h4>
-              <div class="social-links">
-                <a class="social-link" href="https://vk.com" target="_blank">ВКонтакте</a>
-                <a class="social-link" href="https://t.me" target="_blank">Telegram</a>
-                <a class="social-link" href="https://instagram.com" target="_blank">Instagram</a>
-              </div>
-            </div>
-          </div>
+        // 3. Logic: Close Article (Закрытие модального окна статьи)
+        function closeArticle() {
+            const modal = document.getElementById('article-modal');
+            const panel = document.getElementById('modal-panel');
+            
+            panel.classList.add('translate-x-full');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            }, 300);
+        }
 
-          <form class="contact-form">
-            <div class="form-group">
-              <label class="form-label">Ваше имя</label>
-              <input type="text" class="form-input" placeholder="Иван Иванов" required>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-input" placeholder="your@email.com" required>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label">Тема</label>
-              <input type="text" class="form-input" placeholder="Ваша тема" required>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label">Сообщение</label>
-              <textarea class="form-textarea" placeholder="Ваше сообщение..." required></textarea>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Отправить</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </main>
+        // 4. Logic: Toast Notification (Всплывающее уведомление)
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "toast show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-section">
-          <h3>Уличное искусство России</h3>
-          <p>Медиа-проект об осознанном восприятии граффити и стритарта в России. Исследуем творчество художников, мнения жителей и взгляды градозащитников.</p>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Навигация</h3>
-          <ul class="footer-links">
-            <li><a onclick="navigateTo('home')">Главная</a></li>
-            <li><a onclick="navigateTo('about')">О проекте</a></li>
-            <li><a onclick="navigateTo('rubrics')">Рубрики</a></li>
-            <li><a onclick="navigateTo('competitors')">Конкуренты</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Соцсети</h3>
-          <ul class="footer-links">
-            <li><a href="https://vk.com" target="_blank">ВКонтакте</a></li>
-            <li><a href="https://t.me" target="_blank">Telegram</a></li>
-            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-            <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Контакты</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:info@street-art-russia.ru">Email</a></li>
-            <li><a href="mailto:partnerships@street-art-russia.ru">Сотрудничество</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 Уличное искусство России. Все права защищены.</p>
-        <p>Проект создан с целью продвижения культуры и осознанного восприятия современного искусства.</p>
-      </div>
-    </div>
-  </footer>
+        // 5. Logic: Category Filter (Имитация фильтрации и скролла)
+        function filterCategory(category) {
+            document.getElementById('latest').scrollIntoView({behavior: 'smooth'});
+            showToast(`Фильтр активирован: ${category}`);
+        }
 
-  <script>
-    function navigateTo(page) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(page).classList.add('active');
-      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-      event.target?.classList.add('active');
-      window.scrollTo(0, 0);
-    }
-  </script>
+        // 6. Logic: Map Modal (Открытие модального окна карты)
+        function openMapModal() {
+            document.getElementById('map-modal').classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+        function closeMapModal() {
+            document.getElementById('map-modal').classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // 7. Mobile Menu (Переключение мобильного меню)
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('navbar-menu').classList.toggle('hidden');
+        });
+
+    </script>
 </body>
 </html>
