@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СТЕНА | Интерактивное медиа о стрит-арте</title>
+    <title>СТЕНА | УЛИЧНЫЙ АНАЛИТИЧЕСКИЙ МЕДИАПРОЕКТ</title>
     
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     
     <!-- Иконки -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,25 +16,33 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- GSAP (Анимации) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'urban-black': '#0a0a0a',
-                        'urban-dark': '#121212',
-                        'urban-gray': '#1e1e1e',
+                        'urban-black': '#000000', // Чистый черный для СМИ
+                        'urban-dark': '#0A0A0A',
+                        'urban-gray': '#1A1A1A',
                         'accent-yellow': '#FACC15',
-                        'accent-red': '#EF4444',
-                        'accent-blue': '#3B82F6',
+                        'accent-red': '#FF3333',
+                        'accent-blue': '#3366FF',
+                        'accent-acid': '#CCFF00', 
                     },
                     fontFamily: {
                         'anton': ['Anton', 'sans-serif'],
                         'oswald': ['Oswald', 'sans-serif'],
                         'roboto': ['Roboto', 'sans-serif'],
                     },
-                    backgroundImage: {
-                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    cursor: {
+                        'none': 'none',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 5s linear infinite',
                     }
                 }
             }
@@ -42,363 +50,720 @@
     </script>
 
     <style>
-        body { background-color: #0a0a0a; color: #ffffff; font-family: 'Roboto', sans-serif; }
-        .text-stroke { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; }
-        .modal-open { overflow: hidden; }
+        /* Общие стили */
+        body { 
+            background-color: #000000; 
+            color: #ffffff; 
+            font-family: 'Roboto', sans-serif; 
+            overflow-x: hidden;
+            cursor: none;
+        }
         
-        /* Анимация уведомлений */
-        .toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 2px;
-            padding: 16px;
+        /* Кастомный курсор */
+        #cursor {
             position: fixed;
-            z-index: 100;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            border-bottom: 4px solid #FACC15;
-            opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background-color: #FACC15;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s;
+            mix-blend-mode: difference;
         }
-        .toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 50px;
+        #cursor.hovered {
+            width: 40px;
+            height: 40px;
+            background-color: #FACC15;
+            opacity: 0.5;
         }
-        /* Markdown Styles for Modal content */
-        .prose strong { color: #FACC15; font-weight: 700; }
+
+        /* Глобальный шум */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.07%22/%3E%3C/svg%3E');
+            pointer-events: none;
+            z-index: 9990;
+        }
+
+        /* Glitch Effect (более тонкий для новостного стиля) */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .glitch-text::before {
+            left: 1px;
+            text-shadow: -1px 0 #FF3333;
+            clip: rect(30px, 9999px, 50px, 0);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -1px;
+            text-shadow: -1px 0 #3366FF;
+            clip: rect(50px, 9999px, 70px, 0);
+            animation: glitch-anim2 3s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim { 0% { clip: rect(20px, 9999px, 40px, 0); } 100% { clip: rect(60px, 9999px, 80px, 0); } }
+        @keyframes glitch-anim2 { 0% { clip: rect(70px, 9999px, 90px, 0); } 100% { clip: rect(30px, 9999px, 50px, 0); } }
+
+        /* Эффект маски при наведении на статью */
+        .article-card:hover .article-image {
+            transform: scale(1.05) rotate(0.5deg);
+        }
+        .article-image {
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .article-card:hover .text-stroke {
+             -webkit-text-stroke: 1px #FACC15;
+        }
+        .text-stroke { 
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2); 
+            color: transparent; 
+            transition: -webkit-text-stroke 0.3s;
+        }
+        /* Стили для рубрик в Architecture Section */
+        .rubric-card {
+            box-shadow: 0 0 0 2px #1A1A1A;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .rubric-card:hover {
+            box-shadow: 0 0 0 2px #CCFF00;
+            transform: translateY(-5px);
+        }
+        /* Для скроллбара в фильтре */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #FACC15;
+            border-radius: 2px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background-color: #1A1A1A;
+        }
     </style>
 </head>
-<body class="font-roboto bg-urban-black bg-noise selection:bg-accent-yellow selection:text-black">
+<body class="selection:bg-accent-acid selection:text-black">
 
-    <!-- НАВИГАЦИЯ -->
-    <nav class="fixed w-full z-50 top-0 start-0 border-b border-gray-800 bg-urban-black/95 backdrop-blur-sm">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="#" class="flex items-center space-x-3 group" onclick="window.scrollTo(0,0)">
-                <span class="self-center text-4xl font-anton uppercase text-white group-hover:text-accent-yellow transition-colors cursor-pointer">СТЕНА</span>
+    <!-- PRELOADER -->
+    <div id="preloader" class="fixed inset-0 bg-urban-black z-[10000] flex items-center justify-center flex-col">
+        <h1 class="text-6xl md:text-9xl font-anton text-white tracking-widest overflow-hidden">
+            <span class="inline-block transform translate-y-full transition-transform duration-700 delay-100 reveal-text text-accent-acid">С</span>
+            <span class="inline-block transform translate-y-full transition-transform duration-700 delay-150 reveal-text">Т</span>
+            <span class="inline-block transform translate-y-full transition-transform duration-700 delay-200 reveal-text">Е</span>
+            <span class="inline-block transform translate-y-full transition-transform duration-700 delay-250 reveal-text">Н</span>
+            <span class="inline-block transform translate-y-full transition-transform duration-700 delay-300 reveal-text">А</span>
+        </h1>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div id="cursor" class="hidden md:block"></div>
+
+    <!-- NOISE OVERLAY -->
+    <div class="noise-overlay"></div>
+
+    <!-- NAVIGATION (СТИКЕРАМИ) -->
+    <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-urban-black/95 backdrop-blur-md">
+        <div class="max-w-[1600px] mx-auto px-6 py-4 flex flex-wrap items-center justify-between">
+            <a href="#" class="flex items-center group interactable" onclick="window.scrollTo(0,0)">
+                <span class="self-center text-4xl font-anton uppercase text-accent-acid tracking-wider">СТЕНА</span>
             </a>
             
-            <button id="menu-toggle" class="md:hidden text-gray-400 hover:text-white">
-                <i class="fa-solid fa-bars text-2xl"></i>
+            <button id="menu-toggle" class="md:hidden text-white interactable">
+                <i class="fa-solid fa-bars-staggered text-2xl"></i>
             </button>
 
             <div class="hidden w-full md:flex md:w-auto md:order-1" id="navbar-menu">
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-8 md:flex-row md:mt-0 font-oswald uppercase tracking-wider text-sm">
-                    <li><a href="#rubrics" class="block py-2 px-3 text-white hover:text-accent-yellow transition-colors">Рубрики</a></li>
-                    <li><a href="#latest" class="block py-2 px-3 text-white hover:text-accent-yellow transition-colors">Материалы</a></li>
-                    <li><a href="#map" class="block py-2 px-3 text-white hover:text-accent-yellow transition-colors">Карта</a></li>
+                <ul class="flex flex-col md:flex-row gap-8 font-oswald uppercase text-base tracking-widest">
+                    <li><a href="#rubrics" class="block py-2 text-white/50 hover:text-white transition-colors interactable">Рубрики</a></li>
+                    <li><a href="#latest" class="block py-2 text-white/50 hover:text-white transition-colors interactable">Материалы</a></li>
+                    <li><a href="#architecture" class="block py-2 text-white/50 hover:text-white transition-colors interactable">Архитектура</a></li>
+                    <li><a href="#map" class="block py-2 text-white/50 hover:text-white transition-colors interactable">Карта</a></li>
+                    <li><a href="#about" class="block py-2 text-white/50 hover:text-white transition-colors interactable">О проекте</a></li>
                 </ul>
             </div>
             
             <div class="hidden md:flex md:order-2">
-                <button onclick="showToast('Подписка оформлена! (Демо)')" class="text-black bg-white hover:bg-accent-yellow font-medium rounded-sm text-sm px-4 py-2 uppercase font-oswald transition-all">Подписаться</button>
+                <button onclick="showToast('В демо-режиме')" class="relative overflow-hidden group bg-accent-acid text-black font-anton uppercase px-6 py-2 text-lg interactable hover:bg-white transition-colors duration-200">
+                    Подписаться
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- ГЕРОЙ -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <!-- HERO SECTION -->
+    <section class="relative h-[90vh] md:h-screen flex items-center justify-center overflow-hidden border-b-2 border-accent-acid">
+        <!-- Parallax Background -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?q=80&w=2145&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/0a0a0a/ffffff?text=Background+Image';" class="w-full h-full object-cover opacity-60">
-            <div class="absolute inset-0 bg-gradient-to-t from-urban-black via-urban-black/50 to-transparent"></div>
+            <img id="hero-img" src="https://placehold.co/1920x1080/0A0A0A/FACC15?text=STREET+ART+MURAL" class="w-full h-full object-cover opacity-30 scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-urban-black via-urban-black/50 to-black/60"></div>
         </div>
-        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
-            <h1 class="text-7xl md:text-[150px] font-anton leading-none uppercase mb-6 drop-shadow-2xl">
-                Искусство <span class="text-stroke">или</span><br><span class="text-accent-yellow">Вандализм?</span>
+        
+        <div class="relative z-10 text-center px-4 w-full max-w-[1600px]">
+            <!-- Главный Месседж -->
+            <div class="overflow-hidden mb-6">
+                <h2 class="text-xl md:text-3xl font-oswald text-accent-yellow tracking-[0.5em] hero-anim translate-y-20 opacity-0">АНАЛИТИЧЕСКИЙ МЕДИАПРОЕКТ</h2>
+            </div>
+
+            <!-- Glitch Headline -->
+            <h1 class="text-7xl md:text-[14vw] font-anton leading-[0.85] uppercase hero-anim translate-y-20 opacity-0 glitch-text" data-text="ЧИТАЙ СТЕНУ">
+                ЧИТАЙ <span class="text-accent-acid">СТЕНУ</span>
             </h1>
-            <p class="text-xl text-gray-200 font-light max-w-2xl mx-auto mb-10">
-                Аналитический медиапроект. Мы учим читать городские стены.
+            
+            <!-- Mission Statement -->
+            <p class="mt-8 text-lg md:text-xl max-w-4xl mx-auto text-white/70 font-roboto hero-anim translate-y-20 opacity-0" style="animation-delay: 0.6s;">
+                Исследуем, что такое качественное уличное искусство в России, а что — вандальное. Раскрываем критерии оценки граффити глазами художников, жителей и градозащитников.
             </p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center mt-10">
-                <a href="#latest" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-black bg-accent-yellow rounded-sm hover:bg-white transition-colors font-oswald uppercase tracking-wide cursor-pointer shadow-lg hover:shadow-yellow-500/50">
-                    Читать материалы
+
+        </div>
+    </section>
+
+    <!-- TAG/FILTER BAR -->
+    <div id="filter-bar" class="sticky top-[73px] z-40 bg-urban-black border-b border-white/10 shadow-lg py-3 px-6">
+        <div class="max-w-[1600px] mx-auto flex overflow-x-auto whitespace-nowrap space-x-4 custom-scrollbar">
+            <button class="tag-button interactable px-4 py-1 text-sm font-oswald uppercase border border-accent-acid text-accent-acid bg-accent-acid/10 hover:bg-accent-acid hover:text-black transition-all duration-300 active-tag" data-tag="all">ВСЕ МАТЕРИАЛЫ</button>
+            <button class="tag-button interactable px-4 py-1 text-sm font-oswald uppercase border border-white/20 text-white/70 hover:border-accent-yellow hover:text-accent-yellow transition-all duration-300" data-tag="Объектив">Объектив</button>
+            <button class="tag-button interactable px-4 py-1 text-sm font-oswald uppercase border border-white/20 text-white/70 hover:border-accent-red hover:text-accent-red transition-all duration-300" data-tag="А обсудить?">А обсудить?</button>
+            <button class="tag-button interactable px-4 py-1 text-sm font-oswald uppercase border border-white/20 text-white/70 hover:border-accent-blue hover:text-accent-blue transition-all duration-300" data-tag="Город">Город на ладони</button>
+            <button class="tag-button interactable px-4 py-1 text-sm font-oswald uppercase border border-white/20 text-white/70 hover:border-accent-acid hover:text-accent-acid transition-all duration-300" data-tag="Вдохновение">Вдохновение</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT GRID (LATEST MATERIALS) -->
+    <section id="latest" class="py-20 bg-urban-dark border-b border-white/5">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-10">
+                
+                <!-- COLUMN 1: MAIN ARTICLES (8/12 width) -->
+                <div class="w-full md:w-8/12">
+                    <!-- EDITOR'S PICK (Главный Материал) -->
+                    <article class="article-card interactable cursor-pointer mb-12 scroll-reveal transform scale-100 origin-top">
+                        <div class="relative overflow-hidden bg-urban-black p-8 border-4 border-accent-red hover:border-accent-yellow transition-all duration-300">
+                            <div class="flex flex-col lg:flex-row gap-8">
+                                <div class="w-full lg:w-2/3">
+                                    <span class="text-xs font-mono uppercase bg-accent-red text-white px-2 py-1 mb-4 inline-block tracking-widest">
+                                        ВЫБОР РЕДАКЦИИ
+                                    </span>
+                                    <h2 class="text-4xl md:text-6xl font-anton uppercase mb-4 leading-tight text-white hover:text-accent-acid transition-colors">
+                                        Как нейросети меняют теггинг: Искусственный интеллект как новый бомбинг?
+                                    </h2>
+                                    <p class="text-lg text-gray-400 font-roboto mb-6">
+                                        Глубокий анализ новых инструментов в руках уличных художников. Дискуссия о легитимности и будущем стиля.
+                                    </p>
+                                    <a href="#" onclick="openArticle('ai_bombing')" class="font-oswald uppercase text-accent-yellow hover:text-white transition-colors text-lg flex items-center gap-3">
+                                        ЧИТАТЬ СЕЙЧАС <i class="fa-solid fa-arrow-right-long text-xl"></i>
+                                    </a>
+                                </div>
+                                <div class="w-full lg:w-1/3">
+                                    <div class="aspect-square overflow-hidden">
+                                        <img src="https://placehold.co/600x600/1A1A1A/CCFF00?text=AI+VS+TAG" class="article-image w-full h-full object-cover opacity-80" alt="Изображение для статьи об ИИ и теггинге">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <h2 class="text-3xl font-anton uppercase mb-10 border-b border-white/10 pb-4">ВСЕ НОВОСТИ</h2>
+
+                    <!-- ARTICLE GRID -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="article-feed">
+                        
+                        <!-- Article 1: Большой Формат -->
+                        <article class="article-card interactable cursor-pointer col-span-1 md:col-span-2 scroll-reveal" data-tag="Объектив" onclick="openArticle('banksy')">
+                            <div class="relative overflow-hidden aspect-[16/9] mb-4 border border-white/10">
+                                <div class="absolute top-4 left-4 z-10 bg-accent-yellow text-black font-bold font-mono text-xs px-2 py-1">ОБЪЕКТИВ</div>
+                                <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1200" class="article-image w-full h-full object-cover filter brightness-75 hover:brightness-100">
+                            </div>
+                            <h3 class="text-4xl font-anton uppercase text-white hover:text-accent-yellow transition-colors leading-tight">
+                                <span class="text-stroke">БАНКСИ</span> В РОССИИ: МИФ ИЛИ ПЕРФОРМАНС?
+                            </h3>
+                            <p class="text-gray-500 mt-2 font-roboto">Подробный разбор слухов и фактов о появлении новых работ в регионах.</p>
+                        </article>
+                        
+                        <!-- Article 2: Средний Формат -->
+                        <article class="article-card interactable cursor-pointer scroll-reveal" data-tag="А обсудить?" onclick="openArticle('urban')">
+                            <div class="relative overflow-hidden aspect-video mb-4 border border-white/10">
+                                <div class="absolute top-4 left-4 z-10 bg-accent-blue text-white font-bold font-mono text-xs px-2 py-1">А ОБСУДИТЬ?</div>
+                                <img src="https://images.unsplash.com/photo-1483394663321-4d1a38bc8636?q=80&w=600" class="article-image w-full h-full object-cover filter grayscale group-hover:grayscale-0">
+                            </div>
+                            <h3 class="text-2xl font-oswald uppercase group-hover:text-accent-blue transition-colors">ЖКХ vs Искусство: Почему закрашивают?</h3>
+                            <p class="text-gray-500 mt-2 text-sm">Мнение градозащитников и художников о судьбе стрит-арта.</p>
+                        </article>
+
+                        <!-- Article 3: Средний Формат -->
+                        <article class="article-card interactable cursor-pointer scroll-reveal" data-tag="Город" onclick="openArticle('guide')">
+                            <div class="relative overflow-hidden aspect-video mb-4 border border-white/10">
+                                <div class="absolute top-4 left-4 z-10 bg-accent-acid text-black font-bold font-mono text-xs px-2 py-1">ГОРОД</div>
+                                <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=600" class="article-image w-full h-full object-cover filter brightness-50 hover:brightness-100">
+                            </div>
+                            <h3 class="text-2xl font-oswald uppercase group-hover:text-accent-acid transition-colors">Гайд по стилям: От тега до мурала</h3>
+                            <p class="text-gray-500 mt-2 text-sm">Обучающий материал для начинающих экспертов.</p>
+                        </article>
+
+                        <!-- Article 4: Малый Формат (ТОЛЬКО ТЕКСТ) -->
+                        <article class="article-card interactable cursor-pointer col-span-1 md:col-span-2 scroll-reveal" data-tag="А обсудить?" onclick="openArticle('debate')">
+                            <div class="relative p-6 bg-urban-gray hover:bg-urban-gray/50 transition-colors border-l-4 border-accent-blue">
+                                <span class="text-xs font-mono uppercase text-accent-blue mb-2 block">ОБСУЖДЕНИЕ</span>
+                                <h3 class="text-xl font-oswald uppercase text-white">
+                                    Нужно ли легализовать зоны для бомбинга в Москве?
+                                </h3>
+                                <p class="text-gray-400 mt-2 text-sm">5 аргументов "За" и "Против" от наших экспертов.</p>
+                            </div>
+                        </article>
+                        
+                    </div>
+                </div>
+
+                <!-- COLUMN 2: SIDEBAR (4/12 width) -->
+                <div class="w-full md:w-4/12">
+                    <div class="sticky top-[140px] p-6 bg-urban-dark border border-white/10 scroll-reveal transform translate-y-20 opacity-0" style="animation-delay: 0.5s;">
+                        <h3 class="text-2xl font-anton uppercase mb-6 border-b border-accent-yellow pb-2">ХИТЫ НЕДЕЛИ</h3>
+                        
+                        <ul class="space-y-6">
+                            <li class="group cursor-pointer hover:bg-urban-black -mx-6 px-6 py-2 transition-colors duration-200" onclick="openArticle('hit1')">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-4xl font-anton text-accent-yellow">01</span>
+                                    <div>
+                                        <p class="text-sm font-oswald uppercase text-gray-400">#Объектив</p>
+                                        <p class="text-white group-hover:text-accent-yellow transition-colors">Мраморный фасад и граффити: новая этика</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="group cursor-pointer hover:bg-urban-black -mx-6 px-6 py-2 transition-colors duration-200" onclick="openArticle('hit2')">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-4xl font-anton text-accent-yellow">02</span>
+                                    <div>
+                                        <p class="text-sm font-oswald uppercase text-gray-400">#Город</p>
+                                        <p class="text-white group-hover:text-accent-yellow transition-colors">Петербургская эстетика: что рисуют на Неве?</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Рекламный блок (Ad Mockup) -->
+                        <div class="mt-10 p-6 border-2 border-dashed border-gray-700 text-center text-gray-500 font-mono text-sm">
+                            <p>РЕКЛАМА: СВОБОДНОЕ МЕСТО</p>
+                            <p class="text-xs mt-2">Ваш баннер здесь, для целевой аудитории</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURE SECTION (НОВАЯ СЕКЦИЯ) -->
+    <section id="architecture" class="py-24 bg-urban-black border-b border-accent-acid">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <h2 class="text-5xl md:text-6xl font-anton uppercase mb-16 text-center scroll-reveal">
+                <span class="text-accent-acid">АРХИТЕКТУРА</span> ПРОЕКТА
+            </h2>
+
+            <div id="architecture-content" class="space-y-16">
+                <!-- Data will be injected here by JS from site_structure.json -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Vision & Mission -->
+                    <div class="p-8 bg-urban-dark border border-white/10 rubric-card scroll-reveal">
+                        <span class="font-mono text-sm uppercase text-accent-yellow mb-3 block">МИССИЯ</span>
+                        <h3 class="text-3xl font-anton uppercase mb-4">ЦЕЛЬ ПРОЕКТА</h3>
+                        <p class="text-white/70">
+                            <i class="fa-solid fa-bullseye mr-2 text-accent-acid"></i> 
+                            Создать аналитический медиапроект о российском уличном искусстве, показывать развитие данного направления и научить общество «читать» граффити.
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-white/10">
+                            <span class="font-mono text-sm uppercase text-accent-yellow mb-2 block">ОСНОВНАЯ ИДЕЯ</span>
+                            <p class="text-white/70">
+                                <i class="fa-solid fa-lightbulb mr-2 text-accent-acid"></i> 
+                                Сайт раскрывает критерии оценки граффити глазами художников, жителей и градозащитников. Исследует, что такое качественное уличное искусство, а что — поверхностное вандальное изображение.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Audience & Dialogue -->
+                    <div class="p-8 bg-urban-dark border border-white/10 rubric-card scroll-reveal">
+                        <span class="font-mono text-sm uppercase text-accent-red mb-3 block">АУДИТОРИЯ</span>
+                        <h3 class="text-3xl font-anton uppercase mb-4">МЕЖПОКОЛЕНЧЕСКИЙ ДИАЛОГ</h3>
+                        <p class="text-white/70 mb-4">
+                            Люди разных возрастов и поколений (от 25 до 50 лет), готовые к столкновению взглядов.
+                        </p>
+                        <span class="font-mono text-sm uppercase text-accent-red mb-2 block border-t border-white/10 pt-4">БОЛЬ</span>
+                        <p class="text-white/70">
+                            <i class="fa-solid fa-message mr-2 text-accent-red"></i> 
+                            Отсутствует платформа для межпоколенческого диалога о граффити, где мнения не сводятся к простому "за" или "против".
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Rubrics -->
+                <div class="scroll-reveal">
+                    <h3 class="text-3xl font-anton uppercase mb-8 border-b border-white/10 pb-2">НАШИ РУБРИКИ</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Rubric 1 -->
+                        <div class="rubric-card p-6 bg-urban-gray border-l-4 border-accent-yellow">
+                            <h4 class="text-2xl font-oswald uppercase text-accent-yellow mb-2">ОБЪЕКТИВ</h4>
+                            <p class="text-gray-400">Анализ уличного искусства глазами художников и жителей. Глубокие статьи и фоторепортажи.</p>
+                        </div>
+                        <!-- Rubric 2 -->
+                        <div class="rubric-card p-6 bg-urban-gray border-l-4 border-accent-red">
+                            <h4 class="text-2xl font-oswald uppercase text-accent-red mb-2">А ОБСУДИТЬ?</h4>
+                            <p class="text-gray-400">Дискуссионные материалы и интервью с градозащитниками, активистами и чиновниками.</p>
+                        </div>
+                        <!-- Rubric 3 -->
+                        <div class="rubric-card p-6 bg-urban-gray border-l-4 border-accent-blue">
+                            <h4 class="text-2xl font-oswald uppercase text-accent-blue mb-2">ГОРОД НА ЛАДОНИ</h4>
+                            <p class="text-gray-400">Исследования новых объектов и маршрутов стрит-арта. Практические гиды по городам.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Competitors (Конкуренты) -->
+                <div class="scroll-reveal">
+                    <h3 class="text-3xl font-anton uppercase mb-8 border-b border-white/10 pb-2">АНАЛИЗ РЫНКА</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Competitor 1: GraffitiRussia.com -->
+                        <div class="p-6 bg-urban-gray border-4 border-white/20">
+                            <h4 class="text-2xl font-oswald uppercase mb-2">GraffitiRussia.com</h4>
+                            <p class="text-sm font-mono text-accent-yellow mb-4">ПЛАТФОРМА</p>
+                            <div class="space-y-2">
+                                <div class="text-white/70 flex items-start"><i class="fa-solid fa-plus text-green-500 mr-3 mt-1"></i> Подробные тематические материалы.</div>
+                                <div class="text-white/70 flex items-start"><i class="fa-solid fa-minus text-accent-red mr-3 mt-1"></i> Редкая публикация. Уклон на заказы.</div>
+                            </div>
+                        </div>
+
+                        <!-- Competitor 2: Артмоссфера -->
+                        <div class="p-6 bg-urban-gray border-4 border-white/20">
+                            <h4 class="text-2xl font-oswald uppercase mb-2">Артмоссфера</h4>
+                            <p class="text-sm font-mono text-accent-yellow mb-4">БИЕННАЛЕ</p>
+                            <div class="space-y-2">
+                                <div class="text-white/70 flex items-start"><i class="fa-solid fa-plus text-green-500 mr-3 mt-1"></i> Известные эксперты. Высокий дизайн сайта.</div>
+                                <div class="text-white/70 flex items-start"><i class="fa-solid fa-minus text-accent-red mr-3 mt-1"></i> Преимущественно офлайн. Мало постоянного контента.</div>
+                            </div>
+                        </div>
+
+                        <!-- Competitor 3: MOVEBACK N5 -->
+                        <div class="p-6 bg-urban-gray border-4 border-white/20">
+                            <h4 class="text-2xl font-oswald uppercase mb-2">MOVEBACK N5</h4>
+                            <p class="text-sm font-mono text-accent-yellow mb-4">ПЕЧАТНЫЙ ЖУРНАЛ</p>
+                            <div class="space-y-2">
+                                <div class="text-white/70 flex items-start"><i class="fa-solid fa-plus text-green-500 mr-3 mt-1"></i> Подборки интервью, интересные развороты.</div>
+                                <div class="text-white/70 flex items-start"><i class="fa-solid fa-minus text-accent-red mr-3 mt-1"></i> Исключительно печатная версия. Малый охват.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Smart Goal -->
+                <div class="scroll-reveal p-8 bg-urban-dark border border-accent-acid/50">
+                    <h3 class="text-3xl font-anton uppercase mb-4 text-accent-acid">SMART ЦЕЛЬ (3-6 МЕСЯЦЕВ)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-roboto text-white/80">
+                        <p class="border-l-2 border-accent-yellow pl-3">
+                            <span class="font-bold text-accent-yellow">S (Specific):</span> Создать аналитический медиапроект о российском уличном искусстве.
+                        </p>
+                        <p class="border-l-2 border-accent-yellow pl-3">
+                            <span class="font-bold text-accent-yellow">M (Measurable):</span> Достичь 500-1000 уникальных посетителей ежедневно. Заключить 2-4 рекламных контракта.
+                        </p>
+                        <p class="border-l-2 border-accent-yellow pl-3">
+                            <span class="font-bold text-accent-yellow">T (Timely):</span> Реализация проекта — 6 месяцев. Достижение метрик — в первые 3-6 месяцев после запуска.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section id="map" class="py-32 relative flex items-center justify-center overflow-hidden bg-urban-dark">
+        <div class="relative z-10 text-center w-full max-w-4xl px-4">
+            <h2 class="text-6xl md:text-8xl font-anton uppercase mb-4 text-white/10 text-stroke">ГДЕ ЭТО?</h2>
+            <h3 class="text-4xl font-anton uppercase text-white mb-8">КАРТА ЗНАЧИМЫХ ОБЪЕКТОВ</h3>
+            
+            <div onclick="openMapModal()" class="interactable group border-4 border-accent-acid p-2 cursor-pointer bg-urban-dark/70 backdrop-blur-sm hover:bg-urban-dark transition-colors duration-500">
+                <div class="aspect-video bg-urban-gray relative overflow-hidden flex items-center justify-center group">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1500" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
+                    <div class="relative z-20 flex flex-col items-center">
+                        <i class="fa-solid fa-crosshairs text-6xl text-accent-acid mb-4 animate-spin-slow"></i>
+                        <span class="font-anton uppercase text-3xl tracking-widest bg-accent-acid text-black px-6 py-2">ПОСМОТРЕТЬ ГЕОГРАФИЮ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT PROJECT (О ПРОЕКТЕ) -->
+    <section id="about" class="py-24 bg-urban-black text-white/80 border-t border-white/10">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <span class="font-mono text-sm uppercase text-accent-acid mb-3 block">КОМАНДА</span>
+                <h3 class="text-3xl font-anton uppercase mb-4">АВТОР ПРОЕКТА</h3>
+                <p class="text-gray-500">Волынкина Елизавета, 3-ГИД-3. Концепция и реализация медиа-платформы.</p>
+            </div>
+            <div>
+                <span class="font-mono text-sm uppercase text-accent-acid mb-3 block">ФИНАНСЫ</span>
+                <h3 class="text-3xl font-anton uppercase mb-4">СТАРТОВЫЕ ЗАТРАТЫ</h3>
+                <p class="text-gray-500">Примерная сумма ежемесячных затрат (домен, хостинг, офис, ЗП) составляет 247.000 руб. (согласно данным за 1 месяц).</p>
+            </div>
+            <div>
+                <span class="font-mono text-sm uppercase text-accent-acid mb-3 block">РУБРИКИ</span>
+                <ul class="space-y-2">
+                    <li class="font-oswald uppercase text-lg text-accent-yellow">Объектив</li>
+                    <li class="font-oswald uppercase text-lg text-accent-red">А обсудить?</li>
+                    <li class="font-oswald uppercase text-lg text-accent-blue">Город на ладони</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black pt-16 pb-10 border-t border-white/10">
+        <div class="max-w-[1600px] mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <a href="#" class="text-6xl font-anton uppercase text-accent-acid block mb-4">СТЕНА</a>
+                <p class="text-gray-600 font-mono text-xs max-w-xs">
+                    © 2025 ИНТЕРНЕТ-ИЗДАНИЕ «СТЕНА».<br>
+                    ALL RIGHTS RESERVED. DESIGNED FOR THE STREETS.
+                </p>
+            </div>
+            
+            <div class="flex gap-8">
+                <a href="#" onclick="showToast('VK')" class="interactable w-12 h-12 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300">
+                    <i class="fa-brands fa-vk text-xl"></i>
+                </a>
+                <a href="#" onclick="showToast('TG')" class="interactable w-12 h-12 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-accent-blue hover:text-white transition-all duration-300">
+                    <i class="fa-brands fa-telegram text-xl"></i>
                 </a>
             </div>
         </div>
-    </section>
-
-    <!-- РУБРИКИ (ФИЛЬТРЫ) -->
-    <section id="rubrics" class="py-20 px-4 max-w-screen-xl mx-auto">
-        <h2 class="text-5xl md:text-7xl font-anton uppercase mb-12">Рубрики</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div onclick="filterCategory('Объектив')" class="group relative h-64 bg-urban-gray border border-gray-800 hover:border-accent-red cursor-pointer transition-all overflow-hidden">
-                <div class="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/222/ccc?text=Photo');"></div>
-                <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                    <h3 class="text-3xl font-anton uppercase group-hover:text-accent-red transition-colors">Объектив</h3>
-                    <p class="text-sm text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">Анализ уличного искусства</p>
-                </div>
-            </div>
-
-            <div onclick="filterCategory('А обсудить?')" class="group relative h-64 bg-urban-gray border border-gray-800 hover:border-accent-yellow cursor-pointer transition-all overflow-hidden">
-                <div class="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/222/ccc?text=Discuss');"></div>
-                <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                    <h3 class="text-3xl font-anton uppercase group-hover:text-accent-yellow transition-colors">А обсудить?</h3>
-                    <p class="text-sm text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">Дискуссии и мнения</p>
-                </div>
-            </div>
-
-            <div onclick="filterCategory('Город на ладони')" class="group relative h-64 bg-urban-gray border border-gray-800 hover:border-accent-blue cursor-pointer transition-all overflow-hidden">
-                <div class="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/222/ccc?text=Education');"></div>
-                <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                    <h3 class="text-3xl font-anton uppercase group-hover:text-accent-blue transition-colors">Город на ладони</h3>
-                    <p class="text-sm text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">Образовательные гайды</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- СЕТКА МАТЕРИАЛОВ (ПОЛНОСТЬЮ КЛИКАБЕЛЬНАЯ) -->
-    <section id="latest" class="py-20 bg-urban-dark border-t border-gray-800">
-        <div class="max-w-screen-xl mx-auto px-4">
-            <h2 class="text-5xl font-anton uppercase mb-12 flex items-center">
-                <span class="text-accent-red mr-4">///</span> Материалы
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <!-- Карточка 1 -->
-                <article onclick="openArticle('banksy')" class="cursor-pointer group">
-                    <div class="h-64 overflow-hidden border-b-4 border-accent-yellow relative mb-4">
-                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Объектив</span>
-                        <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+1';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-accent-yellow transition-colors">Банкси в России: Миф?</h3>
-                    <p class="text-gray-400 text-sm mt-2">Разбор новых трафаретов в Екатеринбурге.</p>
-                </article>
-
-                <!-- Карточка 2 -->
-                <article onclick="openArticle('urban')" class="cursor-pointer group">
-                    <div class="h-64 overflow-hidden border-b-4 border-accent-blue relative mb-4">
-                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Точка зрения</span>
-                        <img src="https://images.unsplash.com/photo-1483394663321-4d1a38bc8636?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+2';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-accent-blue transition-colors">ЖКХ vs Искусство</h3>
-                    <p class="text-gray-400 text-sm mt-2">Почему серый квадрат убивает город.</p>
-                </article>
-
-                <!-- Карточка 3 -->
-                <article onclick="openArticle('pokras')" class="cursor-pointer group">
-                    <div class="h-64 overflow-hidden border-b-4 border-accent-red relative mb-4">
-                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Вдохновение</span>
-                        <img src="https://images.unsplash.com/photo-1571172964276-91faaa704e1f?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+3';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-accent-red transition-colors">Покрас Лампас</h3>
-                    <p class="text-gray-400 text-sm mt-2">Эксклюзивное интервью о будущем каллиграфии.</p>
-                </article>
-
-                <!-- Карточка 4 -->
-                <article onclick="openArticle('guide')" class="cursor-pointer group">
-                    <div class="h-64 overflow-hidden border-b-4 border-white relative mb-4">
-                        <span class="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 font-oswald uppercase z-10">Город на ладони</span>
-                        <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0a0a0a/ffffff?text=Article+4';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold font-oswald uppercase group-hover:text-gray-300 transition-colors">Гайд: Теги vs Бомбинг</h3>
-                    <p class="text-gray-400 text-sm mt-2">Учимся различать стили улиц.</p>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ИНТЕРАКТИВНАЯ КАРТА -->
-    <section id="map" class="py-20 bg-gray-900 border-t border-gray-800 text-center">
-        <h2 class="text-5xl font-anton uppercase mb-8">Карта Искусства</h2>
-        <div class="max-w-4xl mx-auto px-4">
-            <div onclick="openMapModal()" class="aspect-video bg-gray-800 relative flex items-center justify-center overflow-hidden border border-gray-600 group cursor-pointer shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000" onerror="this.onerror=null;this.src='https://placehold.co/1000x500/0a0a0a/ffffff?text=Map+Placeholder';" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity">
-                <div class="relative z-10 bg-black/80 px-8 py-4 border border-accent-yellow">
-                    <h3 class="text-2xl font-anton text-accent-yellow uppercase"><i class="fa-solid fa-expand mr-2"></i> Открыть карту</h3>
-                </div>
-            </div>
-            <p class="mt-4 text-gray-500 text-sm">Нажмите, чтобы развернуть интерактивный режим</p>
-        </div>
-    </section>
-
-    <!-- ПОДПИСКА -->
-    <section class="py-20 bg-accent-yellow text-black text-center">
-        <h2 class="text-4xl md:text-6xl font-anton uppercase mb-4">Не пропусти важное</h2>
-        <form class="max-w-md mx-auto flex gap-4 px-4" onsubmit="event.preventDefault(); showToast('Вы успешно подписались!');">
-            <input type="email" placeholder="Email" class="flex-1 p-4 border-2 border-black font-oswald outline-none" required>
-            <button type="submit" class="bg-black text-white px-8 font-anton uppercase hover:bg-gray-800 transition-colors">ОК</button>
-        </form>
-    </section>
-
-    <!-- ФУТЕР -->
-    <footer class="bg-urban-black py-12 border-t border-gray-800 text-center">
-        <a href="#" class="text-4xl font-anton uppercase text-white block mb-6">СТЕНА</a>
-        <div class="flex justify-center gap-6 mb-8 text-2xl text-gray-400">
-            <a href="#" class="hover:text-accent-blue"><i class="fa-brands fa-vk"></i></a>
-            <a href="#" class="hover:text-blue-400"><i class="fa-brands fa-telegram"></i></a>
-            <a href="#" class="hover:text-red-500"><i class="fa-brands fa-youtube"></i></a>
-        </div>
-        <p class="text-gray-600 text-xs font-mono">© 2025 СТЕНА. PROJECT BY ELIZAVETA V.</p>
     </footer>
 
-    <!-- УВЕДОМЛЕНИЯ (TOAST) -->
-    <div id="toast" class="toast">Сообщение</div>
+    <!-- MODALS & UTILS -->
+    <div id="toast" class="toast fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-white text-black font-mono text-sm px-6 py-3 uppercase border-l-4 border-accent-acid z-[9999] transition-all duration-300 opacity-0 translate-y-10">Notification</div>
 
-    <!-- МОДАЛЬНОЕ ОКНО СТАТЬИ -->
+    <!-- Article Modal -->
     <div id="article-modal" class="fixed inset-0 z-[100] hidden">
-        <div class="absolute inset-0 bg-black/95 backdrop-blur-sm" onclick="closeArticle()"></div>
-        <div class="absolute inset-y-0 right-0 w-full md:w-2/3 lg:w-1/2 bg-urban-dark border-l border-gray-700 overflow-y-auto transform transition-transform duration-300 translate-x-full" id="modal-panel">
-            <div class="p-8">
-                <button onclick="closeArticle()" class="text-gray-400 hover:text-white mb-6 text-xl"><i class="fa-solid fa-arrow-right"></i> Закрыть</button>
-                <div id="article-content">
-                    <!-- Сюда JS загрузит контент -->
-                </div>
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm cursor-pointer" onclick="closeArticle()"></div>
+        <div class="absolute inset-y-0 right-0 w-full md:w-2/3 bg-urban-dark border-l border-white/10 overflow-y-auto transform transition-transform duration-500 translate-x-full" id="modal-panel">
+            <button onclick="closeArticle()" class="interactable absolute top-6 right-6 z-50 text-white hover:text-accent-acid text-4xl mix-blend-difference">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <div id="article-loader" class="absolute inset-0 flex items-center justify-center bg-urban-dark z-20 transition-opacity duration-300">
+                <div class="w-16 h-16 border-4 border-white/10 border-t-accent-yellow rounded-full animate-spin"></div>
+            </div>
+            <div id="article-content" class="p-8 md:p-20 opacity-0 transition-opacity duration-500">
+                <!-- Content will be injected here -->
             </div>
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО КАРТЫ -->
+    <!-- Map Modal -->
     <div id="map-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/95">
-        <button onclick="closeMapModal()" class="absolute top-5 right-5 text-white text-4xl hover:text-accent-yellow"><i class="fa-solid fa-xmark"></i></button>
-        <div class="w-full h-full p-10 flex flex-col items-center justify-center">
-            <h2 class="text-4xl font-anton uppercase text-accent-yellow mb-4">Карта Искусства</h2>
-            <div class="w-full h-3/4 bg-gray-800 border-2 border-accent-yellow relative rounded-sm flex items-center justify-center">
-                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1500" onerror="this.onerror=null;this.src='https://placehold.co/1000x800/0a0a0a/ffffff?text=Map+Placeholder';" class="absolute inset-0 w-full h-full object-cover opacity-30">
-                <p class="relative z-10 text-xl font-oswald uppercase">Здесь будет API Яндекс.Карт или Google Maps</p>
-                <!-- Имитация пинов -->
-                <i class="fa-solid fa-location-dot text-accent-red text-3xl absolute top-1/3 left-1/4 animate-bounce cursor-pointer" title="Объект 1" onclick="showToast('Объект: Мурал Маяковский, Автор: P183')"></i>
-                <i class="fa-solid fa-location-dot text-accent-blue text-3xl absolute bottom-1/3 right-1/3 animate-bounce cursor-pointer" style="animation-delay: 0.2s" title="Объект 2" onclick="showToast('Объект: Двор Нельсона')"></i>
-                <i class="fa-solid fa-location-dot text-accent-yellow text-3xl absolute top-1/2 left-1/2 animate-bounce cursor-pointer" style="animation-delay: 0.5s" title="Объект 3" onclick="showToast('Объект: Стрит-арт Музей')"></i>
+        <button onclick="closeMapModal()" class="interactable absolute top-10 right-10 text-white text-5xl hover:rotate-90 transition-transform duration-300"><i class="fa-solid fa-xmark"></i></button>
+        <div class="w-full h-full p-4 md:p-20">
+            <div class="w-full h-full border-2 border-accent-acid relative overflow-hidden bg-gray-900">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1500" class="absolute inset-0 w-full h-full object-cover opacity-40">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                    <h3 class="text-4xl font-anton uppercase text-white mb-2">КАРТА. В РАЗРАБОТКЕ</h3>
+                    <p class="font-mono text-accent-yellow animate-pulse">Здесь будет интерактивная карта объектов...</p>
+                </div>
+                <!-- Pins -->
+                <i class="interactable fa-solid fa-map-pin text-accent-red text-4xl absolute top-1/3 left-1/4 animate-bounce cursor-pointer hover:scale-150 transition-transform" onclick="showToast('ОБЪЕКТ: МУРАЛ 01')"></i>
+                <i class="interactable fa-solid fa-map-pin text-accent-blue text-4xl absolute bottom-1/3 right-1/4 animate-bounce cursor-pointer hover:scale-150 transition-transform" style="animation-delay: 0.2s" onclick="showToast('ОБЪЕКТ: ТЕГГИНГ ЗОНА')"></i>
             </div>
         </div>
     </div>
 
     <!-- SCRIPTS -->
     <script>
-        // 1. Data Source (Контент статей)
-        const articlesDB = {
-            'banksy': {
-                title: 'Банкси в России: Миф или реальность?',
-                tag: 'Объектив',
-                color: 'text-accent-yellow',
-                img: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=800',
-                body: `<p class="text-xl font-light text-gray-300 mb-6">Недавние трафареты в Екатеринбурге вызвали споры. Это подражатель или легенда?</p>
-                       <h3 class="text-2xl font-oswald text-white mb-2">Мнение эксперта</h3>
-                       <p class="text-gray-400 mb-4">"Стиль очень похож, но техника нанесения говорит о том, что работал подражатель высокого класса." — А. Соколов.</p>
-                       <p class="text-gray-400">Мы продолжаем следить за ситуацией...</p>`
-            },
-            'urban': {
-                title: 'ЖКХ против Искусства',
-                tag: 'Точка зрения',
-                color: 'text-accent-blue',
-                img: 'https://images.unsplash.com/photo-1483394663321-4d1a38bc8636?q=80&w=800',
-                body: `<p class="text-xl font-light text-gray-300 mb-6">Почему коммунальщики закрашивают шедевры серым цветом, создавая "заплатки"?</p>
-                       <p class="text-gray-400">Теория разбитых окон в действии. Серые квадраты на фасадах выглядят хуже, чем качественный стрит-арт.</p>`
-            },
-            'pokras': {
-                title: 'Покрас Лампас: Интервью',
-                tag: 'Вдохновение',
-                color: 'text-accent-red',
-                img: 'https://images.unsplash.com/photo-1571172964276-91faaa704e1f?q=80&w=800',
-                body: `<p class="text-xl font-light text-gray-300 mb-6">Эксклюзивный разговор о каллиграфутуризме и будущем улиц.</p>
-                       <p class="text-gray-400">"Улица — это диалог. Если ты пишешь на стене, ты должен быть готов к ответу."</p>`
-            },
-            'guide': {
-                title: 'Гайд: Теги vs Бомбинг',
-                tag: 'Город на ладони',
-                color: 'text-white',
-                img: 'https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=800',
-                body: `<p class="text-xl font-light text-gray-300 mb-6">Разбираемся в терминологии.</p>
-                       <ul class="list-disc pl-5 text-gray-400 space-y-2">
-                           <li><strong>Тег:</strong> Подпись автора.</li>
-                           <li><strong>Бомбинг:</strong> Быстрое нанесение рисунка.</li>
-                           <li><strong>Мурал:</strong> Масштабная картина на весь фасад.</li>
-                       </ul>`
+        // --- GSAP ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Preloader
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            tl.to('.reveal-text', { y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.1 })
+              .to('#preloader', { y: '-100%', duration: 1.2, ease: 'power2.inOut', delay: 0.5 })
+              .to('.hero-anim', { y: 0, opacity: 1, stagger: 0.2, duration: 1 }, "-=0.5")
+              .to('#filter-bar', { opacity: 1, duration: 0.5 }); // Show filter bar after load
+        });
+
+        // Parallax Hero Image
+        gsap.to("#hero-img", {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "section",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
             }
+        });
+
+        // Scroll Reveal for Articles
+        gsap.utils.toArray('.scroll-reveal').forEach(elem => {
+            gsap.from(elem, {
+                y: 50,
+                scale: 0.95,
+                opacity: 0,
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // --- CUSTOM CURSOR ---
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover Effect on Interactive Elements
+        const interactables = document.querySelectorAll('.interactable');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- FUNCTIONALITY ---
+        // Mock Article Database (Expanded for more content)
+        const articlesDB = {
+            'ai_bombing': { title: 'Искусственный интеллект как новый бомбинг?', tag: 'ТЕХНО', color: 'text-accent-acid', img: 'https://placehold.co/1200x800/1A1A1A/CCFF00?text=AI+VS+TAG', body: 'Полный анализ: Нейросети меняют стрит-арт навсегда. Это эволюция или уничтожение авторства? В статье мы рассмотрим, как Midjourney, Stable Diffusion и другие генеративные модели влияют на скорость и качество уличной экспрессии. ' },
+            'banksy': { title: 'Банкси в России: Миф или Перформанс?', tag: 'Объектив', color: 'text-accent-yellow', img: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1200', body: 'Глубокий разбор слухов и фактов о появлении новых работ в регионах. Аналитика от экспертов искусства. ' },
+            'urban': { title: 'ЖКХ vs Искусство: Почему закрашивают?', tag: 'А обсудить?', color: 'text-accent-blue', img: 'https://images.unsplash.com/photo-1483394663321-4d1a38bc8636?q=80&w=600', body: 'Конфликт между коммунальными службами и уличными художниками — вечная проблема. Мнение градозащитников и художников о судьбе стрит-арта. ' },
+            'guide': { title: 'Гайд по стилям: От тега до мурала', tag: 'Город', color: 'text-accent-acid', img: 'https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=600', body: 'Полное обучающее руководство по классификации уличного искусства. Различаем теги, бомбинг, муралы и стикеры. ' },
+            'debate': { title: 'Нужно ли легализовать зоны для бомбинга в Москве?', tag: 'А обсудить?', color: 'text-accent-blue', img: 'https://placehold.co/600x400/1A1A1A/3366FF?text=DEBATE', body: '5 аргументов "За" и "Против" от наших экспертов. Поиск компромисса между самовыражением и городским порядком. ' },
+            'hit1': { title: 'Мраморный фасад и граффити: новая этика', tag: 'Объектив', color: 'text-accent-yellow', img: 'https://placehold.co/600x400/1A1A1A/FACC15?text=MARBLE', body: 'Спорный случай в центре города. Как относиться к граффити на исторических зданиях? ' },
+            'hit2': { title: 'Петербургская эстетика: что рисуют на Неве?', tag: 'Город', color: 'text-accent-blue', img: 'https://placehold.co/600x400/1A1A1A/3366FF?text=SPB', body: 'Обзор лучших работ петербургских художников за последний квартал. ' },
         };
 
-        // 2. Logic: Open Article (Открытие модального окна статьи)
         function openArticle(id) {
             const data = articlesDB[id];
-            if(!data) return;
-
-            const content = document.getElementById('article-content');
-            // Заменяем 'alert' на 'showToast' в контенте карты, чтобы избежать проблем в iframe
-            const safeBody = data.body.replace(/alert\(/g, 'showToast('); 
-
-            content.innerHTML = `
-                <span class="text-xs font-bold uppercase border border-gray-600 px-2 py-1 mb-4 inline-block text-gray-400">${data.tag}</span>
-                <h1 class="text-4xl md:text-5xl font-anton uppercase mb-6 leading-tight ${data.color}">${data.title}</h1>
-                <img src="${data.img}" onerror="this.onerror=null;this.src='https://placehold.co/800x600/0a0a0a/ffffff?text=${data.title}';" class="w-full mb-8 rounded-sm border-2 border-gray-800">
-                <div class="prose prose-invert max-w-none">
-                    ${safeBody}
-                </div>
-                <div class="mt-10 pt-6 border-t border-gray-800">
-                    <h4 class="font-oswald uppercase mb-4">Комментарии</h4>
-                    <div class="bg-black p-4 rounded-sm mb-4 border-l-2 border-gray-600">
-                        <p class="text-xs text-gray-500 mb-1">User123</p>
-                        <p class="text-sm text-gray-300">Отличная статья! Спасибо за разбор.</p>
-                    </div>
-                    <textarea class="w-full bg-black border border-gray-700 p-3 text-white text-sm" placeholder="Написать комментарий..."></textarea>
-                    <button onclick="showToast('Комментарий отправлен в модерацию!')" class="mt-2 bg-accent-yellow text-black font-oswald uppercase text-sm px-4 py-2 rounded-sm hover:bg-white transition-colors">Отправить</button>
-                </div>
-            `;
-
             const modal = document.getElementById('article-modal');
             const panel = document.getElementById('modal-panel');
-            
+            const content = document.getElementById('article-content');
+            const loader = document.getElementById('article-loader');
+
             modal.classList.remove('hidden');
-            document.body.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
+            loader.style.opacity = '1';
+            content.style.opacity = '0';
             
-            // Animation for panel slide-in
+            setTimeout(() => { panel.classList.remove('translate-x-full'); }, 10);
+
+            // Имитация загрузки контента
             setTimeout(() => {
-                panel.classList.remove('translate-x-full');
-            }, 10);
+                content.innerHTML = `
+                    <span class="font-mono text-sm border border-white/30 px-3 py-1 mb-6 inline-block">${data.tag}</span>
+                    <h1 class="text-5xl md:text-7xl font-anton uppercase mb-8 leading-none ${data.color}">${data.title}</h1>
+                    <img src="${data.img}" onerror="this.onerror=null; this.src='https://placehold.co/1200x800/1A1A1A/FFFFFF?text=NO+IMAGE';" class="w-full mb-8 filter grayscale hover:grayscale-0 transition-all duration-500 max-h-[50vh] object-cover">
+                    <p class="text-xl font-light text-gray-300 mb-8 font-roboto leading-relaxed border-l-4 border-accent-acid pl-4">
+                        ${data.body}
+                    </p>
+                    <div class="prose max-w-none text-white/70">
+                        <p>Полный текст статьи. Улица — это холст, который не прощает ошибок. Искусство здесь рождается в конфликте: между художником и городскими властями, между самовыражением и нормой. Наша задача — дать голос обеим сторонам. </p>
+                        <p>Граффити, муралы, инсталляции — все это часть большого городского диалога. Но как отличить вандализм от шедевра? В этом материале мы приводим критерии оценки, разработанные совместно с арт-критиками и художниками "первой волны".</p>
+                        <h4 class="text-accent-acid font-anton uppercase mt-10">ЭКСПЕРТНОЕ МНЕНИЕ:</h4>
+                        <blockquote class="border-l-4 border-white/30 pl-4 italic text-lg text-white/90">
+                            "Граффити — это не только о рисунке, но и о времени, месте и контексте. Закрашивание часто является последним актом перформанса."
+                        </blockquote>
+                        <p class="mt-8">Продолжение следует...</p>
+                    </div>
+                `;
+                loader.style.opacity = '0';
+                content.style.opacity = '1';
+                content.scrollTop = 0; // Сброс прокрутки
+            }, 500);
         }
 
-        // 3. Logic: Close Article (Закрытие модального окна статьи)
         function closeArticle() {
             const modal = document.getElementById('article-modal');
             const panel = document.getElementById('modal-panel');
-            
             panel.classList.add('translate-x-full');
-            
             setTimeout(() => {
                 modal.classList.add('hidden');
-                document.body.classList.remove('modal-open');
-            }, 300);
+                document.body.style.overflow = 'auto';
+            }, 500);
         }
 
-        // 4. Logic: Toast Notification (Всплывающее уведомление)
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.className = "toast show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translate(-50%, 0)';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translate(-50%, 40px)';
+            }, 3000);
         }
 
-        // 5. Logic: Category Filter (Имитация фильтрации и скролла)
-        function filterCategory(category) {
-            document.getElementById('latest').scrollIntoView({behavior: 'smooth'});
-            showToast(`Фильтр активирован: ${category}`);
-        }
-
-        // 6. Logic: Map Modal (Открытие модального окна карты)
         function openMapModal() {
             document.getElementById('map-modal').classList.remove('hidden');
-            document.body.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
         }
+        
         function closeMapModal() {
             document.getElementById('map-modal').classList.add('hidden');
-            document.body.classList.remove('modal-open');
+            document.body.style.overflow = 'auto';
         }
 
-        // 7. Mobile Menu (Переключение мобильного меню)
+        // Mobile Menu
         document.getElementById('menu-toggle').addEventListener('click', () => {
             document.getElementById('navbar-menu').classList.toggle('hidden');
         });
 
+        // Tag Filtering Logic
+        const tagButtons = document.querySelectorAll('.tag-button');
+        const articleFeed = document.querySelectorAll('#article-feed .article-card');
+
+        tagButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const selectedTag = e.target.getAttribute('data-tag');
+                
+                // Active state
+                tagButtons.forEach(btn => {
+                    btn.classList.remove('active-tag', 'bg-accent-acid/10', 'text-black', 'border-accent-acid');
+                    btn.classList.add('border-white/20', 'text-white/70'); // Re-apply default inactive styles
+                });
+                e.target.classList.add('active-tag', 'bg-accent-acid/10', 'text-black', 'border-accent-acid');
+                e.target.classList.remove('border-white/20', 'text-white/70'); // Remove default inactive styles
+
+                
+                // Filter logic
+                articleFeed.forEach(article => {
+                    const articleTag = article.getAttribute('data-tag');
+                    if (selectedTag === 'all' || articleTag === selectedTag) {
+                        article.style.display = 'block';
+                        gsap.fromTo(article, 
+                            { opacity: 0, scale: 0.95 }, 
+                            { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }
+                        );
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+                
+                showToast('Фильтр: ' + (selectedTag === 'all' ? 'Все' : selectedTag));
+            });
+        });
     </script>
 </body>
 </html>
